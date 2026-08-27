@@ -66,7 +66,12 @@ self.addEventListener('fetch', event => {
     return
   }
   if (event.request.mode === 'navigate') {
-    event.respondWith(currentCache('/index.html').then(hit => hit || fetch(event.request).catch(() => currentCache('/offline.html'))))
+    // Documentation HTML is intentionally network-first. During a worker
+    // hand-off a navigation can still be dispatched to the previously active
+    // worker; letting that worker answer from its stable /index.html cache
+    // would paint the old release in a brand-new tab. The cached shell remains
+    // the offline fallback, so the app still opens without a connection.
+    event.respondWith(fetch(event.request).catch(() => currentCache('/index.html').then(hit => hit || currentCache('/offline.html'))))
     return
   }
   event.respondWith(currentCache(event.request).then(hit => hit || fetch(event.request)))

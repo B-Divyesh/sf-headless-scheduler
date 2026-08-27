@@ -51,11 +51,25 @@ try {
     const response = await (await caches.open(cache)).match('/index.html')
     return (await response?.text())?.includes('new-build')
   }, newCache)
-  // A newly opened documentation client must be controlled by the activated worker,
-  // not by the old client that initiated the update check.
+  // This is the old-shell regression: a newly opened client must get the new
+  // shell even when its navigation is initially dispatched to the old worker.
+  // Navigation is network-first so that hand-off cannot paint a stale shell.
   const updatedPage = await context.newPage()
-  await updatedPage.goto(`${server.url}/?after-update=1`, { waitUntil: 'networkidle' })
+  await updatedPage.goto(`${server.url}/?after-update=1`, { waitUntil: 'domcontentloaded' })
   if (await updatedPage.locator('meta[name="docs-release"]').getAttribute('content') !== 'new-build') throw new Error('Updated service worker did not serve the new shell')
+  await updatedPage.waitForFunction(cache => new Promise(resolvePromise => {
+    const controller = navigator.serviceWorker.controller
+    if (!controller) return resolvePromise(false)
+    const channel = new MessageChannel()
+    channel.port1.onmessage = event => resolvePromise(event.data?.cache === cache)
+    controller.postMessage('headless-scheduler-cache-version', [channel.port2])
+  }), newCache)
+  // Once the new client is controlled, a second offline navigation proves it
+  // is reading that activated worker's cached new shell rather than the server.
+  await context.setOffline(true)
+  await updatedPage.reload({ waitUntil: 'domcontentloaded' })
+  if (await updatedPage.locator('meta[name="docs-release"]').getAttribute('content') !== 'new-build') throw new Error('Updated service worker did not serve its cached new shell offline')
+  await context.setOffline(false)
   const cachesAfter = await page.evaluate(() => caches.keys())
   if (cachesAfter.some(key => oldCaches.includes(key))) throw new Error('Old service-worker cache was not removed')
   console.log(JSON.stringify({ pwaUpdate: 'old-to-new', oldCaches, newCaches: cachesAfter }))
