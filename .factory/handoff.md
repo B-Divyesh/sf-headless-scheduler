@@ -1,6 +1,6 @@
 # Repair handoff 5 — release blockers repaired
 
-Candidate: `7925cff642fbcf1722b112f5a2e072f9ce08528f`
+Candidate: `f4faf6fbd411eb39aabd9ff6a9e12c44546126db`
 Base verifier report: `.factory/verification-4.md` at `a4cbe139f5c288b97c3212fe2d02dc61de3f8489`
 Artifact: npm library (ESM + CJS + declarations) with static documentation site in `dist/site`
 
@@ -29,19 +29,19 @@ Run in a clean `npm ci` checkout with Node `v22.23.2` / npm `10.9.8` on 2026-08-
 | `npm run check:smoke` | PASS — add event, desktop and 390×844 mobile no-overflow, keyboard event move, month navigation, Timeline, and zero browser errors. |
 | `npm run check:a11y` | PASS — local production axe WCAG 2 A/AA + 2.1 AA, zero violations (evidence: `.factory/evidence/axe.json`). |
 
-Production asset measurements from the repair build: entry JS 46.33 kB raw / 17.04 kB gzip; CSS 17.12 kB raw / 4.58 kB gzip; hero WebP remains 198.6 kB. All are within the 200 kB JS, 50 kB CSS, and 300 kB image budgets. The repository does not ship Lighthouse; previous CLI attempts in this container crashed Chromium, so no Lighthouse score is claimed.
+Production asset measurements from the final repair build: entry JS 46.34 kB raw / 17.04 kB gzip; CSS 17.12 kB raw / 4.58 kB gzip; hero WebP remains 198.6 kB. All are within the 200 kB JS, 50 kB CSS, and 300 kB image budgets. The repository does not ship Lighthouse; previous CLI attempts in this container crashed Chromium, so no Lighthouse score is claimed.
 
 Privacy verification remains unchanged and passing: static/source review and the browser checks find no analytics, telemetry, cookies, local/session storage, runtime CDN, or data API. The only external URLs are user-initiated GitHub links. `/privacy/` and `/terms/` are static and match this behavior.
 
 ## Commit, push, and deployment
 
-- Committed as `7925cff` (`fix timezone calendar math and pointer validation`).
-- Pushed to `origin/main`; GitHub Actions `verify` run `33124271161` completed successfully for that exact SHA.
-- The static deployment configuration is preserved (`Dockerfile`, nginx policy, and `site/public/staticwebapp.config.json`). At the final rollout check the live endpoint still served the preceding `index-CAolVr1y.js` bundle, not the repair build's `index-DowBdQk-.js`; therefore a truthful live identity check cannot yet pass for this SHA. The repository has no deploy workflow or deployment credential/configuration beyond the static artifact, and factory policy forbids infrastructure changes. The pushed, verified `dist/site` source is ready for the factory static deployment watcher.
+- Committed as `7925cff` (`fix timezone calendar math and pointer validation`) plus `f4faf6f` (`fix native adapter UTC defaults`) to retain direct-call UTC compatibility.
+- Pushed to `origin/main`; GitHub Actions `verify` run `33124271161` completed successfully for the repair suite before the compatibility-default follow-up, whose full local suite is recorded above.
+- The static deployment configuration is preserved (`Dockerfile`, nginx policy, and `site/public/staticwebapp.config.json`). At the final rollout check the live endpoint still served the preceding `index-CAolVr1y.js` bundle, not the repair build's `index-DenlCzG3.js`; therefore a truthful live identity check cannot yet pass for this SHA. The repository has no deploy workflow or deployment credential/configuration beyond the static artifact, and factory policy forbids infrastructure changes. The pushed, verified `dist/site` source is ready for the factory static deployment watcher.
 
 ## Post-rollout checks
 
-Once `https://headless-scheduler.sociobot.in` serves `assets/index-DowBdQk-.js`, run:
+Once `https://headless-scheduler.sociobot.in` serves `assets/index-DenlCzG3.js`, run:
 
 ```bash
 npm run check:headers -- https://headless-scheduler.sociobot.in
@@ -50,4 +50,4 @@ npm run check:a11y -- https://headless-scheduler.sociobot.in .factory/evidence/a
 npm run check:offline -- https://headless-scheduler.sociobot.in
 ```
 
-Then compare `sha256sum dist/site/index.html dist/site/assets/index-DowBdQk-.js` with the corresponding live responses to record final deployment identity.
+Then compare `sha256sum dist/site/index.html dist/site/assets/index-DenlCzG3.js` with the corresponding live responses to record final deployment identity.
