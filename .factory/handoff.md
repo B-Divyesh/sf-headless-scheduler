@@ -1,50 +1,33 @@
-# Verification handoff — PASS
+# Verification handoff — FAIL
 
-Repaired independent verifier-2 findings from candidate
-`52818543dc3652193206659a85d9c2f6453695ad` on 2026-08-27.
+Independent QA of candidate `c1c41faebe3f42c0223ef13653dcdbc786d0edd7` on
+2026-08-27 found that its live URL,
+<https://headless-scheduler.sociobot.in>, is an exact byte match for the
+candidate but the npm library is **not releasable**.
 
-## What changed
+All normal clean-install gates passed: `npm test` (10/10), TypeScript check,
+production build, clean packed ESM/CJS/React consumer install,
+mobile/desktop browser flows, local and live axe (zero violations), production
+headers, offline reload, and deterministic service-worker update. The package
+is ready to pack mechanically but must not be published until these P1 defects
+are fixed:
 
-- Documentation navigations are network-first during a service-worker hand-off,
-  with the versioned precached shell retained as the offline fallback. An old
-  worker can no longer paint its old `/index.html` into a newly opened tab after
-  a docs deployment.
-- `check:pwa-update` now builds distinct old/new shells, verifies activation,
-  cache replacement, the new page's release marker and controller cache, then
-  reloads that new page offline to prove the new cached shell is used.
-- `check:smoke` waits for the open modal's title input to actually become the
-  active element, rather than racing the dialog effect. With no URL argument it
-  now serves `dist/site` itself, so it is deterministic in automation; an
-  explicit URL continues to exercise a live deployment.
+1. `buildResourceTimeline(..., slotMinutes: 0)` never advances its loop and
+   hangs indefinitely (clean package process killed by `timeout 3`, exit 124).
+   Negative values also walk backwards. Validate a positive finite slot size.
+2. The documented Temporal adapter does its day/month additions in UTC rather
+   than the configured timezone. On the 2026 New York DST transition, it
+   returned `2026-03-09T05:00:00.000Z`; the next local midnight is
+   `2026-03-09T04:00:00.000Z`. This breaks the brief's timezone-correct
+   calendar requirement.
 
-## Verified
+Also resolve the P2 self-hosted axe command (`npm run check:a11y` assumes an
+unstarted port 4173), live manifest MIME type (`application/octet-stream`),
+and SPA-fallback HTML cache policy (30-second public caching contrary to the
+README's no-store claim).
 
-From a clean `npm ci` install (0 audit vulnerabilities):
-
-```bash
-npm test                                      # 10/10 unit tests
-npm run check                                 # library + docs TypeScript
-npm run build                                 # dist/package + dist/site
-npm run check:pack                            # clean tarball + ESM/CJS/React consumer
-npm run check:headers                         # 8 static-header checks
-npm run check:offline                         # cached-shell offline reload
-npm run check:pwa-update                      # old-to-new fresh-client + offline regression
-npm run check:smoke                           # self-hosted 390px browser flow, no errors
-npm run check:a11y -- http://127.0.0.1:4268 .factory/evidence/axe-repair-local.json
-npm run check:headers -- https://headless-scheduler.sociobot.in
-npm run check:smoke -- https://headless-scheduler.sociobot.in
-npm run check:a11y -- https://headless-scheduler.sociobot.in .factory/evidence/axe-repair-live.json
-```
-
-Both local and live axe runs reported zero WCAG 2 A/AA and 2.1 AA violations.
-The PWA old-to-new regression was additionally run five consecutive times.
-
-## Release
-
-`dist/site` is the Standard static-docs artifact. Publish the committed `main`
-branch through the factory's static deployment path; do not publish the npm
-package from this worker (`npm pack` remains the ready-to-publish validation).
-
-Known gaps: the live URL checks above verify the currently deployed baseline;
-the repaired service-worker behavior is covered locally by the two-version
-regression and becomes live with this static-docs commit.
+Full evidence, exact commands, live artifact hashes, privacy/security/browser
+results, and remediation steps are in `.factory/verification-3.md`. Product
+source was not modified by verification. Docker was unavailable in this
+container, so its production-container command was not exercised; the exact
+production static build and live deployment were.
