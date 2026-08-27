@@ -16,7 +16,7 @@ function defaultRange(anchor: Date, view: SchedulerView, adapter = nativeDateAda
     ? adapter.startOfWeek(adapter.startOfMonth(anchor, timeZone), weekStartsOn, timeZone)
     : view === 'week' ? adapter.startOfWeek(dayStart, weekStartsOn, timeZone) : dayStart
   const days = view === 'week' ? 7 : view === 'month' ? 42 : 1
-  return { start: adapter.toISO(start), end: adapter.toISO(adapter.addDays(start, days)) }
+  return { start: adapter.toISO(start), end: adapter.toISO(adapter.addDays(start, days, timeZone)) }
 }
 
 export function createScheduler(options: SchedulerOptions = {}): Scheduler {
@@ -25,6 +25,8 @@ export function createScheduler(options: SchedulerOptions = {}): Scheduler {
   const initialView = options.initialView ?? 'week'
   const timeZone = options.timeZone ?? 'UTC'
   const weekStartsOn = options.weekStartsOn ?? 1
+  const slotMinutes = options.slotMinutes ?? 30
+  if (!Number.isFinite(slotMinutes) || slotMinutes <= 0) throw new RangeError('slotMinutes must be a positive finite number')
   const initialRange = options.visibleRange ?? defaultRange(anchor, initialView, adapter, timeZone, weekStartsOn)
   if (!validRange(initialRange)) throw new RangeError('visibleRange.end must be after visibleRange.start')
   const initialEvents = [...(options.events ?? [])]
@@ -37,7 +39,7 @@ export function createScheduler(options: SchedulerOptions = {}): Scheduler {
   let state: SchedulerState = Object.freeze({
     view: initialView, anchorDate: adapter.toISO(anchor), visibleRange: { ...initialRange }, events: Object.freeze(initialEvents),
     resources: Object.freeze([...(options.resources ?? [])]), locale: options.locale ?? 'en-US', timeZone,
-    weekStartsOn, slotMinutes: options.slotMinutes ?? 30, announcement: ''
+    weekStartsOn, slotMinutes, announcement: ''
   })
   const listeners = new Set<(value: SchedulerState) => void>()
   const publish = (patch: Partial<SchedulerState>) => { state = Object.freeze({ ...state, ...patch }); listeners.forEach(listener => listener(state)) }
@@ -77,7 +79,7 @@ export function createScheduler(options: SchedulerOptions = {}): Scheduler {
     removeEvent(id) { const event = find(id); changed(state.events.filter(item => item.id !== id), { type: 'remove', event }) },
     navigate(direction) {
       const current = adapter.parse(state.anchorDate)
-      const next = direction === 'today' ? new Date() : state.view === 'month' ? adapter.addMonths(current, direction) : adapter.addDays(current, direction * (state.view === 'week' ? 7 : 1))
+      const next = direction === 'today' ? new Date() : state.view === 'month' ? adapter.addMonths(current, direction, state.timeZone) : adapter.addDays(current, direction * (state.view === 'week' ? 7 : 1), state.timeZone)
       publish({ anchorDate: adapter.toISO(next), visibleRange: defaultRange(next, state.view, adapter, state.timeZone, state.weekStartsOn) })
     },
     announce(message) { publish({ announcement: message }) }

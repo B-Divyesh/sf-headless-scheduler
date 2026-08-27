@@ -33,8 +33,12 @@ interface TemporalZoned {
   dayOfWeek: number
 }
 
-/** DateAdapter backed by native Temporal or @js-temporal/polyfill. */
-export function createTemporalAdapter(Temporal: TemporalLike): DateAdapter {
+/** DateAdapter backed by native Temporal or @js-temporal/polyfill.
+ *
+ * `defaultTimeZone` is used for direct calendar additions. Scheduler view
+ * calculations pass their configured `timeZone` explicitly.
+ */
+export function createTemporalAdapter(Temporal: TemporalLike, defaultTimeZone = 'UTC'): DateAdapter {
   const zoned = (value: Date, timeZone: string) => Temporal.Instant.from(value.toISOString()).toZonedDateTimeISO(timeZone)
   return {
     ...nativeDateAdapter,
@@ -45,8 +49,8 @@ export function createTemporalAdapter(Temporal: TemporalLike): DateAdapter {
       return new Date(date.subtract({ days: (jsDay - weekStartsOn + 7) % 7 }).toInstant().toString())
     },
     startOfMonth(value, timeZone) { return new Date(zoned(value, timeZone).with({ day: 1 }).startOfDay().toInstant().toString()) },
-    addDays(value, amount) { return new Date(zoned(value, 'UTC').add({ days: amount }).toInstant().toString()) },
-    addMonths(value, amount) { return new Date(zoned(value, 'UTC').add({ months: amount }).toInstant().toString()) }
+    addDays(value, amount, timeZone) { return new Date(zoned(value, timeZone ?? defaultTimeZone).add({ days: amount }).toInstant().toString()) },
+    addMonths(value, amount, timeZone) { return new Date(zoned(value, timeZone ?? defaultTimeZone).add({ months: amount }).toInstant().toString()) }
   }
 }
 

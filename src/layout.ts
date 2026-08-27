@@ -53,6 +53,7 @@ export function buildResourceTimeline(input: {
   const start = adapter.parse(range.start)
   const end = adapter.parse(range.end)
   if (end <= start) throw new RangeError('Timeline end must be after its start')
+  if (!Number.isFinite(slotMinutes) || slotMinutes <= 0) throw new RangeError('slotMinutes must be a positive finite number')
   const total = minutesBetween(start, end)
   const slots = []
   for (let cursor = start; cursor < end; cursor = adapter.addMinutes(cursor, slotMinutes)) {
@@ -86,8 +87,8 @@ export function buildMonth(input: {
   const gridStart = adapter.startOfWeek(monthStart, input.weekStartsOn ?? 1, timeZone)
   const todayKey = (input.today ? adapter.parse(input.today) : new Date()).toISOString().slice(0, 10)
   const days = Array.from({ length: 42 }, (_, index) => {
-    const date = adapter.addDays(gridStart, index)
-    const next = adapter.addDays(date, 1)
+    const date = adapter.addDays(gridStart, index, timeZone)
+    const next = adapter.addDays(date, 1, timeZone)
     const key = date.toISOString().slice(0, 10)
     return {
       date: adapter.toISO(date), dayNumber: date.getUTCDate(), outside: date.getUTCMonth() !== monthStart.getUTCMonth(), today: key === todayKey,
@@ -102,16 +103,17 @@ export function buildMonth(input: {
 }
 
 /** Returns an overscanned virtual month window for continuous vertical scrolling. */
-export function getContinuousMonthWindow(input: { anchor: string; scrollTop: number; monthHeight: number; count?: number; overscan?: number; adapter: DateAdapter }) {
+export function getContinuousMonthWindow(input: { anchor: string; scrollTop: number; monthHeight: number; count?: number; overscan?: number; timeZone?: string; adapter: DateAdapter }) {
   if (input.monthHeight <= 0) throw new RangeError('monthHeight must be positive')
   const count = input.count ?? 24
   const overscan = input.overscan ?? 1
   const center = Math.floor(input.scrollTop / input.monthHeight)
   const startIndex = Math.max(-count, center - overscan)
   const endIndex = Math.min(count, center + Math.ceil(800 / input.monthHeight) + overscan)
-  const anchor = input.adapter.startOfMonth(input.adapter.parse(input.anchor), 'UTC')
+  const timeZone = input.timeZone ?? 'UTC'
+  const anchor = input.adapter.startOfMonth(input.adapter.parse(input.anchor), timeZone)
   return Array.from({ length: endIndex - startIndex + 1 }, (_, offset) => {
     const index = startIndex + offset
-    return { index, month: input.adapter.toISO(input.adapter.addMonths(anchor, index)), offset: index * input.monthHeight }
+    return { index, month: input.adapter.toISO(input.adapter.addMonths(anchor, index, timeZone)), offset: index * input.monthHeight }
   })
 }

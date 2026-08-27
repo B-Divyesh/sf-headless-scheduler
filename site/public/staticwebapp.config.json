@@ -8,6 +8,9 @@
     "X-Content-Type-Options": "nosniff",
     "X-Frame-Options": "DENY"
   },
+  "mimeTypes": {
+    ".webmanifest": "application/manifest+json"
+  },
   "routes": [
     { "route": "/assets/*", "headers": { "Cache-Control": "public, max-age=31536000, immutable" } },
     { "route": "/sw.js", "headers": { "Cache-Control": "no-cache, no-store, must-revalidate" } },
@@ -16,7 +19,8 @@
     { "route": "/index.html", "headers": { "Cache-Control": "no-store" } },
     { "route": "/offline.html", "headers": { "Cache-Control": "no-store" } },
     { "route": "/privacy/*", "headers": { "Cache-Control": "no-store" } },
-    { "route": "/terms/*", "headers": { "Cache-Control": "no-store" } }
+    { "route": "/terms/*", "headers": { "Cache-Control": "no-store" } },
+    { "route": "/*", "headers": { "Cache-Control": "no-store" } }
   ],
   "navigationFallback": {
     "rewrite": "/index.html",

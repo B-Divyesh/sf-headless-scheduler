@@ -13,8 +13,8 @@
     "orientationAngle": 0,
     "orientationType": "landscape-primary"
   },
-  "timestamp": "2026-08-27T18:45:11.699Z",
-  "url": "http://127.0.0.1:4173/",
+  "timestamp": "2026-08-27T22:27:06.473Z",
+  "url": "http://127.0.0.1:46381/",
   "toolOptions": {
     "resultTypes": [
       "violations"
@@ -1394,7 +1394,7 @@
               "data": null,
               "relatedNodes": [
                 {
-                  "html": "<main id=\"main\">",
+                  "html": "<main id=\"main\" data-docs-release=\"release\">",
                   "target": [
                     "#main"
                   ]

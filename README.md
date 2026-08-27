@@ -77,11 +77,11 @@ Use `mode: 'create'`, `'move'`, `'resize-start'`, or `'resize-end'`. Pointer cap
 ```ts
 import { createTemporalAdapter, createDateFnsAdapter } from 'headless-scheduler'
 
-const temporal = createTemporalAdapter(Temporal)
+const temporal = createTemporalAdapter(Temporal, 'America/New_York')
 const dateFns = createDateFnsAdapter({ addMinutes, startOfDay, startOfWeek, format })
 ```
 
-Events use ISO strings at the public boundary. Supply offsets or `Z` for instants; `timeZone` controls labels and calendar boundaries. Recurrences must be expanded by the caller in v0.1.
+Events use ISO strings at the public boundary. Supply offsets or `Z` for instants; `timeZone` controls labels and calendar boundaries. For direct `addDays`/`addMonths` calls, configure the Temporal adapter with that same zone (or pass it as the optional third argument) so calendar arithmetic stays correct across DST. Recurrences must be expanded by the caller in v0.1.
 
 ### Tailwind theme
 
@@ -111,6 +111,7 @@ npm run check:pack    # clean pack + fresh ESM/CJS consumer install
 npm run check:offline # production shell reload while offline
 npm run check:pwa-update # two-version service-worker update regression
 npm run check:smoke   # self-hosted production browser smoke check
+npm run check:a11y    # self-hosted production axe check
 ```
 
 `npm pack` and `npm publish` run the library build through `prepack`, so every declared ESM, CJS, declaration, React, and CSS export exists in a clean tarball. `npm run dev` serves the documentation site. The static `dist/site` directory can be deployed as-is; it includes `staticwebapp.config.json` for Static Web Apps cache and security headers plus a build-generated service worker that precaches the emitted shell. No analytics, accounts, cookies, local storage, third-party fonts, or runtime CDNs are used.

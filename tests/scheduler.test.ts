@@ -1,9 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
 import {
   buildMonth, buildResourceTimeline, createPointerInteraction, createScheduler,
-  getContinuousMonthWindow, getGridNavigation, layoutOverlaps, nativeDateAdapter,
+  createTemporalAdapter, getContinuousMonthWindow, getGridNavigation, layoutOverlaps, nativeDateAdapter,
   type PointerPreview
 } from '../src'
+import { Temporal } from '@js-temporal/polyfill'
 
 const resources = [{ id: 'room-a', title: 'Room A' }, { id: 'room-b', title: 'Room B' }]
 const events = [
@@ -28,6 +29,7 @@ describe('createScheduler', () => {
   it('validates duplicate ids and invalid ranges', () => {
     expect(() => createScheduler({ events: [events[0]!, events[0]!] })).toThrow('Duplicate event id')
     expect(() => createScheduler({ visibleRange: { start: range.end, end: range.start } })).toThrow('visibleRange.end')
+    expect(() => createScheduler({ slotMinutes: 0 })).toThrow(RangeError)
   })
 
   it('supports create, resize, update, remove and navigation', () => {
@@ -48,6 +50,10 @@ describe('view models', () => {
     expect(timeline.slots).toHaveLength(10)
     expect(timeline.rows[0]!.events[0]).toMatchObject({ left: 10, width: 15 })
     expect(timeline.rows[1]!.events).toHaveLength(0)
+  })
+
+  it.each([0, -15, Number.POSITIVE_INFINITY, Number.NaN])('rejects non-advancing timeline slots (%s)', slotMinutes => {
+    expect(() => buildResourceTimeline({ range, events, resources, adapter: nativeDateAdapter, slotMinutes })).toThrow(RangeError)
   })
 
   it('lays overlapping events into columns', () => {
@@ -72,6 +78,24 @@ describe('view models', () => {
     expect(month.weeks.flat().find(day => day.today)?.events).toHaveLength(2)
     const window = getContinuousMonthWindow({ anchor: '2026-08-01T00:00:00Z', scrollTop: 600, monthHeight: 600, adapter: nativeDateAdapter })
     expect(window.some(item => item.index === 1)).toBe(true)
+  })
+
+  it('keeps Temporal calendar additions on New York midnights across both DST boundaries', () => {
+    const adapter = createTemporalAdapter(Temporal, 'America/New_York')
+    const springStart = adapter.startOfDay(adapter.parse('2026-03-08T16:00:00.000Z'), 'America/New_York')
+    const fallStart = adapter.startOfDay(adapter.parse('2026-11-01T16:00:00.000Z'), 'America/New_York')
+    expect(adapter.toISO(adapter.addDays(springStart, 1))).toBe('2026-03-09T04:00:00.000Z')
+    expect(adapter.toISO(adapter.addDays(fallStart, 1))).toBe('2026-11-02T05:00:00.000Z')
+    expect(adapter.toISO(adapter.addMonths(springStart, 1))).toBe('2026-04-08T04:00:00.000Z')
+  })
+
+  it('passes the scheduler timezone into Temporal week boundaries', () => {
+    const adapter = createTemporalAdapter(Temporal)
+    const scheduler = createScheduler({
+      dateAdapter: adapter, initialView: 'week', timeZone: 'America/New_York',
+      anchorDate: '2026-03-08T16:00:00.000Z'
+    })
+    expect(scheduler.getState().visibleRange).toEqual({ start: '2026-03-02T05:00:00.000Z', end: '2026-03-09T04:00:00.000Z' })
   })
 })
 

@@ -17,8 +17,10 @@ export interface DateAdapter {
   parse(value: string): Date
   toISO(value: Date): string
   addMinutes(value: Date, amount: number): Date
-  addDays(value: Date, amount: number): Date
-  addMonths(value: Date, amount: number): Date
+  /** Adds calendar days. Pass the scheduler timezone when calendar boundaries matter. */
+  addDays(value: Date, amount: number, timeZone?: string): Date
+  /** Adds calendar months. Pass the scheduler timezone when calendar boundaries matter. */
+  addMonths(value: Date, amount: number, timeZone?: string): Date
   startOfDay(value: Date, timeZone: string): Date
   startOfWeek(value: Date, weekStartsOn: number, timeZone: string): Date
   startOfMonth(value: Date, timeZone: string): Date

@@ -14,7 +14,8 @@ export async function startStaticSite(root) {
   const headersFor = async pathname => {
     const config = JSON.parse(await readFile(resolve(currentRoot, 'staticwebapp.config.json'), 'utf8'))
     const headers = { ...(config.globalHeaders ?? {}) }
-    for (const route of config.routes ?? []) if (matchesRoute(pathname, route.route)) Object.assign(headers, route.headers ?? {})
+    const route = (config.routes ?? []).find(candidate => matchesRoute(pathname, candidate.route))
+    if (route) Object.assign(headers, route.headers ?? {})
     return headers
   }
   const server = createServer(async (request, response) => {
@@ -22,12 +23,14 @@ export async function startStaticSite(root) {
       const pathname = decodeURIComponent(new URL(request.url ?? '/', 'http://site.local').pathname)
       let file = resolve(currentRoot, `.${pathname}`)
       if (file !== currentRoot && !file.startsWith(`${currentRoot}${sep}`)) { response.writeHead(403).end(); return }
+      let fallback = false
       try { if ((await stat(file)).isDirectory()) file = resolve(file, 'index.html') } catch {
         if (extname(pathname)) { response.writeHead(404).end(); return }
         file = resolve(currentRoot, 'index.html')
+        fallback = true
       }
       const body = await readFile(file)
-      response.writeHead(200, { ...await headersFor(pathname), 'Content-Type': contentTypes[extname(file)] ?? 'application/octet-stream' })
+      response.writeHead(200, { ...await headersFor(fallback ? '/' : pathname), 'Content-Type': contentTypes[extname(file)] ?? 'application/octet-stream' })
       response.end(body)
     } catch { response.writeHead(404).end() }
   })
