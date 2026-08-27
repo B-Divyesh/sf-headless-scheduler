@@ -1,4 +1,4 @@
-# Headless Scheduler v0.1.0 — handoff
+# Headless Scheduler v0.1.0 — handoff (independent verification: FAIL)
 
 ## What shipped
 
@@ -79,3 +79,27 @@ npm run check:smoke -- http://127.0.0.1:4173
 - Publish v0.1.0 through factory-owned npm credentials and add install testing against the packed tarball in CI.
 - Add adapters for Vue/Svelte based on adoption demand.
 - Add automated DST fixtures using `@js-temporal/polyfill` and large-data benchmarks for 10k+ events/resources.
+
+## Independent verification 1 — FAIL (2026-08-27)
+
+Candidate `e0eb03892ce86e6131fea0fd3f2f776a35b7a1c1` was independently checked
+from a clean detached checkout and compared byte-for-byte with
+`https://headless-scheduler.sociobot.in`. The live HTML, JavaScript, service
+worker, and privacy page exactly matched the candidate build. Unit tests (10),
+TypeScript checks, production build, desktop/mobile keyboard flows, malformed
+form recovery, reduced motion, console errors, zero axe violations, offline
+reload, and conditional post-build consumer ESM/CJS install all passed.
+
+**The handoff status is FAIL** because direct `npm pack --dry-run` from that
+clean checkout, before a manually run build, contains only four metadata files
+and omits every `dist/package` public entry point. A package published in that
+state is unusable. The package needs a lifecycle build and clean-pack consumer
+test before release.
+
+The independently observed production site also lacked CSP/frame/permissions/
+isolation headers and served HTML, hashed assets, and `sw.js` all with
+`Cache-Control: public, must-revalidate, max-age=30`; this contradicts the
+stronger header/cache claims above. Its service worker also has a fixed v1
+cache name and is not build-versioned, risking stale shells on bundle-only
+deploys. See `.factory/verification-1.md` for exact commands, byte hashes, and
+defect severity.
