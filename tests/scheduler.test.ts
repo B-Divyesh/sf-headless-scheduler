@@ -1,7 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
 import {
   buildMonth, buildResourceTimeline, createPointerInteraction, createScheduler,
-  getContinuousMonthWindow, getGridNavigation, layoutOverlaps, nativeDateAdapter
+  getContinuousMonthWindow, getGridNavigation, layoutOverlaps, nativeDateAdapter,
+  type PointerPreview
 } from '../src'
 
 const resources = [{ id: 'room-a', title: 'Room A' }, { id: 'room-b', title: 'Room B' }]
@@ -55,6 +56,15 @@ describe('view models', () => {
     expect(laidOut.every(event => event.columnCount === 2)).toBe(true)
   })
 
+  it('keeps collision cluster widths consistent for chained overlaps', () => {
+    const chained = [
+      { id: 'a', title: 'A', start: '2026-08-27T09:00:00Z', end: '2026-08-27T12:00:00Z' },
+      { id: 'b', title: 'B', start: '2026-08-27T09:30:00Z', end: '2026-08-27T10:00:00Z' },
+      { id: 'c', title: 'C', start: '2026-08-27T10:15:00Z', end: '2026-08-27T11:00:00Z' }
+    ]
+    expect(layoutOverlaps(chained, range, nativeDateAdapter).map(event => event.columnCount)).toEqual([2, 2, 2])
+  })
+
   it('builds a six-week month and an overscanned virtual window', () => {
     const month = buildMonth({ month: '2026-08-10T00:00:00Z', events, adapter: nativeDateAdapter, today: '2026-08-27T00:00:00Z' })
     expect(month.label).toContain('August')
@@ -73,6 +83,14 @@ describe('interaction primitives', () => {
     interaction.onPointerDown({ button: 0, clientX: 100, pointerId: 2, currentTarget: target, preventDefault: vi.fn() } as unknown as PointerEvent)
     interaction.onPointerUp({ clientX: 163, pointerId: 2 } as PointerEvent)
     expect(onCommit).toHaveBeenCalledWith(expect.objectContaining({ start: '2026-08-27T09:30:00.000Z', end: '2026-08-27T11:00:00.000Z' }))
+  })
+
+  it('creates and resizes with a minimum snapped duration', () => {
+    const commits: PointerPreview[] = []
+    const create = createPointerInteraction({ mode: 'create', start: '2026-08-27T09:00:00Z', end: '2026-08-27T09:15:00Z', pixelsPerMinute: 1, snapMinutes: 15, onPreview: () => undefined, onCommit: value => commits.push(value) })
+    create.onPointerDown({ button: 0, clientX: 0, pointerId: 1, currentTarget: null, preventDefault() {} } as unknown as PointerEvent)
+    create.onPointerUp({ clientX: 4, pointerId: 1 } as PointerEvent)
+    expect(commits[0]!.end).toBe('2026-08-27T09:15:00.000Z')
   })
 
   it('maps standard ARIA grid keys', () => {

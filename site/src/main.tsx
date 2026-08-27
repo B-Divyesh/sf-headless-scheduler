@@ -67,7 +67,7 @@ function App() {
 
   return <>
     <header className="site-header">
-      <a className="brand" href="#top" aria-label="Headless Scheduler home"><span className="brand-mark">HS</span><span>headless—scheduler</span></a>
+      <a className="brand" href="#top"><span className="brand-mark">HS</span><span>headless—scheduler</span></a>
       <nav aria-label="Primary"><a href="#demo">Demo</a><a href="#api">API</a><a href="#install">Install</a><a className="repo-link" href="https://github.com/B-Divyesh/sf-headless-scheduler"><Icon name="github" />GitHub</a></nav>
     </header>
     <main id="main">
@@ -114,7 +114,7 @@ function App() {
 
       <section className="install" id="install" aria-labelledby="install-title">
         <div><p className="kicker">One package. Bring your stack.</p><h2 id="install-title">Ship the scheduler, not the fight.</h2><p>ESM, CJS, declarations, zero runtime dependencies in the core. React is optional.</p></div>
-        <div className="code-panel"><div className="code-label"><span>Terminal</span><button onClick={() => { navigator.clipboard?.writeText('npm install headless-scheduler'); setNotice('Install command copied.') }}>Copy</button></div><pre><code><span>$</span> npm install headless-scheduler</code></pre><pre><code><span>›</span> import {'{ createScheduler }'} from 'headless-scheduler'</code></pre></div>
+        <div className="code-panel"><div className="code-label"><span>Terminal</span><button onClick={() => { navigator.clipboard?.writeText('npm install headless-scheduler'); setNotice('Install command copied.') }}>Copy</button></div><pre tabIndex={0}><code><span>$</span> npm install headless-scheduler</code></pre><pre tabIndex={0}><code><span>›</span> import {'{ createScheduler }'} from 'headless-scheduler'</code></pre></div>
       </section>
 
       <section className="api" id="api" aria-labelledby="api-title"><p className="kicker">Small on purpose</p><h2 id="api-title">Primitives you can hold in your head</h2><div className="api-list"><code>createScheduler(options)</code><code>buildResourceTimeline(input)</code><code>getContinuousMonthWindow(input)</code><code>createPointerInteraction(options)</code><code>getGridNavigation(input)</code></div><a className="button primary" href="https://github.com/B-Divyesh/sf-headless-scheduler#usage">Read the API <Icon name="arrow" /></a></section>
@@ -144,17 +144,17 @@ function Timeline({ state, preview, setPreview, setNotice, remove }: { state: Sc
     scheduler.moveEvent(event.id, { start: new Date(new Date(event.start).getTime() + minutes * 60_000).toISOString() })
     setNotice(`${event.title} moved ${Math.abs(minutes)} minutes ${minutes > 0 ? 'later' : 'earlier'}.`)
   }
-  return <div className="timeline" role="grid" aria-label="Resource schedule for 27 August 2026" onPointerMove={e => interaction.current?.onPointerMove(e.nativeEvent)} onPointerUp={e => interaction.current?.onPointerUp(e.nativeEvent)} onPointerCancel={e => interaction.current?.onPointerCancel(e.nativeEvent)}>
-    <div className="timeline-corner" role="columnheader">Resource <span>UTC</span></div>
-    <div className="timeline-head timeline-canvas" role="row">{timeline.slots.map(slot => <div role="columnheader" key={slot.start}>{slot.label.replace(':00','')}</div>)}</div>
-    {timeline.rows.map(row => <React.Fragment key={row.resource.id}><div className="resource-name" role="rowheader"><span className={`avatar avatar-${row.resource.id}`}>{row.resource.title.charAt(0)}</span><span><strong>{row.resource.title}</strong><small>{row.resource.group}</small></span></div><div className="timeline-row timeline-canvas" role="row">
+  return <div className="timeline" role="region" aria-label="Resource schedule for 27 August 2026" onPointerMove={e => interaction.current?.onPointerMove(e.nativeEvent)} onPointerUp={e => interaction.current?.onPointerUp(e.nativeEvent)} onPointerCancel={e => interaction.current?.onPointerCancel(e.nativeEvent)}>
+    <div className="timeline-corner">Resource <span>UTC</span></div>
+    <div className="timeline-head timeline-canvas">{timeline.slots.map(slot => <div key={slot.start}>{slot.label.replace(':00','')}</div>)}</div>
+    {timeline.rows.map(row => <React.Fragment key={row.resource.id}><div className="resource-name"><span className={`avatar avatar-${row.resource.id}`}>{row.resource.title.charAt(0)}</span><span><strong>{row.resource.title}</strong><small>{row.resource.group}</small></span></div><div className="timeline-row timeline-canvas">
       <div className="hour-lines" aria-hidden="true">{timeline.slots.map(slot => <i key={slot.start}></i>)}</div>
       {row.events.length === 0 && <span className="open-label">Open</span>}
       {row.events.map(event => {
         const value = preview?.id === event.id ? preview.value : event
         const start = new Date(value.start), end = new Date(value.end), rangeStart = new Date(state.visibleRange.start), total = new Date(state.visibleRange.end).getTime() - rangeStart.getTime()
         const left = Math.max(0,(start.getTime()-rangeStart.getTime())/total*100), width = Math.max(2,(end.getTime()-start.getTime())/total*100)
-        return <button className={`event-block tone-${String(event.meta?.tone ?? 'red')}`} style={{left:`${left}%`,width:`${width}%`}} key={event.id} onPointerDown={e => startDrag(e,event,'move')} onKeyDown={e => { keyMove(e,event); if(e.key==='Delete') remove(event) }} aria-label={`${event.title}, ${formatTime(event.start)} to ${formatTime(event.end)}. Drag or use left and right arrows to move; Delete to remove.`}><strong>{event.title}</strong><span>{formatTime(value.start)}–{formatTime(value.end)}</span><i className="resize-handle" aria-hidden="true" onPointerDown={e => { e.stopPropagation(); startDrag(e,event,'resize-end') }}></i></button>
+        return <button className={`event-block tone-${String(event.meta?.tone ?? 'red')}`} style={{left:`${left}%`,width:`${width}%`}} key={event.id} onPointerDown={e => startDrag(e,event,'move')} onKeyDown={e => { keyMove(e,event); if(e.key==='Delete') remove(event) }} aria-label={`${event.title} ${formatTime(value.start)}–${formatTime(value.end)}. Drag or use left and right arrows to move; Delete to remove.`}><strong>{event.title}</strong><span>{formatTime(value.start)}–{formatTime(value.end)}</span><i className="resize-handle" aria-hidden="true" onPointerDown={e => { e.stopPropagation(); startDrag(e,event,'resize-end') }}></i></button>
       })}
     </div></React.Fragment>)}
   </div>

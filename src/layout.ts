@@ -11,7 +11,7 @@ export function layoutOverlaps(events: readonly SchedulerEvent[], range: DateRan
   const total = Math.max(1, minutesBetween(rangeStart, rangeEnd))
   const sorted = [...events].filter(event => overlaps(event, { id: '', title: '', ...range }, adapter)).sort((a, b) => a.start.localeCompare(b.start) || a.end.localeCompare(b.end))
   const active: { event: SchedulerEvent; column: number }[] = []
-  const result: PositionedEvent[] = []
+  const assigned: { event: SchedulerEvent; column: number; columnCount: number }[] = []
   for (const event of sorted) {
     const start = adapter.parse(event.start)
     for (let i = active.length - 1; i >= 0; i--) if (adapter.parse(active[i]!.event.end) <= start) active.splice(i, 1)
@@ -19,13 +19,27 @@ export function layoutOverlaps(events: readonly SchedulerEvent[], range: DateRan
     let column = 0
     while (used.has(column)) column++
     active.push({ event, column })
-    const group = events.filter(candidate => overlaps(event, candidate, adapter))
-    const columnCount = Math.max(column + 1, group.length)
+    assigned.push({ event, column, columnCount: column + 1 })
+  }
+  let clusterStart = 0
+  while (clusterStart < assigned.length) {
+    let clusterEnd = clusterStart + 1
+    let latestEnd = adapter.parse(assigned[clusterStart]!.event.end)
+    while (clusterEnd < assigned.length && adapter.parse(assigned[clusterEnd]!.event.start) < latestEnd) {
+      const candidateEnd = adapter.parse(assigned[clusterEnd]!.event.end)
+      if (candidateEnd > latestEnd) latestEnd = candidateEnd
+      clusterEnd++
+    }
+    const columnCount = Math.max(...assigned.slice(clusterStart, clusterEnd).map(item => item.column + 1))
+    for (let index = clusterStart; index < clusterEnd; index++) assigned[index]!.columnCount = columnCount
+    clusterStart = clusterEnd
+  }
+  return assigned.map(({ event, column, columnCount }) => {
+    const start = adapter.parse(event.start)
     const clippedStart = new Date(Math.max(start.getTime(), rangeStart.getTime()))
     const clippedEnd = new Date(Math.min(adapter.parse(event.end).getTime(), rangeEnd.getTime()))
-    result.push({ ...event, top: minutesBetween(rangeStart, clippedStart) / total * 100, height: Math.max(0.5, minutesBetween(clippedStart, clippedEnd) / total * 100), column, columnCount })
-  }
-  return result
+    return { ...event, top: minutesBetween(rangeStart, clippedStart) / total * 100, height: Math.max(0.5, minutesBetween(clippedStart, clippedEnd) / total * 100), column, columnCount }
+  })
 }
 
 export function buildResourceTimeline(input: {

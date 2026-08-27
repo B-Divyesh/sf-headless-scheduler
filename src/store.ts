@@ -10,9 +10,12 @@ function assertEvent(event: SchedulerEvent, events: readonly SchedulerEvent[], i
   if (!(new Date(event.end) > new Date(event.start))) throw new RangeError(`Event ${event.id} must end after it starts`)
 }
 
-function defaultRange(anchor: Date, view: SchedulerView, adapter = nativeDateAdapter): DateRange {
-  const start = adapter.startOfDay(anchor, 'UTC')
-  const days = view === 'day' ? 1 : view === 'week' ? 7 : view === 'resource-timeline' ? 1 : 42
+function defaultRange(anchor: Date, view: SchedulerView, adapter = nativeDateAdapter, timeZone = 'UTC', weekStartsOn = 1): DateRange {
+  const dayStart = adapter.startOfDay(anchor, timeZone)
+  const start = view === 'month'
+    ? adapter.startOfWeek(adapter.startOfMonth(anchor, timeZone), weekStartsOn, timeZone)
+    : view === 'week' ? adapter.startOfWeek(dayStart, weekStartsOn, timeZone) : dayStart
+  const days = view === 'week' ? 7 : view === 'month' ? 42 : 1
   return { start: adapter.toISO(start), end: adapter.toISO(adapter.addDays(start, days)) }
 }
 
@@ -20,7 +23,9 @@ export function createScheduler(options: SchedulerOptions = {}): Scheduler {
   const adapter = options.dateAdapter ?? nativeDateAdapter
   const anchor = adapter.parse(options.anchorDate ?? new Date().toISOString())
   const initialView = options.initialView ?? 'week'
-  const initialRange = options.visibleRange ?? defaultRange(anchor, initialView, adapter)
+  const timeZone = options.timeZone ?? 'UTC'
+  const weekStartsOn = options.weekStartsOn ?? 1
+  const initialRange = options.visibleRange ?? defaultRange(anchor, initialView, adapter, timeZone, weekStartsOn)
   if (!validRange(initialRange)) throw new RangeError('visibleRange.end must be after visibleRange.start')
   const initialEvents = [...(options.events ?? [])]
   const initialIds = new Set<string>()
@@ -31,8 +36,8 @@ export function createScheduler(options: SchedulerOptions = {}): Scheduler {
   })
   let state: SchedulerState = Object.freeze({
     view: initialView, anchorDate: adapter.toISO(anchor), visibleRange: { ...initialRange }, events: Object.freeze(initialEvents),
-    resources: Object.freeze([...(options.resources ?? [])]), locale: options.locale ?? 'en-US', timeZone: options.timeZone ?? 'UTC',
-    weekStartsOn: options.weekStartsOn ?? 1, slotMinutes: options.slotMinutes ?? 30, announcement: ''
+    resources: Object.freeze([...(options.resources ?? [])]), locale: options.locale ?? 'en-US', timeZone,
+    weekStartsOn, slotMinutes: options.slotMinutes ?? 30, announcement: ''
   })
   const listeners = new Set<(value: SchedulerState) => void>()
   const publish = (patch: Partial<SchedulerState>) => { state = Object.freeze({ ...state, ...patch }); listeners.forEach(listener => listener(state)) }
@@ -49,8 +54,8 @@ export function createScheduler(options: SchedulerOptions = {}): Scheduler {
   return {
     getState: () => state,
     subscribe(listener) { listeners.add(listener); listener(state); return () => listeners.delete(listener) },
-    setView(view) { publish({ view, visibleRange: defaultRange(adapter.parse(state.anchorDate), view, adapter) }) },
-    setAnchorDate(date) { const next = adapter.parse(date); publish({ anchorDate: adapter.toISO(next), visibleRange: defaultRange(next, state.view, adapter) }) },
+    setView(view) { publish({ view, visibleRange: defaultRange(adapter.parse(state.anchorDate), view, adapter, state.timeZone, state.weekStartsOn) }) },
+    setAnchorDate(date) { const next = adapter.parse(date); publish({ anchorDate: adapter.toISO(next), visibleRange: defaultRange(next, state.view, adapter, state.timeZone, state.weekStartsOn) }) },
     setVisibleRange(range) { if (!validRange(range)) throw new RangeError('visibleRange.end must be after visibleRange.start'); publish({ visibleRange: { ...range } }) },
     setEvents(events) {
       const next = [...events]
@@ -73,7 +78,7 @@ export function createScheduler(options: SchedulerOptions = {}): Scheduler {
     navigate(direction) {
       const current = adapter.parse(state.anchorDate)
       const next = direction === 'today' ? new Date() : state.view === 'month' ? adapter.addMonths(current, direction) : adapter.addDays(current, direction * (state.view === 'week' ? 7 : 1))
-      publish({ anchorDate: adapter.toISO(next), visibleRange: defaultRange(next, state.view, adapter) })
+      publish({ anchorDate: adapter.toISO(next), visibleRange: defaultRange(next, state.view, adapter, state.timeZone, state.weekStartsOn) })
     },
     announce(message) { publish({ announcement: message }) }
   }
