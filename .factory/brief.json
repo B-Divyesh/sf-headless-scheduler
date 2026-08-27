@@ -1,0 +1,8 @@
+{
+  "slug": "headless-scheduler",
+  "title": "Headless, Tailwind-native calendar/scheduler library with free resource-timeline views",
+  "artifact_class": "library-npm",
+  "monetization": "free",
+  "smallest_useful_product": "Framework-agnostic TypeScript core and React adapter with day, week, continuous month and resource timeline views; pointer drag, resize and create; keyboard/ARIA helpers; Temporal and date-fns adapters; Tailwind example theme.",
+  "not_in_v1": ["Vue/Svelte adapters", "recurrence expansion", "iCal parsing", "printing", "hosted builder"]
+}

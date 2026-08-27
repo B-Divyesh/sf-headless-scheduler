@@ -1,0 +1,41 @@
+{
+  "name": "headless-scheduler",
+  "version": "0.1.0",
+  "description": "Headless TypeScript calendar and free resource timeline primitives",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "files": ["dist/package", "README.md", "LICENSE", "CHANGELOG.md"],
+  "main": "./dist/package/index.cjs",
+  "module": "./dist/package/index.js",
+  "types": "./dist/package/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/package/index.d.ts", "import": "./dist/package/index.js", "require": "./dist/package/index.cjs" },
+    "./react": { "types": "./dist/package/react.d.ts", "import": "./dist/package/react.js", "require": "./dist/package/react.cjs" },
+    "./preset.css": "./dist/package/preset.css"
+  },
+  "scripts": {
+    "dev": "vite --config site/vite.config.ts",
+    "test": "vitest run",
+    "build": "npm run build:lib && npm run build:site",
+    "build:lib": "vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css",
+    "build:site": "vite build --config site/vite.config.ts",
+    "check": "tsc --noEmit && tsc -p site/tsconfig.json --noEmit"
+  },
+  "peerDependencies": { "react": ">=18" },
+  "peerDependenciesMeta": { "react": { "optional": true } },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@types/react": "^19.1.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "jsdom": "^26.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^3.1.4"
+  },
+  "engines": { "node": ">=20" },
+  "repository": { "type": "git", "url": "https://github.com/B-Divyesh/sf-headless-scheduler.git" },
+  "keywords": ["calendar", "scheduler", "resource-timeline", "headless", "tailwind", "react"]
+}
