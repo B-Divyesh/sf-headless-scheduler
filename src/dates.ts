@@ -64,17 +64,17 @@ export const nativeDateAdapter: DateAdapter = {
   addMinutes(value, amount) { return new Date(value.getTime() + amount * 60_000) },
   addDays(value, amount, timeZone = 'UTC') { return calendarAdd(value, amount, timeZone, 'days') },
   addMonths(value, amount, timeZone = 'UTC') { return calendarAdd(value, amount, timeZone, 'months') },
-  startOfDay(value, timeZone) {
+  startOfDay(value, timeZone = 'UTC') {
     const parts = partsInZone(value, timeZone)
     return fromZonedParts({ ...parts, hour: 0, minute: 0, second: 0 }, 0, timeZone)
   },
-  startOfWeek(value, weekStartsOn, timeZone) {
+  startOfWeek(value, weekStartsOn, timeZone = 'UTC') {
     const day = this.startOfDay(value, timeZone)
     const parts = partsInZone(day, timeZone)
     const weekDay = new Date(Date.UTC(parts.year, parts.month - 1, parts.day)).getUTCDay()
     return this.addDays(day, -((weekDay - weekStartsOn + 7) % 7), timeZone)
   },
-  startOfMonth(value, timeZone) {
+  startOfMonth(value, timeZone = 'UTC') {
     const parts = partsInZone(value, timeZone)
     return fromZonedParts({ ...parts, day: 1, hour: 0, minute: 0, second: 0 }, 0, timeZone)
   },
