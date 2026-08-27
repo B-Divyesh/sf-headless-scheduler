@@ -24,6 +24,15 @@ npm run dev
 
 The required build command is `npm run build`. Library artifacts land in `dist/package`; static deployment output lands in `dist/site`, with `dist/site/index.html` at its root. Registry publication is intentionally not performed by the worker. Validate the package with `npm pack --dry-run`.
 
+The production container is built and served with:
+
+```bash
+docker build -t headless-scheduler .
+docker run --rm -p 8080:8080 headless-scheduler
+```
+
+It builds the existing project in a Node 22 Alpine stage and copies only `dist/site` into an unprivileged Nginx runtime on port 8080.
+
 Browser checks (with a site running at port 4173):
 
 ```bash
@@ -45,6 +54,17 @@ npm run check:smoke -- http://127.0.0.1:4173
 - Lighthouse 12.8.2 mobile: Performance **98**, Accessibility **100**, Best Practices **100**, SEO **100**. LCP **2.3 s**, TBT **90 ms**, CLS **0**. Report is `.factory/evidence/lighthouse.json`.
 - Static budgets: initial JS **44,249 bytes**, CSS **16,723 bytes**, hero WebP **198,634 bytes**; all below the 200 KB / 50 KB / 300 KB limits. No webfont payload.
 - Screenshots and machine-readable reports are under `.factory/evidence/`.
+
+## Deployment repair (2026-08-27)
+
+- The prior accepted build was retained. The Azure Static Web Apps Free-SKU error 51021 was a subscription site-quota failure, not a product or build failure.
+- Added a minimal multi-stage `Dockerfile`, `.dockerignore`, and Nginx configuration for the factory `container` deployment path. The runtime uses `nginxinc/nginx-unprivileged`, explicitly runs as `nginx`, and exposes only port 8080.
+- Nginx serves `dist/site` with client-side route fallback; returns `no-store` for HTML; applies `public, max-age=31536000, immutable` to Vite’s `/assets/` files; returns `no-cache, no-store, must-revalidate` for `sw.js`; preserves the shipped PWA service worker; and adds CSP, HSTS, frame, MIME, referrer, permissions, COOP, and CORP protections.
+- The a11y harness now bypasses CSP only inside its isolated Playwright context so axe can be injected without relaxing the deployed site’s CSP.
+- A local Docker-compatible runtime was not installed in the worker, so direct `docker run` was unavailable. The factory ACR build completed successfully for `sf-headless-scheduler:56fb8ca4a139`, and its Container App revision reached `Healthy`/`Running` before the public-domain checks.
+- Deployed through the factory Container Apps path to `https://headless-scheduler.sociobot.in`. Azure required the hostname to be registered in a disabled state before its managed certificate could be issued; the hostname is now SNI-bound with a successfully issued certificate.
+- Public HTTPS verification: HTTP 200; valid custom-domain TLS; expected CSP/HSTS/security headers; no-store document and legal-page headers; immutable hashed JavaScript asset header; PWA service-worker no-store header; and a deep client route returned the SPA document with HTTP 200.
+- Public browser verification: factory URL verifier found no page or console errors, one `h1`, `lang`, `main`, image alt text, and labelled controls; axe reported zero violations; mobile (`390 × 844`) and desktop (`1440 × 1000`) interaction smoke tests passed add-event, keyboard move, month navigation, timeline switching, and zero console errors. Evidence is under `.factory/evidence/deployed/`.
 
 ## Known v1 boundaries
 

@@ -1,0 +1,14 @@
+{
+  "url": "https://headless-scheduler.sociobot.in",
+  "loadMs": 697,
+  "errors": [],
+  "a11y": {
+    "title": "Headless Scheduler — resource timelines without the licence wall",
+    "lang": "en",
+    "h1": 1,
+    "main": true,
+    "imgsMissingAlt": 0,
+    "buttonsUnlabeled": 0,
+    "textLength": 2263
+  }
+}
