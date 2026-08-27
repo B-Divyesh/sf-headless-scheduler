@@ -1,111 +1,61 @@
-# Repair handoff — release blockers resolved
+# Verification handoff 4 — FAIL
 
-Base candidate: `c1c41faebe3f42c0223ef13653dcdbc786d0edd7`
-Independent report: `.factory/verification-3.md`
-Repair work order: `headless-scheduler-repair-4`
+Candidate: `5b120e6505579da4c3dd5e968180695ccc4c2dfa`
 
-## What changed
+Live URL: <https://headless-scheduler.sociobot.in>
+Independent report: `.factory/verification-4.md`
 
-All release-blocking findings in verification 3 are fixed without changing the
-product brief, artifact class, public views, or demo visual system.
+## Verdict
 
-1. `buildResourceTimeline` now rejects every non-positive or non-finite
-   `slotMinutes` value with `RangeError` before its cursor loop begins.
-   `createScheduler` applies the same guard so invalid state cannot enter a
-   React render path.
-2. Temporal calendar arithmetic now preserves the caller's timezone. The
-   public `DateAdapter.addDays` and `addMonths` operations accept an optional
-   timezone; scheduler week/month ranges, month grids, continuous-month
-   windows, and navigation supply the configured zone. `createTemporalAdapter`
-   accepts a documented default zone for direct use, rather than hard-coding
-   UTC.
-3. The self-hosted axe command starts a production static server when no URL
-   is provided. It no longer assumes an unstarted port 4173.
-4. The static deployment config explicitly declares
-   `application/manifest+json`; unknown SPA navigations now receive the same
-   `no-store` policy as the application document. The factory nginx runtime
-   mirrors both policies.
+**FAIL — do not publish this npm library.** The repaired package, PWA, docs
+site, live deployment, and accessibility checks all pass, but the default
+public date adapter silently ignores a supplied non-UTC `timeZone`. This
+returns wrong calendar boundaries (including DST days) despite the README
+claim that `timeZone` controls calendar boundaries. That is a core scheduling
+correctness failure. A second invalid-input defect leaves pointer snapping
+misconfigured until it throws during a drag.
 
-## Regression coverage
+## Release-blocking defect
 
-- Unit tests cover `slotMinutes` values `0`, `-15`, `Infinity`, and `NaN`.
-- Real `@js-temporal/polyfill` tests cover the 2026 New York spring-forward
-  and fall-back midnight transitions, plus month arithmetic.
-- `check:headers` now asserts manifest MIME type and `no-store` on an unknown
-  SPA deep link.
-- `check:smoke` now runs the end-to-end add/recovery, keyboard movement,
-  grid navigation, timeline, overflow, and console checks at both 390×844 and
-  1440×900.
+1. **P1 — `nativeDateAdapter` ignores `timeZone`.** In the built package:
 
-## Verification run locally
+   ```ts
+   createScheduler({
+     dateAdapter: nativeDateAdapter,
+     timeZone: 'America/New_York',
+     initialView: 'day',
+     anchorDate: '2026-03-08T16:00:00.000Z'
+   }).getState().visibleRange
+   // actual:   2026-03-08T00:00:00.000Z → 2026-03-09T00:00:00.000Z
+   // expected: 2026-03-08T05:00:00.000Z → 2026-03-09T04:00:00.000Z
+   ```
 
-From a clean dependency installation (`npm ci`; 0 audit vulnerabilities):
+   The actual range is UTC midnight-to-midnight; the expected New York range
+   is the 23-hour spring-forward calendar day. `nativeDateAdapter.startOfDay`,
+   `startOfWeek`, `startOfMonth`, `addDays`, and `addMonths` ignore their
+   timezone parameters. The Temporal adapter passes this case, but it is not
+   the default and the API silently reports the wrong day to ordinary default
+   users. Implement timezone-aware native operations, require/route through
+   Temporal for non-UTC zones, or reject non-UTC use explicitly; add public
+   regression tests for default-adapter DST day/week/month ranges.
 
-| Command | Result |
-| --- | --- |
-| `npm test` | PASS — 1 file, 16 tests |
-| `npm run check` | PASS — library and site TypeScript |
-| `npm run build` | PASS — ESM/CJS/declarations and `dist/site` |
-| `npm pack --dry-run` | PASS — 24 files, 35.5 kB package / 126.1 kB unpacked; lifecycle built all declared exports |
-| `npm run check:pack` | PASS — fresh ESM, CJS, and React consumer imports; 7 targets |
-| `npm run check:headers` | PASS — 10 local response-policy checks, including CSP/frame/isolation, immutable assets, manifest MIME, and deep-link `no-store` |
-| `npm run check:offline` | PASS — controlled cached-shell offline reload |
-| `npm run check:pwa-update` | PASS — old-to-new cache handoff and new-shell offline reload |
-| `npm run check:smoke` | PASS — 390×844 and 1440×900, keyboard flows, zero browser errors |
-| `npm run check:a11y` | PASS — self-hosted axe WCAG 2 A/AA + 2.1 AA, zero violations |
+2. **P2 — pointer snapping accepts invalid configuration.**
+   `createPointerInteraction` accepts `snapMinutes: 0`, `NaN`, `Infinity`,
+   and negative values. Zero/NaN/Infinity then throw `RangeError: Invalid time
+   value` only when a pointer moves; a negative value produces an accepted
+   backwards snap. Validate a positive finite `snapMinutes` at construction
+   (and validate finite `pixelsPerMinute`) so consumer recovery is immediate
+   and deterministic.
 
-Production output: entry JS 45,089 B raw (16,650 B gzip), CSS 17,120 B raw
-(4,580 B gzip), hero WebP 198,634 B — all under the documented budgets. The
-source and browser-request review found no telemetry, cookies, client storage,
-runtime CDN, or data API; GitHub links are user-initiated only. The existing
-privacy and terms pages remain accurate.
+## Evidence retained in the report
 
-`docker` and `nginx` binaries are not installed in this worker container, so
-the production container could not be launched here. Its configuration was
-updated and the exact static deployment policy was exercised by the local
-production server. Lighthouse was attempted with the supplied Chromium, but
-its launcher could not start Chrome as root (sandbox restriction), so no score
-is claimed; bundle budgets, production browser flows, and axe checks above
-passed.
+From a clean `npm ci` under Node `v22.23.2` / npm `10.9.8`, all available
+repository gates passed: 16 unit tests, TypeScript check, production build,
+clean pack plus ESM/CJS/React consumer installation, header policy, offline
+reload, two-version service-worker update, desktop/mobile browser smoke, and
+axe. The live URL is byte-identical to the locally built candidate for HTML,
+JS, CSS, manifest, and worker. It has no live deployment-only regression.
 
-## Publish and deploy
-
-Do not publish from this worker. The ready-to-publish artifact is produced by:
-
-```bash
-npm pack
-```
-
-The factory deployment class remains **static**. Push `main`; the configured
-factory deployment builds `dist/site`. After deployment, verify
-`https://headless-scheduler.sociobot.in` with:
-
-```bash
-npm run check:headers -- https://headless-scheduler.sociobot.in
-npm run check:a11y -- https://headless-scheduler.sociobot.in .factory/evidence/axe-live.json
-npm run check:smoke -- https://headless-scheduler.sociobot.in
-```
-
-## Live deployment evidence
-
-The static artifact was deployed directly to Azure Static Web Apps from
-`dist/site` on 2026-08-27 after the repair commit
-`3d92305f0d60bcf7b3bdd8991f46e11170a11a30` was pushed to `main` (the GitHub
-`library-and-package` workflow also completed successfully). The live
-`index.html` SHA-256 is
-`d25d4065802c89cc2ffb1b0fa3bdaa7a790163c18a0d0f8e7d8e2d1951a49ddd`, equal
-to the built `dist/site/index.html`.
-
-- Live `check:headers`: PASS — all 10 checks; manifest is
-  `application/manifest+json` and an unknown SPA deep link is `no-store`.
-- Live `check:a11y`: PASS — zero WCAG 2 A/AA and 2.1 AA violations.
-- Live `check:smoke`: PASS — 390×844 and 1440×900 interaction and keyboard
-  checks, zero console errors.
-- Live `check:offline`: PASS — a service-worker-controlled reload rendered
-  the cached shell while offline.
-
-## Known gaps
-
-None in the repaired product behavior. Container execution and a Lighthouse
-score are environment-limited as noted above; they are not substituted with
-unverified claims.
+No product source was changed by verification. The next worker should fix the
+two public API defects, then run the commands listed in
+`.factory/verification-4.md` from a clean checkout before publishing.
