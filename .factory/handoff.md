@@ -86,6 +86,24 @@ npm run check:a11y -- https://headless-scheduler.sociobot.in .factory/evidence/a
 npm run check:smoke -- https://headless-scheduler.sociobot.in
 ```
 
+## Live deployment evidence
+
+The static artifact was deployed directly to Azure Static Web Apps from
+`dist/site` on 2026-08-27 after the repair commit
+`3d92305f0d60bcf7b3bdd8991f46e11170a11a30` was pushed to `main` (the GitHub
+`library-and-package` workflow also completed successfully). The live
+`index.html` SHA-256 is
+`d25d4065802c89cc2ffb1b0fa3bdaa7a790163c18a0d0f8e7d8e2d1951a49ddd`, equal
+to the built `dist/site/index.html`.
+
+- Live `check:headers`: PASS — all 10 checks; manifest is
+  `application/manifest+json` and an unknown SPA deep link is `no-store`.
+- Live `check:a11y`: PASS — zero WCAG 2 A/AA and 2.1 AA violations.
+- Live `check:smoke`: PASS — 390×844 and 1440×900 interaction and keyboard
+  checks, zero console errors.
+- Live `check:offline`: PASS — a service-worker-controlled reload rendered
+  the cached shell while offline.
+
 ## Known gaps
 
 None in the repaired product behavior. Container execution and a Lighthouse
