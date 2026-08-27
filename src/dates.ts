@@ -1,6 +1,58 @@
 import type { DateAdapter } from './types'
 
-const copy = (date: Date) => new Date(date.getTime())
+interface ZonedParts { year: number; month: number; day: number; hour: number; minute: number; second: number }
+
+const zonedFormatterCache = new Map<string, Intl.DateTimeFormat>()
+
+function zonedFormatter(timeZone: string) {
+  let formatter = zonedFormatterCache.get(timeZone)
+  if (!formatter) {
+    formatter = new Intl.DateTimeFormat('en-US-u-ca-iso8601', {
+      timeZone, year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23'
+    })
+    zonedFormatterCache.set(timeZone, formatter)
+  }
+  return formatter
+}
+
+/** Returns Gregorian calendar fields for an instant in an IANA timezone. */
+function partsInZone(value: Date, timeZone: string): ZonedParts {
+  const fields = Object.fromEntries(zonedFormatter(timeZone).formatToParts(value)
+    .filter(part => part.type !== 'literal')
+    .map(part => [part.type, Number(part.value)])) as Record<string, number>
+  return {
+    year: fields.year!, month: fields.month!, day: fields.day!, hour: fields.hour!,
+    minute: fields.minute!, second: fields.second!
+  }
+}
+
+function offsetAt(value: Date, timeZone: string) {
+  const parts = partsInZone(value, timeZone)
+  return Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second) - value.getTime()
+}
+
+/**
+ * Converts a wall-clock calendar value to its instant without relying on the
+ * host machine timezone. A second offset lookup handles DST transitions.
+ */
+function fromZonedParts(parts: ZonedParts, milliseconds: number, timeZone: string) {
+  const wallClock = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second, milliseconds)
+  let instant = wallClock - offsetAt(new Date(wallClock), timeZone)
+  instant = wallClock - offsetAt(new Date(instant), timeZone)
+  return new Date(instant)
+}
+
+function calendarAdd(value: Date, amount: number, timeZone: string, unit: 'days' | 'months') {
+  const parts = partsInZone(value, timeZone)
+  const wallClock = new Date(Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second, value.getUTCMilliseconds()))
+  if (unit === 'days') wallClock.setUTCDate(wallClock.getUTCDate() + amount)
+  else wallClock.setUTCMonth(wallClock.getUTCMonth() + amount)
+  return fromZonedParts({
+    year: wallClock.getUTCFullYear(), month: wallClock.getUTCMonth() + 1, day: wallClock.getUTCDate(),
+    hour: wallClock.getUTCHours(), minute: wallClock.getUTCMinutes(), second: wallClock.getUTCSeconds()
+  }, wallClock.getUTCMilliseconds(), timeZone)
+}
 
 export const nativeDateAdapter: DateAdapter = {
   parse(value) {
@@ -10,14 +62,22 @@ export const nativeDateAdapter: DateAdapter = {
   },
   toISO: value => value.toISOString(),
   addMinutes(value, amount) { return new Date(value.getTime() + amount * 60_000) },
-  addDays(value, amount) { const next = copy(value); next.setUTCDate(next.getUTCDate() + amount); return next },
-  addMonths(value, amount) { const next = copy(value); next.setUTCMonth(next.getUTCMonth() + amount); return next },
-  startOfDay(value) { return new Date(Date.UTC(value.getUTCFullYear(), value.getUTCMonth(), value.getUTCDate())) },
+  addDays(value, amount, timeZone = 'UTC') { return calendarAdd(value, amount, timeZone, 'days') },
+  addMonths(value, amount, timeZone = 'UTC') { return calendarAdd(value, amount, timeZone, 'months') },
+  startOfDay(value, timeZone) {
+    const parts = partsInZone(value, timeZone)
+    return fromZonedParts({ ...parts, hour: 0, minute: 0, second: 0 }, 0, timeZone)
+  },
   startOfWeek(value, weekStartsOn, timeZone) {
     const day = this.startOfDay(value, timeZone)
-    return this.addDays(day, -((day.getUTCDay() - weekStartsOn + 7) % 7))
+    const parts = partsInZone(day, timeZone)
+    const weekDay = new Date(Date.UTC(parts.year, parts.month - 1, parts.day)).getUTCDay()
+    return this.addDays(day, -((weekDay - weekStartsOn + 7) % 7), timeZone)
   },
-  startOfMonth(value) { return new Date(Date.UTC(value.getUTCFullYear(), value.getUTCMonth(), 1)) },
+  startOfMonth(value, timeZone) {
+    const parts = partsInZone(value, timeZone)
+    return fromZonedParts({ ...parts, day: 1, hour: 0, minute: 0, second: 0 }, 0, timeZone)
+  },
   format(value, options, locale, timeZone) { return new Intl.DateTimeFormat(locale, { ...options, timeZone }).format(value) }
 }
 

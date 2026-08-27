@@ -22,7 +22,8 @@ export function createPointerInteraction(options: PointerInteractionOptions) {
   const baseStart = new Date(options.event?.start ?? options.start ?? '').getTime()
   const baseEnd = new Date(options.event?.end ?? options.end ?? '').getTime()
   if (!Number.isFinite(baseStart) || !Number.isFinite(baseEnd) || baseEnd <= baseStart) throw new RangeError('Pointer interaction requires a valid start and end')
-  if (!(options.pixelsPerMinute > 0)) throw new RangeError('pixelsPerMinute must be positive')
+  if (!Number.isFinite(step) || step <= 0) throw new RangeError('snapMinutes must be a positive finite number')
+  if (!Number.isFinite(options.pixelsPerMinute) || options.pixelsPerMinute <= 0) throw new RangeError('pixelsPerMinute must be a positive finite number')
   let origin = 0
   let activePointer: number | undefined
   const resourceId = options.resourceId ?? options.event?.resourceId

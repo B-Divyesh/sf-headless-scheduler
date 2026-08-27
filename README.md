@@ -70,7 +70,7 @@ const drag = createPointerInteraction({
 element.addEventListener('pointerdown', drag.onPointerDown)
 ```
 
-Use `mode: 'create'`, `'move'`, `'resize-start'`, or `'resize-end'`. Pointer capture keeps drags stable. Keyboard equivalents are available through `getGridNavigation`, and `scheduler.announce()` exposes changes for an `aria-live` region.
+Use `mode: 'create'`, `'move'`, `'resize-start'`, or `'resize-end'`. `pixelsPerMinute` and `snapMinutes` must be positive finite numbers; invalid configuration throws when the interaction is created. Pointer capture keeps drags stable. Keyboard equivalents are available through `getGridNavigation`, and `scheduler.announce()` exposes changes for an `aria-live` region.
 
 ### Date adapters
 
@@ -81,7 +81,7 @@ const temporal = createTemporalAdapter(Temporal, 'America/New_York')
 const dateFns = createDateFnsAdapter({ addMinutes, startOfDay, startOfWeek, format })
 ```
 
-Events use ISO strings at the public boundary. Supply offsets or `Z` for instants; `timeZone` controls labels and calendar boundaries. For direct `addDays`/`addMonths` calls, configure the Temporal adapter with that same zone (or pass it as the optional third argument) so calendar arithmetic stays correct across DST. Recurrences must be expanded by the caller in v0.1.
+Events use ISO strings at the public boundary. Supply offsets or `Z` for instants; `timeZone` controls labels and calendar boundaries. The default `nativeDateAdapter` uses the platform `Intl` timezone data, so scheduler day/week/month boundaries and direct `addDays`/`addMonths` calls remain on the requested local calendar date across DST (pass the zone as the optional third argument for direct calls). The Temporal adapter provides the same behavior when you prefer Temporal. Recurrences must be expanded by the caller in v0.1.
 
 ### Tailwind theme
 

@@ -97,6 +97,26 @@ describe('view models', () => {
     })
     expect(scheduler.getState().visibleRange).toEqual({ start: '2026-03-02T05:00:00.000Z', end: '2026-03-09T04:00:00.000Z' })
   })
+
+  it('keeps default native day, week, month and continuous-month boundaries in the configured timezone', () => {
+    const options = { timeZone: 'America/New_York', anchorDate: '2026-03-08T16:00:00.000Z' }
+    expect(createScheduler({ ...options, initialView: 'day' }).getState().visibleRange).toEqual({
+      start: '2026-03-08T05:00:00.000Z', end: '2026-03-09T04:00:00.000Z'
+    })
+    expect(createScheduler({ ...options, initialView: 'week' }).getState().visibleRange).toEqual({
+      start: '2026-03-02T05:00:00.000Z', end: '2026-03-09T04:00:00.000Z'
+    })
+    expect(createScheduler({ ...options, initialView: 'month' }).getState().visibleRange).toEqual({
+      start: '2026-02-23T05:00:00.000Z', end: '2026-04-06T04:00:00.000Z'
+    })
+    expect(getContinuousMonthWindow({ anchor: options.anchorDate, scrollTop: 0, monthHeight: 600, count: 1, overscan: 0, timeZone: options.timeZone, adapter: nativeDateAdapter })
+      .map(item => item.month)).toEqual(['2026-03-01T05:00:00.000Z', '2026-04-01T04:00:00.000Z'])
+  })
+
+  it('keeps default native calendar boundaries in non-DST zones', () => {
+    const scheduler = createScheduler({ timeZone: 'Asia/Kolkata', initialView: 'day', anchorDate: '2026-03-08T16:00:00.000Z' })
+    expect(scheduler.getState().visibleRange).toEqual({ start: '2026-03-07T18:30:00.000Z', end: '2026-03-08T18:30:00.000Z' })
+  })
 })
 
 describe('interaction primitives', () => {
@@ -115,6 +135,14 @@ describe('interaction primitives', () => {
     create.onPointerDown({ button: 0, clientX: 0, pointerId: 1, currentTarget: null, preventDefault() {} } as unknown as PointerEvent)
     create.onPointerUp({ clientX: 4, pointerId: 1 } as PointerEvent)
     expect(commits[0]!.end).toBe('2026-08-27T09:15:00.000Z')
+  })
+
+  it.each([0, -15, Number.NaN, Number.POSITIVE_INFINITY])('rejects invalid snapMinutes at construction (%s)', snapMinutes => {
+    expect(() => createPointerInteraction({ mode: 'move', event: events[0]!, pixelsPerMinute: 1, snapMinutes, onPreview: () => undefined, onCommit: () => undefined })).toThrow(RangeError)
+  })
+
+  it.each([0, -1, Number.NaN, Number.POSITIVE_INFINITY])('rejects invalid pixelsPerMinute at construction (%s)', pixelsPerMinute => {
+    expect(() => createPointerInteraction({ mode: 'move', event: events[0]!, pixelsPerMinute, onPreview: () => undefined, onCommit: () => undefined })).toThrow(RangeError)
   })
 
   it('maps standard ARIA grid keys', () => {
