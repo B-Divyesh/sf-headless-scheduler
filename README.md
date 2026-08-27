@@ -111,6 +111,15 @@ npm pack --dry-run
 
 `npm run dev` serves the documentation site. The static `dist/site` directory can be deployed as-is. No analytics, accounts, cookies, local storage, third-party fonts, or runtime CDNs are used.
 
+For the production container used by the factory deployment:
+
+```bash
+docker build -t headless-scheduler .
+docker run --rm -p 8080:8080 headless-scheduler
+```
+
+It builds `dist/site` in a separate stage, then serves it on port 8080 as a non-root user. The runtime applies SPA fallback, no-store HTML responses, immutable caching for Vite's hashed assets, PWA-aware service-worker caching, and browser security headers.
+
 ## Browser and framework support
 
 Evergreen browsers with ES2022 and Pointer Events. The package ships ESM and CJS. React 18/19 is supported as an optional peer; Vue and Svelte adapters are intentionally outside v0.1, while the core works in either.
