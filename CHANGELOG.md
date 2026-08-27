@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Make `npm pack`/`npm publish` build the library automatically and add a clean tarball consumer regression.
+- Generate a revisioned documentation service worker with emitted-shell precaching and update coverage.
+- Ship Static Web Apps cache and security header configuration with the documentation build.
+
 ## 0.1.0 — 2026-08-27
 
 - First public release of the headless core and React adapter.

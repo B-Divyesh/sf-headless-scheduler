@@ -7,7 +7,21 @@ import {
 } from '../../src'
 import './styles.css'
 
-if ('serviceWorker' in navigator && import.meta.env.PROD) addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => undefined))
+const docsRelease = import.meta.env.VITE_DOCS_BUILD_MARKER ?? 'release'
+
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).then(registration => {
+      registration.addEventListener('updatefound', () => {
+        const worker = registration.installing
+        if (!worker) return
+        worker.addEventListener('statechange', () => {
+          if (worker.state === 'installed' && navigator.serviceWorker.controller) dispatchEvent(new Event('headless-scheduler-update'))
+        })
+      })
+    }).catch(() => undefined)
+  })
+}
 
 const RESOURCES = [
   { id: 'studio', title: 'Studio A', group: 'Rooms' },
@@ -52,10 +66,16 @@ function App() {
   const [notice, setNotice] = useState('Tip: drag an event or focus it and use arrow keys.')
   const [preview, setPreview] = useState<{ id: string; value: PointerPreview } | null>(null)
   const [undo, setUndo] = useState<SchedulerEvent | null>(null)
+  const [updateAvailable, setUpdateAvailable] = useState(false)
   useEffect(() => {
     const update = () => setOnline(navigator.onLine)
     addEventListener('online', update); addEventListener('offline', update)
     return () => { removeEventListener('online', update); removeEventListener('offline', update) }
+  }, [])
+  useEffect(() => {
+    const notify = () => setUpdateAvailable(true)
+    addEventListener('headless-scheduler-update', notify)
+    return () => removeEventListener('headless-scheduler-update', notify)
   }, [])
 
   const setView = (view: SchedulerView) => {
@@ -70,7 +90,8 @@ function App() {
       <a className="brand" href="#top"><span className="brand-mark">HS</span><span>headless—scheduler</span></a>
       <nav aria-label="Primary"><a href="#demo">Demo</a><a href="#api">API</a><a href="#install">Install</a><a className="repo-link" href="https://github.com/B-Divyesh/sf-headless-scheduler"><Icon name="github" />GitHub</a></nav>
     </header>
-    <main id="main">
+    <main id="main" data-docs-release={docsRelease}>
+      {updateAvailable && <div className="update-toast" role="status">Documentation update ready. <button onClick={() => location.reload()}>Reload</button></div>}
       <section className="hero" id="top">
         <div className="hero-copy">
           <p className="eyebrow"><span>MIT</span> No premium views</p>

@@ -107,9 +107,10 @@ npm test
 npm run build         # library + static docs
 npm run build:site    # static docs -> dist/site (index.html at root)
 npm pack --dry-run
+npm run check:pack    # clean pack + fresh ESM/CJS consumer install
 ```
 
-`npm run dev` serves the documentation site. The static `dist/site` directory can be deployed as-is. No analytics, accounts, cookies, local storage, third-party fonts, or runtime CDNs are used.
+`npm pack` and `npm publish` run the library build through `prepack`, so every declared ESM, CJS, declaration, React, and CSS export exists in a clean tarball. `npm run dev` serves the documentation site. The static `dist/site` directory can be deployed as-is; it includes `staticwebapp.config.json` for Static Web Apps cache and security headers plus a build-generated service worker that precaches the emitted shell. No analytics, accounts, cookies, local storage, third-party fonts, or runtime CDNs are used.
 
 For the production container used by the factory deployment:
 

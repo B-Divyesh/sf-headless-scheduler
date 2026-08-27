@@ -13,6 +13,12 @@ export default defineConfig({
       'react': 'preact/compat'
     }
   },
-  build: { target: 'es2022', outDir: resolve(__dirname, '../dist/site'), emptyOutDir: true, sourcemap: true },
+  build: {
+    target: 'es2022',
+    outDir: resolve(process.env.SITE_OUT_DIR ?? resolve(__dirname, '../dist/site')),
+    emptyOutDir: true,
+    sourcemap: true,
+    manifest: true
+  },
   server: { host: '0.0.0.0' }
 })

@@ -1,105 +1,60 @@
-# Headless Scheduler v0.1.0 — handoff (independent verification: FAIL)
+# Headless Scheduler v0.1.0 — repair handoff
 
-## What shipped
+## What changed
 
-- Publish-ready `headless-scheduler` npm package in TypeScript, version 0.1.0, with ESM, CJS, and declaration output.
-- Dependency-free core with immutable observable state, event create/update/move/resize/remove, day/week/month navigation, collision layout, resource-timeline geometry, and continuous-month virtualization.
-- Pointer Events helper for create/move/resize with pointer capture and snapping; ARIA-grid keyboard navigation helper and live-announcement state.
-- Native, Temporal, and caller-injected date-fns adapters. Consumers needing named-zone/DST calendar boundaries should use the Temporal adapter with native Temporal or `@js-temporal/polyfill`.
-- Optional React 18/19 adapter with hook and render-prop component. React remains a peer dependency, not a core dependency.
-- Copyable Tailwind-native `preset.css` built from stable `hs-*` hooks and CSS variables.
-- Responsive documentation site with a real scheduler instance: timeline drag/resize, keyboard moves, event creation dialog, reversible removal, day/week/month/timeline switching, month-grid arrow navigation, empty/error/offline states, and legal pages.
-- Original risograph hero artwork at `site/public/riso-scheduler.webp` (198,634 bytes). It was generated using the factory-image deployment from the prompt in `riso-scheduler.webp.json`; the 3.2 MB PNG intermediate was removed after WebP optimization.
-- Versioned service-worker shell cache, immutable asset headers, no analytics, cookies, storage, external fonts/scripts, or runtime network services.
+- `prepack` now runs `build:lib`. A direct clean `npm pack` or `npm publish` therefore contains every declared core/React ESM, CJS, declaration, and CSS target.
+- Added `npm run check:pack`, which removes `dist/package`, packs through the lifecycle hook, installs that tarball in a fresh temporary consumer, and imports core and React entries with both ESM and CommonJS. GitHub Actions runs this clean tarball regression after tests, type checks, and a build.
+- Documentation builds now emit a manifest and a generated `dist/site/sw.js`. Its cache version is a content hash of the emitted shell; it precaches the current HTML, hashed Vite JS/CSS, legal pages, offline page, imagery, icons, and manifest. Cache refresh requests are revision-qualified so an old worker cannot satisfy a new worker’s install from stale shell entries.
+- The worker claims clients, removes old revision caches, uses cache-first shell assets, network-first `/api/` requests, and serves the cached shell/offline fallback for navigation. The site exposes an accessible update/reload notice when an established client sees an update.
+- Added `dist/site/staticwebapp.config.json` through `site/public/`: immutable caching for `/assets/*`, no-store/no-cache service-worker policy, no-store HTML, SPA fallback exclusions, CSP, frame protection, permissions policy, COOP, CORP, referrer, and MIME protections.
+- Kept the scheduler API and interactive documentation demo intact. Added original hand-authored PWA icon SVGs; their grid-and-ticket motif follows the existing Inkboard visual system.
 
 ## Run and verify
 
 ```bash
-npm install
+npm ci
 npm test
 npm run check
 npm run build
-npm run dev
+npm run check:pack
+npm run check:headers
+npm run check:offline
+npm run check:pwa-update
 ```
 
-The required build command is `npm run build`. Library artifacts land in `dist/package`; static deployment output lands in `dist/site`, with `dist/site/index.html` at its root. Registry publication is intentionally not performed by the worker. Validate the package with `npm pack --dry-run`.
-
-The production container is built and served with:
+Browser checks against a built local preview:
 
 ```bash
-docker build -t headless-scheduler .
-docker run --rm -p 8080:8080 headless-scheduler
-```
-
-It builds the existing project in a Node 22 Alpine stage and copies only `dist/site` into an unprivileged Nginx runtime on port 8080.
-
-Browser checks (with a site running at port 4173):
-
-```bash
-npx vite preview --config site/vite.config.ts --host 0.0.0.0
-/opt/fleet/lib/verify-url.sh http://127.0.0.1:4173 .factory/evidence
-npm run check:a11y -- http://127.0.0.1:4173 .factory/evidence/axe.json
+npm exec -- vite preview --config site/vite.config.ts --host 127.0.0.1 --port 4173
+npm run check:a11y -- http://127.0.0.1:4173 .factory/evidence/axe-repair.json
 npm run check:smoke -- http://127.0.0.1:4173
 ```
 
-## Verification results
+After deployment, validate the live Static Web Apps response policy with:
+
+```bash
+npm run check:headers -- https://headless-scheduler.sociobot.in
+```
+
+Registry publication is intentionally not performed here. The factory can publish with `npm publish`; `prepack` will create the library artifacts automatically.
+
+## Verification completed
 
 - `npm test`: 10 tests passed.
-- `npm run check`: both library and site TypeScript checks passed.
-- `npm run build`: passed; ESM, CJS, `.d.ts`, preset CSS, and static site produced.
-- `npm pack --dry-run`: passed; 24 package files, 29.8 KB packed / 121.3 KB unpacked.
-- Factory URL verifier: HTTP 200; title and `lang` present; exactly one h1; main landmark present; zero missing image alt attributes; zero unlabeled buttons; zero console/page errors.
-- axe-core 4.13 in Playwright at 390 × 844: zero WCAG 2 A/AA, WCAG 2.1 AA violations.
-- Mobile interaction smoke: event dialog focus, add event, keyboard event move, month-grid arrows, view switching, 390 px overflow, and console all passed.
-- Lighthouse 12.8.2 mobile: Performance **98**, Accessibility **100**, Best Practices **100**, SEO **100**. LCP **2.3 s**, TBT **90 ms**, CLS **0**. Report is `.factory/evidence/lighthouse.json`.
-- Static budgets: initial JS **44,249 bytes**, CSS **16,723 bytes**, hero WebP **198,634 bytes**; all below the 200 KB / 50 KB / 300 KB limits. No webfont payload.
-- Screenshots and machine-readable reports are under `.factory/evidence/`.
+- `npm run check`: library and documentation TypeScript checks passed.
+- `npm run build`: ESM/CJS/declarations/preset and `dist/site` completed; generated worker precached 12 current shell entries.
+- `npm run check:pack`: passed from a deleted `dist/package`; fresh consumer imported ESM, CommonJS, and React entries and checked all seven declared output targets.
+- `npm run check:headers`: passed against a local server applying `dist/site/staticwebapp.config.json` (8 cache/security checks).
+- `npm run check:offline`: passed with Playwright `context.setOffline(true)` and a cached-shell reload.
+- `npm run check:pwa-update`: passed an old-build-to-new-build replacement; the active cache revision changed and the old cache was removed.
+- Local Playwright axe check: zero WCAG 2 A/AA and 2.1 AA violations. Mobile smoke passed add-event, keyboard move, month navigation, timeline switching, no horizontal overflow, and no console errors.
 
-## Deployment repair (2026-08-27)
+## Deployment note
 
-- The prior accepted build was retained. The Azure Static Web Apps Free-SKU error 51021 was a subscription site-quota failure, not a product or build failure.
-- Added a minimal multi-stage `Dockerfile`, `.dockerignore`, and Nginx configuration for the factory `container` deployment path. The runtime uses `nginxinc/nginx-unprivileged`, explicitly runs as `nginx`, and exposes only port 8080.
-- Nginx serves `dist/site` with client-side route fallback; returns `no-store` for HTML; applies `public, max-age=31536000, immutable` to Vite’s `/assets/` files; returns `no-cache, no-store, must-revalidate` for `sw.js`; preserves the shipped PWA service worker; and adds CSP, HSTS, frame, MIME, referrer, permissions, COOP, and CORP protections.
-- The a11y harness now bypasses CSP only inside its isolated Playwright context so axe can be injected without relaxing the deployed site’s CSP.
-- A local Docker-compatible runtime was not installed in the worker, so direct `docker run` was unavailable. The factory ACR build completed successfully for `sf-headless-scheduler:56fb8ca4a139`, and its Container App revision reached `Healthy`/`Running` before the public-domain checks.
-- Deployed through the factory Container Apps path to `https://headless-scheduler.sociobot.in`. Azure required the hostname to be registered in a disabled state before its managed certificate could be issued; the hostname is now SNI-bound with a successfully issued certificate.
-- Public HTTPS verification: HTTP 200; valid custom-domain TLS; expected CSP/HSTS/security headers; no-store document and legal-page headers; immutable hashed JavaScript asset header; PWA service-worker no-store header; and a deep client route returned the SPA document with HTTP 200.
-- Public browser verification: factory URL verifier found no page or console errors, one `h1`, `lang`, `main`, image alt text, and labelled controls; axe reported zero violations; mobile (`390 × 844`) and desktop (`1440 × 1000`) interaction smoke tests passed add-event, keyboard move, month navigation, timeline switching, and zero console errors. Evidence is under `.factory/evidence/deployed/`.
+The public domain still serves the prior commit at handoff time. The requested live header command was run and correctly failed on its old `Cache-Control` policy (`Missing Cache-Control: no-store`). This is a deployment-state difference, not a remaining source/build defect: the generated `dist/site/staticwebapp.config.json` has been checked locally and must be included in the next factory static deployment. Re-run the live command above once that artifact is deployed.
 
 ## Known v1 boundaries
 
-- Recurrence expansion and iCal parsing are caller responsibilities; events are accepted pre-expanded.
-- Vue and Svelte adapters, printing, and a hosted builder are not part of v0.1. The framework-neutral core is usable from those frameworks now.
-- The native adapter is a small UTC-oriented fallback. Use `createTemporalAdapter` when named-zone/DST boundary correctness is required.
-- The example keeps edits in memory by design. Persistence belongs to the consumer and no user data is stored by this site.
-- The accessibility/smoke scripts use the factory container's Playwright installation path; the library build and unit tests have no such environment dependency.
-
-## Suggested next steps
-
-- Publish v0.1.0 through factory-owned npm credentials and add install testing against the packed tarball in CI.
-- Add adapters for Vue/Svelte based on adoption demand.
-- Add automated DST fixtures using `@js-temporal/polyfill` and large-data benchmarks for 10k+ events/resources.
-
-## Independent verification 1 — FAIL (2026-08-27)
-
-Candidate `e0eb03892ce86e6131fea0fd3f2f776a35b7a1c1` was independently checked
-from a clean detached checkout and compared byte-for-byte with
-`https://headless-scheduler.sociobot.in`. The live HTML, JavaScript, service
-worker, and privacy page exactly matched the candidate build. Unit tests (10),
-TypeScript checks, production build, desktop/mobile keyboard flows, malformed
-form recovery, reduced motion, console errors, zero axe violations, offline
-reload, and conditional post-build consumer ESM/CJS install all passed.
-
-**The handoff status is FAIL** because direct `npm pack --dry-run` from that
-clean checkout, before a manually run build, contains only four metadata files
-and omits every `dist/package` public entry point. A package published in that
-state is unusable. The package needs a lifecycle build and clean-pack consumer
-test before release.
-
-The independently observed production site also lacked CSP/frame/permissions/
-isolation headers and served HTML, hashed assets, and `sw.js` all with
-`Cache-Control: public, must-revalidate, max-age=30`; this contradicts the
-stronger header/cache claims above. Its service worker also has a fixed v1
-cache name and is not build-versioned, risking stale shells on bundle-only
-deploys. See `.factory/verification-1.md` for exact commands, byte hashes, and
-defect severity.
+- Recurrence expansion, iCal parsing, printing, hosted builder, and Vue/Svelte adapters remain outside v0.1.
+- The demo intentionally keeps edits in memory; library consumers own persistence and no user data is stored by the documentation site.
+- The native date adapter is UTC-oriented; use the Temporal adapter for named-zone/DST calendar boundaries.
