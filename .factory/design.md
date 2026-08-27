@@ -26,8 +26,8 @@ Color is never the only status signal: event categories include text and pattern
 
 ## Type, spacing, shape
 
-- Display: self-hosted **Bricolage Grotesque** subset where available, falling back to `Arial Black`; blunt, editorial letterforms behave like block-set type.
-- Utility/body: system sans (`ui-sans-serif`, `system-ui`) to keep the npm example fast and code legible. Numeric cells use tabular figures.
+- Display: the local platform serif stack (`Georgia`, `Times New Roman`) gives the page its printed-editorial voice without a font request.
+- Utility/body: the local system sans stack (`ui-sans-serif`, `system-ui`) keeps the npm example fast and code legible. Numeric cells use tabular figures. No font files or third-party font services are loaded.
 - Scale: 14 / 16 / 20 / 28 / 44 / 72 px. Body never drops below 16 px.
 - Spacing follows a 4 px base with 8, 12, 16, 24, 32, 48, 72 steps.
 - Edges are mostly square with 2–8 px softening. Offset 2 px ink shadows and coarse dashed rules replace generic floating cards.
