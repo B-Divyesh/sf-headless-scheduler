@@ -1,0 +1,9 @@
+@layer components {
+  .hs-root { --hs-paper: #f4efdf; --hs-ink: #19231f; --hs-muted: #4e5c55; --hs-accent: #8d241e; color: var(--hs-ink); background: var(--hs-paper); font: 1rem/1.5 ui-sans-serif, system-ui, sans-serif; }
+  .hs-grid { display: grid; border: 2px solid var(--hs-ink); overflow: auto; }
+  .hs-row { position: relative; min-height: 4rem; border-block-start: 1px dashed color-mix(in srgb, var(--hs-ink) 30%, transparent); }
+  .hs-event { position: absolute; min-height: 2.75rem; padding: .5rem; color: #fff; background: var(--hs-accent); border: 2px solid var(--hs-ink); box-shadow: 2px 2px 0 var(--hs-ink); touch-action: none; }
+  .hs-event:focus-visible, .hs-button:focus-visible { outline: 3px solid #2456a6; outline-offset: 3px; }
+  .hs-button { min-width: 2.75rem; min-height: 2.75rem; padding: .5rem .75rem; border: 2px solid var(--hs-ink); background: var(--hs-paper); color: var(--hs-ink); }
+  @media (prefers-reduced-motion: no-preference) { .hs-event { transition: transform 180ms ease, box-shadow 180ms ease; } .hs-event:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--hs-ink); } }
+}
