@@ -4,7 +4,7 @@ Date: 2026-08-28
 
 Reviewed release: `5e9933d4b3548a7b7fbaf2b069970af4bbec4087`
 
-Repair commit: recorded in the final handoff after verification and deployment.
+Repair commit: `980429e` (`polish release candidate findings`), pushed to `main` and deployed as the configured static artifact.
 
 ## Evidence key
 
@@ -13,12 +13,13 @@ Repair commit: recorded in the final handoff after verification and deployment.
 - `BROWSER`: `.factory/evidence/polish-2/browser.json` and its four screenshots — 390 × 844 and 1440 × 900, routes, first screen, privacy, target-size, and overflow checks.
 - `A11Y`: `npm run check:a11y` — zero axe violations on Home, Demo, Privacy, Terms, and 404.
 - `PACKAGE`: `npm run check:pack` — fresh ESM, CommonJS, React, types, and CSS consumer.
+- `LIVE`: `.factory/evidence/polish-2-live/browser.json`, `verify/verify.json`, and `axe.json` — cold deployed URL, route/title/404/mobile checks, factory URL verification, and zero axe violations on all route states.
 
 ## Review 2 findings
 
 | Finding | Change made | Evidence |
 | --- | --- | --- |
-| F-2-1 / UC-21 | The test extracts the exact README scheduler fence, installs the hosted release in a temporary project, compiles it, runs it with `renderYourUI`, and asserts the moved event retains its duration. | `@claim:readme-example`; CLAIMS, MATRIX |
+| F-2-1 / UC-21 | The test extracts the exact README scheduler fence, installs the hosted release in a temporary project, compiles it, runs it with `renderYourUI`, and asserts the moved event retains its duration. | `@claim:readme-example`; CLAIMS, MATRIX, LIVE claim suite |
 | F-2-2 / UC-45 | The installed release now runs in a browser sandbox that traps fetch, XHR, WebSocket, EventSource, beacon, cookies, IndexedDB, Cache Storage, and both web stores while every public operation is exercised. | `@claim:package-side-effects`; CLAIMS, MATRIX |
 | F-2-3 / UC-51 | Grid navigation now asserts each documented key at the first and last row and first and last cell, as well as an interior cell. | `@claim:grid-keyboard-navigation`; CLAIMS, MATRIX |
 | F-2-4 / UC-15 | Offline verification now proves seeded Studio A and Morning briefing, changes views, edits an event offline, and confirms the resulting timeline event. | `@claim:offline-demo`; CLAIMS, MATRIX |
@@ -58,3 +59,4 @@ All `UC-01` through `UC-53` remain covered by their named claim tests from round
 - `npm test`: 29/29 unit tests pass.
 - `npm run check`, `npm run build`, `npm run check:pack`, `npm run check:smoke`, `npm run check:a11y`, `npm run check:offline`, `npm run check:pwa-update`, and `npm run check:headers` pass.
 - `BROWSER` reports no console errors, horizontal overflow, undersized targets, cookies, local/session storage, IndexedDB databases, or third-party origins.
+- Cold live recheck after deployment repeated the same route, first-screen, isolated-demo, metadata, title, 404, privacy, target-size, and console checks at `https://headless-scheduler.sociobot.in`; all passed in `LIVE`.

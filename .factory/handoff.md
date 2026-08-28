@@ -6,7 +6,7 @@ Work order: `headless-scheduler-polish-2`
 
 Base reviewed commit: `5e9933d4b3548a7b7fbaf2b069970af4bbec4087`
 
-Repair commit: `33a55f3` (amended after clean-clone type checking)
+Repair commit: `980429e` (`polish release candidate findings`)
 
 Live URL: <https://headless-scheduler.sociobot.in>
 
@@ -24,12 +24,13 @@ Live URL: <https://headless-scheduler.sociobot.in>
 - Browser evidence: `.factory/evidence/polish-2/browser.json`, `home-mobile.png`, `demo-mobile.png`, `home-desktop.png`, and `demo-desktop.png` show first-screen actions and facts, demo, routes, no overflow, no console errors, no undersized controls, and no persistent storage.
 - Accessibility: `npm run check:a11y` found zero axe violations on Home, Demo, Privacy, Terms, and 404. The claim suite also checks skip link, headings, focus restore, route announcement, dialog focus, keyboard controls, and mobile controls.
 - Performance: the production build is 19.46 kB gzip JavaScript and 5.68 kB gzip CSS, within the 200 kB / 50 kB budgets. Existing live Lighthouse evidence for this unchanged asset class is 99 performance and 100 accessibility.
+- Post-deploy: `CLAIMS_BASE_URL=https://headless-scheduler.sociobot.in npm run test:claims` passed all 33 claims plus one mobile interaction test. Cold live output is in `.factory/evidence/polish-2-live/browser.json`; `/opt/fleet/lib/verify-url.sh` passed in `.factory/evidence/polish-2-live/verify/verify.json`; Playwright+axe found zero violations in `.factory/evidence/polish-2-live/axe.json` on Home, Demo, Privacy, Terms, and 404.
 
 ## Publish and deploy
 
 - Do not publish from this worker. The ready-to-publish command is `npm pack` (or `npm run check:pack` for a fresh consumer check).
-- Push commit `33a55f3` to `main`; the configured static deployment is then the deployment mechanism for this work order.
-- After deployment, rerun the cold live URL checks, URL verifier, and axe against Home, Demo, Privacy, Terms, and 404. Record the deployed build marker here if it differs from the commit.
+- Commit `980429e` was pushed to `main` and deployed with `/opt/fleet/lib/deploy-static.sh headless-scheduler dist/site`.
+- The live response updated at `Fri, 28 Aug 2026 12:16:10 GMT` and serves asset `assets/index-CQmFBLL1.js`, which contains the repaired copy and actions.
 
 ## Known gaps
 
