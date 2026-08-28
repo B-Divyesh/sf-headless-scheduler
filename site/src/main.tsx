@@ -105,7 +105,7 @@ function App() {
       </section>
 
       <section className="demo-section" id="demo" aria-labelledby="demo-title">
-        <div className="section-heading"><div><p className="kicker">The actual library, in motion</p><h2 id="demo-title">Plan across people and places</h2></div><p>Drag events to reschedule. Arrow keys move a focused event by 15 minutes. Every view below comes from the same headless state.</p></div>
+        <div className="section-heading"><div><p className="kicker">The actual library, in motion</p><h2 id="demo-title">Plan across people and places</h2></div><p>Drag events to reschedule. Arrow keys move a focused event by 15 minutes; tab to its resize control, then use left or right arrows to change its duration. Every view below comes from the same headless state.</p></div>
         <div className="scheduler-shell">
           <div className="scheduler-topbar">
             <div className="date-controls"><button onClick={() => scheduler.navigate(-1)} aria-label="Previous period">←</button><button onClick={() => scheduler.navigate('today')}>Today</button><button onClick={() => scheduler.navigate(1)} aria-label="Next period">→</button><strong>27 August 2026</strong></div>
@@ -166,6 +166,21 @@ function Timeline({ state, preview, setPreview, setNotice, remove }: { state: Sc
     scheduler.moveEvent(event.id, { start: new Date(new Date(event.start).getTime() + minutes * 60_000).toISOString() })
     setNotice(`${event.title} moved ${Math.abs(minutes)} minutes ${minutes > 0 ? 'later' : 'earlier'}.`)
   }
+  const keyResize = (keyboard: React.KeyboardEvent, event: SchedulerEvent) => {
+    if (!['ArrowLeft','ArrowRight'].includes(keyboard.key)) return
+    keyboard.preventDefault()
+    const minutes = keyboard.key === 'ArrowRight' ? 15 : -15
+    const start = new Date(event.start).getTime()
+    const currentEnd = new Date(event.end).getTime()
+    const nextEnd = Math.max(start + 15 * 60_000, currentEnd + minutes * 60_000)
+    if (nextEnd === currentEnd) {
+      setNotice(`${event.title} is already at the minimum duration of 15 minutes.`)
+      return
+    }
+    const end = new Date(nextEnd).toISOString()
+    scheduler.resizeEvent(event.id, { end })
+    setNotice(formatTimelineInteractionNotice(event.title, 'resize-end', { start: event.start, end }))
+  }
   return <div className="timeline" role="region" aria-label="Resource schedule for 27 August 2026" onPointerMove={e => interaction.current?.onPointerMove(e.nativeEvent)} onPointerUp={e => interaction.current?.onPointerUp(e.nativeEvent)} onPointerCancel={e => interaction.current?.onPointerCancel(e.nativeEvent)}>
     <div className="timeline-corner">Resource <span>UTC</span></div>
     <div className="timeline-head timeline-canvas">{timeline.slots.map(slot => <div key={slot.start}>{slot.label.replace(':00','')}</div>)}</div>
@@ -176,7 +191,7 @@ function Timeline({ state, preview, setPreview, setNotice, remove }: { state: Sc
         const value = preview?.id === event.id ? preview.value : event
         const start = new Date(value.start), end = new Date(value.end), rangeStart = new Date(state.visibleRange.start), total = new Date(state.visibleRange.end).getTime() - rangeStart.getTime()
         const left = Math.max(0,(start.getTime()-rangeStart.getTime())/total*100), width = Math.max(2,(end.getTime()-start.getTime())/total*100)
-        return <button className={`event-block tone-${String(event.meta?.tone ?? 'red')}`} style={{left:`${left}%`,width:`${width}%`}} key={event.id} onPointerDown={e => startDrag(e,event,'move')} onKeyDown={e => { keyMove(e,event); if(e.key==='Delete') remove(event) }} aria-label={`${event.title} ${formatTime(value.start)}–${formatTime(value.end)}. Drag or use left and right arrows to move; Delete to remove.`}><strong>{event.title}</strong><span>{formatTime(value.start)}–{formatTime(value.end)}</span><i className="resize-handle" aria-hidden="true" onPointerDown={e => { e.stopPropagation(); startDrag(e,event,'resize-end') }}></i></button>
+        return <div className="event-placement" style={{left:`${left}%`,width:`${width}%`}} key={event.id}><button className={`event-block tone-${String(event.meta?.tone ?? 'red')}`} onPointerDown={e => startDrag(e,event,'move')} onKeyDown={e => { keyMove(e,event); if(e.key==='Delete') remove(event) }} aria-label={`${event.title} ${formatTime(value.start)}–${formatTime(value.end)}. Drag or use left and right arrows to move; Delete to remove.`}><strong>{event.title}</strong><span>{formatTime(value.start)}–{formatTime(value.end)}</span></button><button className={`resize-handle tone-${String(event.meta?.tone ?? 'red')}`} onPointerDown={e => { e.stopPropagation(); startDrag(e,event,'resize-end') }} onKeyDown={e => keyResize(e,event)} aria-label={`Resize ${event.title}, currently ending at ${formatTime(value.end)}. Use left and right arrows to change the duration by 15 minutes.`}><span aria-hidden="true">↔</span></button></div>
       })}
     </div></React.Fragment>)}
   </div>

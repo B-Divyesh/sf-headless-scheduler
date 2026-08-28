@@ -26,9 +26,9 @@ try {
     })
     await page.getByLabel('Event title').fill(`Customer call ${viewport.width}`)
     await page.getByRole('button', { name: 'Add event', exact: true }).last().click()
-    await page.getByRole('button', { name: new RegExp(`Customer call ${viewport.width}`) }).waitFor()
+    await page.getByRole('button', { name: new RegExp(`^Customer call ${viewport.width}`) }).waitFor()
 
-    const morning = page.getByRole('button', { name: /Morning briefing/ })
+    const morning = page.getByRole('button', { name: /^Morning briefing/ })
     await morning.focus()
     await morning.press('ArrowRight')
     if (!(await morning.getAttribute('aria-label'))?.includes('8:45 AM')) throw new Error('Keyboard move did not update the event')
@@ -42,7 +42,21 @@ try {
 
     await page.getByRole('button', { name: 'Timeline' }).click()
     await page.getByRole('region', { name: 'Resource schedule for 27 August 2026' }).waitFor()
-    const resizeHandle = morning.locator('.resize-handle')
+    await morning.focus()
+    await page.keyboard.press('Tab')
+    const keyboardResize = page.getByRole('button', { name: /Resize Morning briefing/ })
+    if (!await keyboardResize.evaluate(element => document.activeElement === element && element.tabIndex === 0)) {
+      throw new Error('Resize control is not keyboard reachable')
+    }
+    await page.keyboard.press('ArrowRight')
+    const status = page.locator('.scheduler-status [aria-live="polite"]')
+    if (await status.innerText() !== 'Morning briefing resized to 10:30 AM.') {
+      throw new Error(`Keyboard resize did not announce its new end time: ${await status.innerText()}`)
+    }
+    if (!(await keyboardResize.getAttribute('aria-label'))?.includes('currently ending at 10:30 AM')) {
+      throw new Error('Keyboard resize did not update the control description')
+    }
+    const resizeHandle = keyboardResize
     await resizeHandle.scrollIntoViewIfNeeded()
     const handleBox = await resizeHandle.boundingBox()
     if (!handleBox) throw new Error('Resize handle is not visible')
@@ -50,9 +64,8 @@ try {
     await page.mouse.down()
     await page.mouse.move(handleBox.x + handleBox.width / 2 + 30, handleBox.y + handleBox.height / 2)
     await page.mouse.up()
-    const status = page.locator('.scheduler-status [aria-live="polite"]')
     await status.waitFor({ state: 'visible' })
-    if (!/Morning briefing resized to (?:10:15|10:30|10:45) AM\./.test(await status.innerText())) {
+    if (!/Morning briefing resized to (?:10:45|11:00) AM\./.test(await status.innerText())) {
       throw new Error(`Resize completion did not announce its new end time: ${await status.innerText()}`)
     }
     if (errors.length) throw new Error(`Browser errors: ${errors.join('; ')}`)
@@ -60,7 +73,7 @@ try {
     return `${viewport.width}x${viewport.height}`
   }
   const viewports = await Promise.all([exercise({ width: 390, height: 844 }), exercise({ width: 1440, height: 900 })])
-  console.log(JSON.stringify({ viewports, addEvent: true, keyboardMove: true, monthNavigation: true, resizeAnnouncement: true, consoleErrors: 0 }))
+  console.log(JSON.stringify({ viewports, addEvent: true, keyboardMove: true, keyboardResize: true, monthNavigation: true, resizeAnnouncement: true, consoleErrors: 0 }))
 } finally {
   await browser.close()
   await server?.close()

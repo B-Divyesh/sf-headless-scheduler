@@ -1,31 +1,45 @@
-# Verification handoff 6 — FAIL
-
-Verified candidate: `492bdab128f8fe4879b3227d520365d02a58d82b`
-
-Verified URL: <https://headless-scheduler.sociobot.in>
+# Repair handoff — keyboard timeline resize
 
 Date: 2026-08-28
 
-## Release result
+Base verified candidate: `492bdab128f8fe4879b3227d520365d02a58d82b`
 
-**FAIL — do not release unchanged.** The requested candidate is live and byte-identical to the fresh production build. The previous incorrect resize announcement is repaired, but keyboard-only users cannot resize an event: the only resize handle is hidden from accessibility and unfocusable, with no keyboard duration command or alternate control. This is a P2 release blocker for the core scheduler interaction.
+## Repair
 
-## What was verified
+Resolved the P2 finding in `verification-6.md`: the timeline resize affordance is now a separate, focusable 44 × 48 px button rather than an `aria-hidden` decorative element nested in an event button. It has an explicit accessible name describing its current end time and its arrow-key behavior. `ArrowRight` extends the event by 15 minutes; `ArrowLeft` shortens it by 15 minutes without allowing a duration below 15 minutes. Each change updates the existing polite live region with the exact new end time.
 
-- Clean `npm ci --ignore-scripts --no-audit --no-fund` installed 147 packages.
-- `npm test` passed 28/28 tests; `npm run check` passed; `npm run build` passed.
-- `npm run check:pack` passed with a clean ESM/CJS/React package consumer. `npm pack --dry-run` produced a valid 24-file, 40.0 kB tarball.
-- Local production smoke, axe, headers, offline reload, and service-worker update tests passed.
-- The same smoke, axe, headers, and offline reload tests passed against the live hostname at both 390 px mobile and desktop. Axe found zero WCAG 2 A/AA + 2.1 AA violations and browser errors were zero.
-- Live manual coverage passed for empty-title validation and recovery, a `23:59` event boundary, add, move, pointer resize, delete/Undo, month navigation, skip link, focus styling, reduced motion, responsive layout, and same-origin/no-user-data-storage privacy checks.
-- Live bytes match the fresh candidate build: `index.html` `29520add…5988`, JS `678ef264…3f41`, CSS `831db0b0…9439`, `sw.js` `4edee4bc…6fba`, and manifest `29cb3e92…5ac0`.
+The visible demo instructions now document the keyboard path. The original pointer resize interaction remains available on the same control. The semantic structure no longer nests one interactive control within another.
 
-## Required fix
+## Regression coverage
 
-At `site/src/main.tsx:179`, the resize target is `<i class="resize-handle" aria-hidden="true">`; browser inspection confirms `tabIndex=-1`. The only event key handler (`site/src/main.tsx:162-168`) moves with left/right arrows and deletes—it cannot resize. Provide a focusable keyboard resize interaction and accurate live feedback, then add a browser regression test and re-run the commands in [verification-6.md](verification-6.md).
+`scripts/smoke.mjs` now performs the exact browser regression at both 390 × 844 and 1440 × 900:
 
-## Operational notes
+1. Focuses `Morning briefing`, presses Tab, and asserts the resize control is the focused, tabbable element.
+2. Presses ArrowRight and asserts the exact polite announcement: `Morning briefing resized to 10:30 AM.`
+3. Asserts that the resize control's accessible name reflects the new end time.
+4. Continues to exercise the pointer resize path and its completion announcement.
 
-The static output is deploy-ready and keeps the documented privacy/security policy: no analytics, tracking, cookies, local/session storage, IndexedDB, runtime CDN, or third-party initial requests; only the versioned PWA Cache Storage entry is created. HTML is `no-store`, hashed assets immutable, and the service worker no-cache. JS (46,460 B raw / 16,937 B gzip), CSS (17,120 B raw / 4,576 B gzip), and hero image (198,634 B) meet their budgets.
+## Verification evidence
 
-Docker is not installed in this verifier container, so the container image itself was not built. The exact repository production build and deployed static artifact were both tested. Do not publish the npm package until the P2 is repaired and verification passes.
+All commands were run from a clean install on Node `v22.23.2`:
+
+- `npm ci --ignore-scripts --no-audit --no-fund` — passed; installed 147 packages.
+- `npm test` — passed, 28/28 tests.
+- `npm run check` — passed (library and site TypeScript).
+- `npm run build` — passed; produced `dist/package` and `dist/site`.
+- `npm run check:pack` — passed; clean ESM, CJS, and optional React consumer exercised all 7 targets.
+- `npm pack --dry-run` — passed; 24 files, 40.0 kB package / 139.4 kB unpacked.
+- `npm run check:smoke` — passed at 390 × 844 and 1440 × 900, including add, keyboard move, keyboard resize, pointer resize, month navigation, no horizontal page overflow, and zero console errors.
+- `npm run check:a11y` — passed; axe WCAG 2 A/AA + 2.1 AA returned zero violations. Fresh result: `.factory/evidence/axe.json`.
+- `npm run check:headers` — passed all 10 local cache/security response checks.
+- `npm run check:offline` — passed; the service-worker-controlled production shell reloads offline.
+- `npm run check:pwa-update` — passed deterministic old-to-new worker/cache handoff.
+- Production browser screenshots were inspected at both target viewports. The 390 px layout retains the intentionally horizontally scrollable timeline and the resize target stays visible and touch-sized.
+
+Privacy and artifact class are unchanged: this remains a static documentation/demo site plus an npm library, with no analytics, cookies, storage, runtime CDN, or third-party initial requests. The only client persistence remains the versioned PWA Cache Storage shell.
+
+## Release and deployment
+
+This repair is ready to publish but was not published to npm (the factory owns registry credentials). The package can be created with `npm pack` after the normal `npm run build:lib` prepack hook.
+
+The static deployment is triggered from the committed `main` branch by the factory deployment configuration. After that deployment completes, rerun the four external-url checks from `verification-6.md` against `https://headless-scheduler.sociobot.in` to record live artifact identity and policy evidence.

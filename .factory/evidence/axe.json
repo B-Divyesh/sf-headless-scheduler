@@ -13,8 +13,8 @@
     "orientationAngle": 0,
     "orientationType": "landscape-primary"
   },
-  "timestamp": "2026-08-28T00:01:29.510Z",
-  "url": "http://127.0.0.1:34615/",
+  "timestamp": "2026-08-28T01:37:46.141Z",
+  "url": "http://127.0.0.1:35295/",
   "toolOptions": {
     "resultTypes": [
       "violations"
@@ -1249,9 +1249,9 @@
           ],
           "none": [],
           "impact": null,
-          "html": "<button aria-label=\"Morning briefing 8:30 AM–10:00 AM. Drag or use left and right arrows to move; Delete to remove.\" class=\"event-block tone-red\" style=\"left: 15%; width: 15%;\"><strong>Morning briefing</strong><span>8:30 AM–10:00 AM</span><i aria-hidden=\"true\" class=\"resize-handle\"></i></button>",
+          "html": "<div class=\"event-placement\" style=\"left: 15%; width: 15%;\">",
           "target": [
-            ".timeline-row.timeline-canvas:nth-child(4) > .tone-red.event-block"
+            ".timeline-row.timeline-canvas:nth-child(4) > .event-placement"
           ]
         }
       ]
