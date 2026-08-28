@@ -42,12 +42,25 @@ try {
 
     await page.getByRole('button', { name: 'Timeline' }).click()
     await page.getByRole('region', { name: 'Resource schedule for 27 August 2026' }).waitFor()
+    const resizeHandle = morning.locator('.resize-handle')
+    await resizeHandle.scrollIntoViewIfNeeded()
+    const handleBox = await resizeHandle.boundingBox()
+    if (!handleBox) throw new Error('Resize handle is not visible')
+    await page.mouse.move(handleBox.x + handleBox.width / 2, handleBox.y + handleBox.height / 2)
+    await page.mouse.down()
+    await page.mouse.move(handleBox.x + handleBox.width / 2 + 30, handleBox.y + handleBox.height / 2)
+    await page.mouse.up()
+    const status = page.locator('.scheduler-status [aria-live="polite"]')
+    await status.waitFor({ state: 'visible' })
+    if (!/Morning briefing resized to (?:10:15|10:30|10:45) AM\./.test(await status.innerText())) {
+      throw new Error(`Resize completion did not announce its new end time: ${await status.innerText()}`)
+    }
     if (errors.length) throw new Error(`Browser errors: ${errors.join('; ')}`)
     await context.close()
     return `${viewport.width}x${viewport.height}`
   }
   const viewports = await Promise.all([exercise({ width: 390, height: 844 }), exercise({ width: 1440, height: 900 })])
-  console.log(JSON.stringify({ viewports, addEvent: true, keyboardMove: true, monthNavigation: true, consoleErrors: 0 }))
+  console.log(JSON.stringify({ viewports, addEvent: true, keyboardMove: true, monthNavigation: true, resizeAnnouncement: true, consoleErrors: 0 }))
 } finally {
   await browser.close()
   await server?.close()

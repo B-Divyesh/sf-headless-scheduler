@@ -6,6 +6,7 @@ import {
   type PointerPreview, type Scheduler, type SchedulerEvent, type SchedulerState, type SchedulerView
 } from '../../src'
 import './styles.css'
+import { formatTimelineInteractionNotice } from './interaction-notice'
 
 const docsRelease = import.meta.env.VITE_DOCS_BUILD_MARKER ?? 'release'
 
@@ -154,7 +155,7 @@ function Timeline({ state, preview, setPreview, setNotice, remove }: { state: Sc
     interaction.current = createPointerInteraction({ mode, event, pixelsPerMinute: width / 600, snapMinutes: 15, onPreview: value => setPreview({ id: event.id, value }), onCommit: value => {
       if (mode === 'move') scheduler.moveEvent(event.id, { start: value.start })
       else scheduler.resizeEvent(event.id, { end: value.end })
-      setPreview(null); setNotice(`${event.title} ${mode === 'move' ? 'moved' : 'resized'} to ${new Date(value.start).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}.`)
+      setPreview(null); setNotice(formatTimelineInteractionNotice(event.title, mode, value))
     } })
     interaction.current.onPointerDown(reactEvent.nativeEvent)
   }
