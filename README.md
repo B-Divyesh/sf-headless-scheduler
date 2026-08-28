@@ -6,7 +6,7 @@ Version 0.1.0 includes day, week, continuous month, and resource timeline models
 
 ## Try the package
 
-Open the [isolated sample playground](https://headless-scheduler.sociobot.in/demo). You can edit sample JSON, move or resize events, switch views, and reset the demo. Demo edits stay in memory and clear on reload or reset.
+Open the [isolated sample playground](https://headless-scheduler.sociobot.in/?demo=1). You can edit sample JSON, move or resize events, switch views, and reset the demo. Demo edits stay in memory and clear on reload or reset.
 
 ## Install the release file
 
@@ -104,6 +104,7 @@ Import `headless-scheduler/preset.css` or copy it into your Tailwind component l
 npm ci
 npm test
 npm run check
+npm run check:claims
 npm run build
 npm run test:claims
 npm run check:pack
@@ -116,13 +117,13 @@ npm run check:headers
 
 `npm run build` writes the package to `dist/package` and the static site to `dist/site`. The site output includes the installable tarball and route files.
 
-The documentation site uses no analytics, accounts, cookies, local storage, third-party scripts, remote fonts, or runtime CDNs. Cache Storage holds only the offline site shell.
+The documentation site uses no analytics, accounts, cookies, local storage, third-party scripts, remote fonts, or runtime CDNs. The service worker uses Cache Storage for offline pages and assets.
 
 The package includes no telemetry or network calls. Applications choose how to store scheduler data.
 
 ## Support and scope
 
-The package targets browsers with ES2022 and Pointer Events. The release contains ESM and CommonJS builds plus declarations. React 18 and 19 can use the optional adapter.
+The package build targets ES2022 and pointer interactions use the Pointer Events API. The release contains ESM and CommonJS builds plus declarations. React 18 and 19 can use the optional adapter.
 
 Vue and Svelte adapters, recurrence expansion, iCal parsing, printing, and a hosted builder are outside version 0.1.
 

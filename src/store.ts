@@ -1,11 +1,20 @@
-import { nativeDateAdapter } from './dates'
-import type { DateRange, MoveEventPatch, ResizeEventPatch, Scheduler, SchedulerChange, SchedulerEvent, SchedulerOptions, SchedulerState, SchedulerView } from './types'
+import { nativeDateAdapter } from './dates.js'
+import type { DateRange, MoveEventPatch, ResizeEventPatch, Scheduler, SchedulerChange, SchedulerEvent, SchedulerOptions, SchedulerState, SchedulerView } from './types.js'
 
 const duration = (event: SchedulerEvent) => new Date(event.end).getTime() - new Date(event.start).getTime()
 const validRange = (range: DateRange) => new Date(range.end) > new Date(range.start)
+const isoInstant = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:\d{2})$/
+
+function assertISOInstant(value: string, field: string) {
+  if (!isoInstant.test(value) || !Number.isFinite(new Date(value).getTime())) {
+    throw new RangeError(`${field} must be an ISO date-time with Z or an offset`)
+  }
+}
 
 function assertEvent(event: SchedulerEvent, events: readonly SchedulerEvent[], ignoreId?: string) {
   if (!event.id.trim() || !event.title.trim()) throw new TypeError('Events require a non-empty id and title')
+  assertISOInstant(event.start, `Event ${event.id} start`)
+  assertISOInstant(event.end, `Event ${event.id} end`)
   if (events.some(item => item.id === event.id && item.id !== ignoreId)) throw new TypeError(`Duplicate event id: ${event.id}`)
   if (!(new Date(event.end) > new Date(event.start))) throw new RangeError(`Event ${event.id} must end after it starts`)
 }
@@ -70,6 +79,7 @@ export function createScheduler(options: SchedulerOptions = {}): Scheduler {
     updateEvent(id, patch) { const previous = find(id); replace(previous, { ...previous, ...patch }, 'update') },
     moveEvent(id, patch: MoveEventPatch) {
       const previous = find(id)
+      assertISOInstant(patch.start, `Event ${id} start`)
       const start = adapter.parse(patch.start)
       const next: SchedulerEvent = { ...previous, start: adapter.toISO(start), end: adapter.toISO(new Date(start.getTime() + duration(previous))) }
       if (patch.resourceId !== undefined) next.resourceId = patch.resourceId

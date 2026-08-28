@@ -1,4 +1,4 @@
-import type { PointerMode, PointerPreview, SchedulerEvent } from './types'
+import type { PointerMode, PointerPreview, SchedulerEvent } from './types.js'
 
 export interface PointerInteractionOptions {
   mode: PointerMode

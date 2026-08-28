@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
-import { buildResourceTimeline } from './layout'
-import { createScheduler } from './store'
-import { nativeDateAdapter } from './dates'
-import type { Scheduler, SchedulerOptions, SchedulerState, TimelineModel } from './types'
+import { buildResourceTimeline } from './layout.js'
+import { createScheduler } from './store.js'
+import { nativeDateAdapter } from './dates.js'
+import type { Scheduler, SchedulerOptions, SchedulerState, TimelineModel } from './types.js'
 
 export function useScheduler(options: SchedulerOptions): { scheduler: Scheduler; state: SchedulerState } {
   const scheduler = useMemo(() => createScheduler(options), [])

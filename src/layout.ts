@@ -1,5 +1,5 @@
-import { minutesBetween } from './dates'
-import type { DateAdapter, DateRange, MonthModel, PositionedEvent, SchedulerEvent, SchedulerResource, TimelineModel } from './types'
+import { minutesBetween } from './dates.js'
+import type { DateAdapter, DateRange, MonthModel, PositionedEvent, SchedulerEvent, SchedulerResource, TimelineModel } from './types.js'
 
 const overlaps = (a: SchedulerEvent, b: SchedulerEvent, adapter: DateAdapter) =>
   adapter.parse(a.start) < adapter.parse(b.end) && adapter.parse(b.start) < adapter.parse(a.end)

@@ -4,6 +4,8 @@ export default defineConfig({
   testDir: './tests',
   testMatch: 'claims.spec.ts',
   fullyParallel: false,
+  timeout: 120_000,
+  timeout: 120_000,
   retries: 0,
   workers: 1,
   reporter: [['line'], ['json', { outputFile: '.factory/evidence/claims.json' }]],

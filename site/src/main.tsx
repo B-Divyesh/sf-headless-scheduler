@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
   buildMonth, buildResourceTimeline, buildTimeGrid, createPointerInteraction,
-  createScheduler, getGridNavigation, nativeDateAdapter,
+  createScheduler, getGridNavigation, nativeDateAdapter, PACKAGE_VERSION,
   type PointerPreview, type Scheduler, type SchedulerEvent, type SchedulerState, type SchedulerView
 } from 'headless-scheduler'
 import './styles.css'
@@ -87,6 +87,7 @@ function setMetadata(route: Route) {
   set('meta[name="description"]', meta.description)
   set('meta[property="og:title"]', meta.title)
   set('meta[property="og:description"]', meta.description)
+  set('meta[property="og:url"]', `https://headless-scheduler.sociobot.in${meta.canonical}`)
   set('meta[name="twitter:title"]', meta.title)
   set('meta[name="twitter:description"]', meta.description)
   document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute('href', `https://headless-scheduler.sociobot.in${meta.canonical}`)
@@ -105,12 +106,12 @@ function AppLink({ href, children, className }: { href: string; children: React.
 function Header() {
   return <header className="site-header">
     <AppLink className="brand" href="/"><span className="brand-mark">HS</span><span>headless—scheduler</span></AppLink>
-    <nav aria-label="Primary"><AppLink href="/demo">Demo</AppLink><a href="/#api">API</a><a href="/#install">Install</a><a className="repo-link" href="https://github.com/B-Divyesh/sf-headless-scheduler"><Icon name="github" /><span>GitHub</span></a></nav>
+    <nav aria-label="Primary"><AppLink href="/demo">Demo</AppLink><a href="/#api">API</a><a href="/#install">Install</a><a className="repo-link" href="https://github.com/B-Divyesh/sf-headless-scheduler" aria-label="GitHub repository (external link)"><Icon name="github" /><span>GitHub</span></a></nav>
   </header>
 }
 
 function Footer() {
-  return <footer><div><span className="brand-mark">HS</span><strong>headless—scheduler</strong></div><p>Scheduling logic for interfaces you design.</p><nav aria-label="Legal"><AppLink href="/privacy">Privacy</AppLink><AppLink href="/terms">Terms</AppLink><a href="https://github.com/B-Divyesh/sf-headless-scheduler">Source</a></nav><small>Built by Param Factory · v0.1.0 · {docsRelease}</small></footer>
+  return <footer><div><span className="brand-mark">HS</span><strong>headless—scheduler</strong></div><p>Scheduling logic for interfaces you design.</p><nav aria-label="Legal"><AppLink href="/privacy">Privacy</AppLink><AppLink href="/terms">Terms</AppLink><a href="https://github.com/B-Divyesh/sf-headless-scheduler" aria-label="Source repository (external link)">Source</a></nav><small>Built by Param Factory · v0.1.0 · {docsRelease}</small></footer>
 }
 
 function App() {
@@ -154,10 +155,10 @@ function Home() {
         <p className="eyebrow"><span>MIT</span> UI not included</p>
         <h1 tabIndex={-1}>Build calendar and resource timeline UIs</h1>
         <p className="lede">For product engineers who need scheduling behavior without adopting another component library.</p>
-        <div className="hero-actions"><AppLink className="button primary" href="/demo">Try it with sample data <Icon name="arrow" /></AppLink><span>Opens an editable resource timeline in this page.</span></div>
+        <div className="hero-actions"><AppLink className="button primary" href="/?demo=1">Try it with sample data <Icon name="arrow" /></AppLink><span>Opens an editable resource timeline in this page.</span></div>
         <ul className="proof" aria-label="Package facts"><li><strong>MIT licensed</strong></li><li><strong>No runtime dependencies in core</strong></li><li><strong>Demo edits stay in this tab</strong></li></ul>
       </div>
-      <figure className="hero-art"><img src="/riso-scheduler.webp" width="768" height="512" alt="Event slips arranged across a resource schedule and folded month strip" fetchPriority="high"/><figcaption>You supply the interface. The package supplies scheduling logic.</figcaption></figure>
+      <figure className="hero-art"><picture><source media="(max-width: 600px)" srcSet="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"/><img src="/riso-scheduler.webp" width="768" height="512" alt="Event slips arranged across a resource schedule and folded month strip" fetchPriority="high"/></picture><figcaption>You supply the interface. The package supplies scheduling logic.</figcaption></figure>
     </section>
 
     <section className="home-preview" aria-labelledby="preview-title"><div><p className="kicker">Package playground</p><h2 id="preview-title">See a staffed studio schedule</h2><p>The sample opens with rooms, people, and scheduled work.</p><AppLink className="button primary" href="/demo">Open the sample schedule <Icon name="arrow" /></AppLink></div><div className="paper-preview" aria-hidden="true"><span>Studio A</span><b>Morning briefing</b><span>Prototype lab</span><b>Prototype review</b><span>Maya Chen</span><b>Field notes</b></div></section>
@@ -177,7 +178,7 @@ function Home() {
       <div className="code-panel"><div className="code-label"><span>Terminal</span><button onClick={() => { navigator.clipboard?.writeText(installCommand); setCopyNotice('Install command copied.') }}>Copy install command</button></div><pre tabIndex={0}><code><span>$</span> {installCommand}</code></pre><pre tabIndex={0}><code><span>›</span> import {'{ createScheduler }'} from 'headless-scheduler'</code></pre><p className="copy-notice" role="status">{copyNotice}</p></div>
     </section>
 
-    <section className="api" id="api" aria-labelledby="api-title"><p className="kicker">Five core functions</p><h2 id="api-title">Use a small typed API</h2><div className="api-list"><code>createScheduler(options)</code><code>buildResourceTimeline(input)</code><code>getContinuousMonthWindow(input)</code><code>createPointerInteraction(options)</code><code>getGridNavigation(input)</code></div><a className="button primary" href="https://github.com/B-Divyesh/sf-headless-scheduler#public-api">Read the API <Icon name="arrow" /></a></section>
+    <section className="api" id="api" aria-labelledby="api-title"><p className="kicker">Core functions</p><h2 id="api-title">Use the typed API</h2><div className="api-list"><code>createScheduler(options)</code><code>buildResourceTimeline(input)</code><code>getContinuousMonthWindow(input)</code><code>createPointerInteraction(options)</code><code>getGridNavigation(input)</code></div><a className="button primary" href="https://github.com/B-Divyesh/sf-headless-scheduler#public-api" aria-label="Read the API on GitHub (external link)">Read the API <Icon name="arrow" /></a></section>
   </main>
 }
 
@@ -190,6 +191,7 @@ function Demo() {
   const [undo, setUndo] = useState<SchedulerEvent | null>(null)
   const [sampleInput, setSampleInput] = useState(() => JSON.stringify(INITIAL_EVENTS[0], null, 2))
   const [inputError, setInputError] = useState('')
+  const addButtonRef = useRef<HTMLButtonElement>(null)
   useEffect(() => {
     const update = () => setOnline(navigator.onLine)
     addEventListener('online', update); addEventListener('offline', update)
@@ -218,16 +220,21 @@ function Demo() {
     try {
       const value = JSON.parse(sampleInput) as SchedulerEvent
       if (!value.id || !value.title || !value.start || !value.end || !value.resourceId) throw new Error('Include id, title, resourceId, start, and end.')
+      if (!RESOURCES.some(resource => resource.id === value.resourceId)) throw new Error('Use a resourceId shown in the sample schedule.')
       const events = state.events.filter(event => event.id !== value.id)
       scheduler.setEvents([...events, value])
       setInputError(''); setNotice(`${value.title} applied to the timeline.`)
     } catch (error) { setInputError(error instanceof Error ? error.message : 'Enter valid event JSON.') }
   }
+  const closeDialog = () => {
+    setFormOpen(false)
+    requestAnimationFrame(() => addButtonRef.current?.focus())
+  }
 
   return <main id="main" data-docs-release={docsRelease}>
       <aside className="demo-banner" aria-label="Demo mode"><strong>Demo — sample data, nothing is saved</strong><div><button onClick={reset}>Reset demo</button><AppLink href="/">Start for real</AppLink></div></aside>
       <section className="demo-section" aria-labelledby="demo-title">
-        <div className="section-heading"><div><p className="kicker">Built package playground</p><h1 id="demo-title" tabIndex={-1}>Edit a resource timeline</h1></div><p>Change the sample JSON and apply it. The schedule updates from isolated in-memory data.</p></div>
+        <div className="section-heading"><div><p className="kicker">v{PACKAGE_VERSION} package playground</p><h1 id="demo-title" tabIndex={-1}>Edit a resource timeline</h1></div><p>Change the sample JSON and apply it. The schedule updates from isolated in-memory data.</p></div>
         <div className="playground-grid"><div className="sample-editor"><label htmlFor="sample-json">Sample event JSON</label><textarea id="sample-json" value={sampleInput} onChange={event => setSampleInput(event.target.value)} spellCheck={false} aria-describedby={inputError ? 'sample-error' : 'sample-help'}></textarea><p id="sample-help">Edit the title or times, then apply the sample event.</p>{inputError && <p id="sample-error" role="alert">{inputError}</p>}<button className="primary" onClick={applyInput}>Apply sample event</button></div>
         <div className="scheduler-shell">
           <div className="scheduler-topbar">
@@ -235,7 +242,7 @@ function Demo() {
             <div className="view-tabs" role="group" aria-label="Calendar view">
               {(['day','week','month','resource-timeline'] as const).map(view => { const label = view === 'resource-timeline' ? 'timeline' : view; return <button key={view} aria-label={`Show ${label} view`} aria-pressed={state.view === view} onClick={() => setView(view)}>{label[0]!.toUpperCase() + label.slice(1)}</button> })}
             </div>
-            <button className="add-button" onClick={() => setFormOpen(true)}><Icon name="plus" />Add event</button>
+            <button ref={addButtonRef} className="add-button" onClick={() => setFormOpen(true)}><Icon name="plus" />Add event</button>
           </div>
           {!online && <div className="offline" role="status"><strong>You’re offline.</strong> The demo still works. Changes stay in memory until reload.</div>}
           <div className="schedule-stage">
@@ -247,13 +254,14 @@ function Demo() {
         </div>
         </div>
       </section>
-      {formOpen && <EventDialog scheduler={scheduler} onClose={() => setFormOpen(false)} onNotice={setNotice} />}
+      <section className="demo-snippet" aria-labelledby="demo-snippet-title"><div><p className="kicker">Fresh project</p><h2 id="demo-snippet-title">Run this schedule locally</h2><p>Install the same version used above, then pass the sample event to <code>createScheduler</code>.</p></div><div className="code-panel"><pre tabIndex={0}><code>npm install https://headless-scheduler.sociobot.in/headless-scheduler-{PACKAGE_VERSION}.tgz</code></pre><pre tabIndex={0}><code>import {'{ createScheduler }'} from 'headless-scheduler'</code></pre></div></section>
+      {formOpen && <EventDialog scheduler={scheduler} onClose={closeDialog} onNotice={setNotice} />}
     </main>
 }
 
 function LegalPage({ kind }: { kind: 'privacy' | 'terms' }) {
   const privacy = kind === 'privacy'
-  return <main id="main" className="legal-page"><p className="kicker">Headless Scheduler</p><h1 tabIndex={-1}>{privacy ? 'Privacy' : 'Terms'}</h1>{privacy ? <><p>The documentation site uses no analytics, accounts, cookies, local storage, or third-party scripts.</p><p>The demo keeps edits in memory and clears them on reload or reset.</p><p>The package includes no telemetry or network calls. Your application chooses where scheduler data is stored.</p></> : <><p>Headless Scheduler is provided under the MIT License, without warranty.</p><p>This site offers no payment or hosted scheduling service.</p><p>Read the repository <a href="https://github.com/B-Divyesh/sf-headless-scheduler/blob/main/LICENSE">LICENSE file</a> for the complete terms.</p></>}<p><small>Last updated 28 August 2026.</small></p></main>
+  return <main id="main" className="legal-page"><p className="kicker">Headless Scheduler</p><h1 tabIndex={-1}>{privacy ? 'Privacy' : 'Terms'}</h1>{privacy ? <><p>The documentation site uses no analytics, accounts, cookies, local storage, or third-party scripts.</p><p>The demo keeps edits in memory and clears them on reload or reset.</p><p>The package includes no telemetry or network calls. Your application chooses where scheduler data is stored.</p></> : <><p>Headless Scheduler is provided under the MIT License, without warranty.</p><p>This site offers no payment or hosted scheduling service.</p><p>Read the repository <a href="https://github.com/B-Divyesh/sf-headless-scheduler/blob/main/LICENSE" aria-label="LICENSE file on GitHub (external link)">LICENSE file on GitHub</a> for the complete terms.</p></>}<p><small>Last updated 28 August 2026.</small></p></main>
 }
 
 function NotFound() { return <main id="main" className="not-found"><div className="lost-slip" aria-hidden="true">404</div><p className="kicker">Misfiled paper slip</p><h1 tabIndex={-1}>This page is not on the board</h1><p>Check the address or return to the scheduler library.</p><AppLink className="button primary" href="/">Return home</AppLink></main> }
@@ -300,8 +308,11 @@ function Timeline({ scheduler, state, preview, setPreview, setNotice, remove }: 
       {row.events.length === 0 && <span className="open-label">Open</span>}
       {row.events.map(event => {
         const value = preview?.id === event.id ? preview.value : event
-        const start = new Date(value.start), end = new Date(value.end), rangeStart = new Date(state.visibleRange.start), total = new Date(state.visibleRange.end).getTime() - rangeStart.getTime()
-        const left = Math.max(0,(start.getTime()-rangeStart.getTime())/total*100), width = Math.max(2,(end.getTime()-start.getTime())/total*100)
+        const positioned = preview?.id === event.id
+          ? buildResourceTimeline({ range: state.visibleRange, events: [{ ...event, ...value }], resources: [row.resource], adapter: nativeDateAdapter, slotMinutes: 60, locale: state.locale, timeZone: state.timeZone }).rows[0]?.events[0]
+          : event
+        const left = positioned?.left ?? 0
+        const width = positioned?.width ?? 0.25
         return <div className="event-placement" style={{left:`${left}%`,width:`${width}%`}} key={event.id}><button className={`event-block tone-${String(event.meta?.tone ?? 'red')}`} onPointerDown={e => startDrag(e,event,'move')} onKeyDown={e => { keyMove(e,event); if(e.key==='Delete') remove(event) }} aria-label={`${event.title} ${formatTime(value.start)}–${formatTime(value.end)}. Drag or use left and right arrows to move; Delete to remove.`}><strong>{event.title}</strong><span>{formatTime(value.start)}–{formatTime(value.end)}</span></button><button className={`resize-handle tone-${String(event.meta?.tone ?? 'red')}`} onPointerDown={e => { e.stopPropagation(); startDrag(e,event,'resize-end') }} onKeyDown={e => keyResize(e,event)} aria-label={`Resize ${event.title}, currently ending at ${formatTime(value.end)}. Use left and right arrows to change the duration by 15 minutes.`}><span aria-hidden="true">↔</span></button></div>
       })}
     </div></React.Fragment>)}
@@ -319,7 +330,7 @@ function MonthScroller({ state }: { state: SchedulerState }) {
   const months = [-1,0,1].map(offset => buildMonth({ month: nativeDateAdapter.toISO(nativeDateAdapter.addMonths(new Date(state.anchorDate), offset)), events: state.events, adapter: nativeDateAdapter, today: '2026-08-27T00:00:00Z' }))
   const onKey = (e: React.KeyboardEvent, index: number) => { const next = getGridNavigation({key:e.key,index,columns:7,count:126,pageSize:42}); if(next!==null){e.preventDefault();setFocusIndex(next); document.querySelector<HTMLElement>(`[data-day="${next}"]`)?.focus()} }
   let dayIndex = -1
-  return <div className="month-scroll" aria-label="Continuous month calendar">{months.map(month=><section key={month.key} aria-labelledby={`month-${month.key}`}><h3 id={`month-${month.key}`}>{month.label}</h3><div className="weekday-row" aria-hidden="true">{['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(day=><span key={day}>{day}</span>)}</div><div className="month-grid" role="grid">{month.weeks.flat().map(day=>{dayIndex++; const index=dayIndex; return <button role="gridcell" data-day={index} tabIndex={focusIndex===index?0:-1} onKeyDown={e=>onKey(e,index)} className={`${day.outside?'outside ':''}${day.today?'today':''}`} key={day.date}><span>{day.dayNumber}</span>{day.events.slice(0,2).map(event=><i key={event.id}>{event.title}</i>)}</button>})}</div></section>)}</div>
+  return <div className="month-scroll" aria-label="Continuous month calendar">{months.map(month=><section key={month.key} aria-labelledby={`month-${month.key}`}><h2 id={`month-${month.key}`}>{month.label}</h2><div className="weekday-row" aria-hidden="true">{['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(day=><span key={day}>{day}</span>)}</div><div className="month-grid" role="grid">{month.weeks.flat().map(day=>{dayIndex++; const index=dayIndex; return <button role="gridcell" data-day={index} tabIndex={focusIndex===index?0:-1} onKeyDown={e=>onKey(e,index)} className={`${day.outside?'outside ':''}${day.today?'today':''}`} key={day.date}><span>{day.dayNumber}</span>{day.events.slice(0,2).map(event=><i key={event.id}>{event.title}</i>)}</button>})}</div></section>)}</div>
 }
 
 function EmptyState() { return <div className="empty-state"><span aria-hidden="true">✦</span><strong>No events in this range</strong><p>Choose another date or add the first event.</p></div> }

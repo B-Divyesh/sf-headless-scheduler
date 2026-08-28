@@ -1,0 +1,104 @@
+{
+  "base": "http://127.0.0.1:33223",
+  "routes": [
+    {
+      "route": "/",
+      "viewport": "390x844",
+      "status": 200,
+      "title": "Headless Scheduler — calendar and timeline logic",
+      "h1": 1,
+      "errors": [],
+      "overflow": false
+    },
+    {
+      "route": "/?demo=1",
+      "viewport": "390x844",
+      "status": 200,
+      "title": "Demo — Headless Scheduler",
+      "h1": 1,
+      "errors": [],
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "viewport": "1440x900",
+      "status": 200,
+      "title": "Headless Scheduler — calendar and timeline logic",
+      "h1": 1,
+      "errors": [],
+      "overflow": false
+    },
+    {
+      "route": "/?demo=1",
+      "viewport": "1440x900",
+      "status": 200,
+      "title": "Demo — Headless Scheduler",
+      "h1": 1,
+      "errors": [],
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "viewport": "raw-http",
+      "status": 200,
+      "title": "Headless Scheduler — calendar and timeline logic",
+      "canonical": "https://headless-scheduler.sociobot.in/"
+    },
+    {
+      "route": "/demo",
+      "viewport": "raw-http",
+      "status": 200,
+      "title": "Demo — Headless Scheduler",
+      "canonical": "https://headless-scheduler.sociobot.in/demo"
+    },
+    {
+      "route": "/privacy",
+      "viewport": "raw-http",
+      "status": 200,
+      "title": "Privacy — Headless Scheduler",
+      "canonical": "https://headless-scheduler.sociobot.in/privacy"
+    },
+    {
+      "route": "/terms",
+      "viewport": "raw-http",
+      "status": 200,
+      "title": "Terms — Headless Scheduler",
+      "canonical": "https://headless-scheduler.sociobot.in/terms"
+    },
+    {
+      "route": "/missing-polish-1",
+      "viewport": "raw-http",
+      "status": 404,
+      "title": "Page not found — Headless Scheduler",
+      "canonical": "https://headless-scheduler.sociobot.in/404.html"
+    }
+  ],
+  "firstScreen": {
+    "mobile": {
+      "actionVisible": true,
+      "factsVisible": true
+    },
+    "desktop": {
+      "actionVisible": true,
+      "factsVisible": true
+    }
+  },
+  "demoPrivacy": {
+    "origins": [
+      "http://127.0.0.1:33223"
+    ],
+    "cookies": 0,
+    "storage": {
+      "localStorage": 0,
+      "sessionStorage": 0,
+      "indexedDB": 0
+    },
+    "undersizedTargets": []
+  },
+  "screenshots": [
+    "home-mobile.png",
+    "demo-mobile.png",
+    "home-desktop.png",
+    "demo-desktop.png"
+  ]
+}

@@ -37,13 +37,15 @@
     "build:site": "npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs",
     "prepack": "npm run build:lib",
     "check": "tsc --noEmit && tsc -p site/tsconfig.json --noEmit",
+    "check:claims": "node scripts/check-claims.mjs",
     "check:a11y": "node scripts/a11y.mjs",
+    "check:visual": "node scripts/capture-evidence.mjs",
     "check:smoke": "node scripts/smoke.mjs",
     "check:pack": "node scripts/pack-consumer.mjs",
     "check:headers": "node scripts/site-headers.mjs",
     "check:offline": "node scripts/pwa-offline.mjs",
     "check:pwa-update": "node scripts/pwa-update.mjs",
-    "test:claims": "npm run build && playwright test --config playwright.config.ts"
+    "test:claims": "npm run check:claims && npm run build && playwright test --config playwright.config.ts"
   },
   "peerDependencies": {
     "react": ">=18"

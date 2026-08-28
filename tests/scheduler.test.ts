@@ -32,6 +32,12 @@ describe('createScheduler', () => {
     expect(() => createScheduler({ slotMinutes: 0 })).toThrow(RangeError)
   })
 
+  it('rejects event instants without an ISO offset', () => {
+    expect(() => createScheduler({ events: [{ ...events[0]!, start: '2026-08-27T09:00:00' }] })).toThrow('ISO date-time')
+    expect(() => createScheduler({ events: [{ ...events[0]!, start: 'August 27, 2026 09:00' }] })).toThrow('ISO date-time')
+    expect(createScheduler({ events: [{ ...events[0]!, start: '2026-08-27T09:00:00+05:30', end: '2026-08-27T10:30:00+05:30' }] }).getState().events).toHaveLength(1)
+  })
+
   it('supports create, resize, update, remove and navigation', () => {
     const scheduler = createScheduler({ anchorDate: '2026-08-27T09:00:00Z', initialView: 'week' })
     scheduler.createEvent(events[0]!)

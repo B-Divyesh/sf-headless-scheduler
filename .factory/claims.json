@@ -1,12 +1,226 @@
 [
-  {"id":"release-package-installs","claim":"The hosted v0.1.0 tarball installs in a clean project and exposes ESM, CommonJS, declarations, React, and CSS.","where":"landing install section, README","test":"npm run test:claims -- --grep @claim:release-package-installs","sandbox":"fresh temporary npm project; download release file; import ESM and CommonJS; inspect declared files"},
-  {"id":"mit-zero-dependencies","claim":"The core package is MIT licensed and has no runtime dependencies.","where":"landing first screen, README","test":"npm run test:claims -- --grep @claim:mit-zero-dependencies","sandbox":"inspect package manifest and shipped license"},
-  {"id":"readme-example","claim":"The README scheduler example runs and preserves event duration when moved.","where":"README create a scheduler","test":"npm run test:claims -- --grep @claim:readme-example","sandbox":"construct sample scheduler and assert moved event data"},
-  {"id":"view-models","claim":"The package calculates resource positions, six-week months, and finite continuous-month windows.","where":"landing capabilities, README public API","test":"npm run test:claims -- --grep @claim:view-models","sandbox":"sample package data; assert observable model output"},
-  {"id":"four-demo-views","claim":"The demo includes day, week, continuous month, and resource timeline views.","where":"landing how it works, README","test":"npm run test:claims -- --grep @claim:four-demo-views","sandbox":"fresh /demo; open each named view and assert its rendered model"},
-  {"id":"demo-isolation-reset","claim":"Demo edits stay in memory and clear on reload or reset.","where":"landing first screen, demo banner, privacy, README","test":"npm run test:claims -- --grep @claim:demo-isolation-reset","sandbox":"fresh ?demo=1; edit sample; reset; reload; inspect browser storage and cookies"},
-  {"id":"keyboard-controls","claim":"Demo events can be moved and resized with keyboard controls in 15-minute steps.","where":"demo instructions, README","test":"npm run test:claims -- --grep @claim:keyboard-controls","sandbox":"fresh /demo; move and resize a focused event; assert times and live announcement"},
-  {"id":"privacy-boundary","claim":"The site loads no analytics, third-party scripts, or remote fonts, and the package makes no network or storage calls.","where":"landing privacy section, privacy route, README","test":"npm run test:claims -- --grep @claim:privacy-boundary","sandbox":"fresh /demo context; intercept full flow; assert same-origin requests and empty persistent storage"},
-  {"id":"offline-demo","claim":"The demo opens offline after the first visit.","where":"demo offline state, README verification commands","test":"npm run test:claims -- --grep @claim:offline-demo","sandbox":"fresh /demo; wait for service worker; set context offline; reload and assert sample UI"},
-  {"id":"route-contract","claim":"Demo, privacy, terms, and 404 are real routes with route metadata and managed focus.","where":"site navigation and README","test":"npm run test:claims -- --grep @claim:route-contract","sandbox":"direct route requests plus History API navigation in a fresh browser context"}
+  {
+    "id": "release-package-installs",
+    "claim": "The hosted v0.1.0 tarball installs and runs in a fresh project.",
+    "where": "landing install section, demo snippet, README",
+    "test": "npm run test:claims -- --grep @claim:release-package-installs",
+    "sandbox": "download the served tarball into a new npm project, install it, and run its exported scheduler"
+  },
+  {
+    "id": "package-formats",
+    "claim": "The tarball contains working ESM and CommonJS builds, React builds, declarations, and preset CSS.",
+    "where": "README install section",
+    "test": "npm run test:claims -- --grep @claim:package-formats",
+    "sandbox": "install the downloaded tarball in a fresh project, import and require it, and inspect every declared target"
+  },
+  {
+    "id": "typescript-declarations",
+    "claim": "The package provides TypeScript declarations for its core public API.",
+    "where": "landing, README",
+    "test": "npm run test:claims -- --grep @claim:typescript-declarations",
+    "sandbox": "compile a strict NodeNext TypeScript consumer against the downloaded tarball"
+  },
+  {
+    "id": "mit-license",
+    "claim": "The package and all four views are MIT licensed.",
+    "where": "landing first screen, README, terms",
+    "test": "npm run test:claims -- --grep @claim:mit-license",
+    "sandbox": "inspect the package manifest, LICENSE, and built release file"
+  },
+  {
+    "id": "zero-runtime-dependencies",
+    "claim": "The core package has no runtime dependencies and React is optional.",
+    "where": "landing first screen, README",
+    "test": "npm run test:claims -- --grep @claim:zero-runtime-dependencies",
+    "sandbox": "inspect dependencies and optional peer metadata in package.json"
+  },
+  {
+    "id": "package-playground",
+    "claim": "The demo runs the v0.1.0 package build and shows a matching fresh-project snippet.",
+    "where": "demo",
+    "test": "npm run test:claims -- --grep @claim:package-playground",
+    "sandbox": "open ?demo=1, assert the version marker and snippet, and verify the site build aliases the built package"
+  },
+  {
+    "id": "readme-example",
+    "claim": "The README scheduler example moves an event while preserving its duration.",
+    "where": "README create a scheduler",
+    "test": "npm run test:claims -- --grep @claim:readme-example",
+    "sandbox": "run the documented data and assert the moved resource, start, and end"
+  },
+  {
+    "id": "scheduler-operations",
+    "claim": "The scheduler provides create, update, move, resize, and remove operations without mutating prior state.",
+    "where": "README public API",
+    "test": "npm run test:claims -- --grep @claim:scheduler-operations",
+    "sandbox": "run every operation and compare the original frozen state after all changes"
+  },
+  {
+    "id": "resource-layout",
+    "claim": "Resource timeline models return slots and clipped event positions as percentages.",
+    "where": "landing capabilities, README public API",
+    "test": "npm run test:claims -- --grep @claim:resource-layout",
+    "sandbox": "build a ten-hour timeline containing an event clipped at the start"
+  },
+  {
+    "id": "collision-layout",
+    "claim": "Time-grid models assign collision columns to overlapping events.",
+    "where": "README public API",
+    "test": "npm run test:claims -- --grep @claim:collision-layout",
+    "sandbox": "lay out two overlapping events and assert their columns and shared model output"
+  },
+  {
+    "id": "month-models",
+    "claim": "The package returns six-week months and finite continuous-month windows.",
+    "where": "landing capabilities, README public API",
+    "test": "npm run test:claims -- --grep @claim:month-models",
+    "sandbox": "build an August grid and an overscanned month window with explicit finite limits"
+  },
+  {
+    "id": "four-demo-views",
+    "claim": "The demo renders day, week, continuous month, and resource timeline views.",
+    "where": "landing first screen and how it works, README",
+    "test": "npm run test:claims -- --grep @claim:four-demo-views",
+    "sandbox": "open a fresh demo, select every named view, and assert its rendered model"
+  },
+  {
+    "id": "shared-demo-state",
+    "claim": "The demo views use the same edited scheduler state.",
+    "where": "README demo section",
+    "test": "npm run test:claims -- --grep @claim:shared-demo-state",
+    "sandbox": "edit an event, switch from timeline to day and back, and assert the edit in both views"
+  },
+  {
+    "id": "demo-isolation-reset",
+    "claim": "Demo edits stay in memory and clear on reset, reload, or exit.",
+    "where": "landing first screen, demo banner, privacy, README",
+    "test": "npm run test:claims -- --grep @claim:demo-isolation-reset",
+    "sandbox": "fresh ?demo=1 context; edit, reset, reload, exit, re-enter, and inspect cookies and persistent storage"
+  },
+  {
+    "id": "pointer-modes",
+    "claim": "Pointer helpers create, move, resize-start, and resize-end at fixed intervals.",
+    "where": "README pointer input and public API",
+    "test": "npm run test:claims -- --grep @claim:pointer-modes",
+    "sandbox": "commit all four pointer modes against one event and assert exact timestamps"
+  },
+  {
+    "id": "pointer-capture-validation",
+    "claim": "Pointer helpers capture the active pointer, snap movement, and reject invalid scale or interval values.",
+    "where": "README pointer input",
+    "test": "npm run test:claims -- --grep @claim:pointer-capture-validation",
+    "sandbox": "move beyond the origin, assert pointer capture and snapped output, then test zero, negative, NaN, and infinity"
+  },
+  {
+    "id": "grid-keyboard-navigation",
+    "claim": "Grid navigation maps Arrow, Home, End, Page Up, and Page Down keys to bounded cells.",
+    "where": "README pointer input and public API",
+    "test": "npm run test:claims -- --grep @claim:grid-keyboard-navigation",
+    "sandbox": "assert every documented key and an unhandled key against a fixed grid"
+  },
+  {
+    "id": "keyboard-controls",
+    "claim": "Demo events move and resize by keyboard in 15-minute steps with a live result message.",
+    "where": "demo instructions, landing capabilities",
+    "test": "npm run test:claims -- --grep @claim:keyboard-controls",
+    "sandbox": "move and resize a focused sample event, then assert its accessible name and live message"
+  },
+  {
+    "id": "iso-event-boundary",
+    "claim": "Public event dates require ISO date-time strings with Z or an offset.",
+    "where": "README date calculations",
+    "test": "npm run test:claims -- --grep @claim:iso-event-boundary",
+    "sandbox": "reject locale and offset-free values, then accept an explicit offset"
+  },
+  {
+    "id": "timezone-boundaries",
+    "claim": "Configured day boundaries follow DST and non-DST time zones.",
+    "where": "README date calculations",
+    "test": "npm run test:claims -- --grep @claim:timezone-boundaries",
+    "sandbox": "assert spring, fall, and Asia/Kolkata day boundaries"
+  },
+  {
+    "id": "date-adapters",
+    "claim": "The package supports built-in, Temporal, and caller-supplied date-fns calculations.",
+    "where": "README date calculations and public API",
+    "test": "npm run test:claims -- --grep @claim:date-adapters",
+    "sandbox": "run the built-in adapter, Temporal polyfill adapter, and supplied date functions"
+  },
+  {
+    "id": "recurrence-scope",
+    "claim": "Version 0.1 does not expand recurring events.",
+    "where": "README date calculations and support",
+    "test": "npm run test:claims -- --grep @claim:recurrence-scope",
+    "sandbox": "pass one event with a recurrence rule and assert that one unchanged event remains"
+  },
+  {
+    "id": "release-scope",
+    "claim": "Version 0.1 has no storage, account, payment, iCal, print, Vue, or Svelte modules.",
+    "where": "landing scope section, terms, README support",
+    "test": "npm run test:claims -- --grep @claim:release-scope",
+    "sandbox": "inspect every built export and the package export map for excluded product modules"
+  },
+  {
+    "id": "browser-primitives",
+    "claim": "The package build targets ES2022 and pointer interactions use the Pointer Events API.",
+    "where": "README support",
+    "test": "npm run test:claims -- --grep @claim:browser-primitives",
+    "sandbox": "inspect the package build target and run the demo in a browser with PointerEvent support"
+  },
+  {
+    "id": "preset-css",
+    "claim": "The package exports preset CSS with hs-* hooks and overridable color variables.",
+    "where": "README styling section",
+    "test": "npm run test:claims -- --grep @claim:preset-css",
+    "sandbox": "install the tarball, load its CSS, override --hs-accent, and assert the computed event color"
+  },
+  {
+    "id": "react-adapter",
+    "claim": "The optional React adapter renders with React 18 and React 19.",
+    "where": "README React and support sections",
+    "test": "npm run test:claims -- --grep @claim:react-adapter",
+    "sandbox": "install the tarball separately with React 18.3.1 and 19.1.0, then server-render HeadlessScheduler"
+  },
+  {
+    "id": "privacy-boundary",
+    "claim": "The site loads no analytics, third-party scripts, or remote fonts and writes no cookies or persistent app storage.",
+    "where": "landing privacy section, privacy route, README",
+    "test": "npm run test:claims -- --grep @claim:privacy-boundary",
+    "sandbox": "intercept a complete ?demo=1 flow and inspect origins, cookies, localStorage, sessionStorage, and IndexedDB"
+  },
+  {
+    "id": "package-side-effects",
+    "claim": "The core package makes no network or browser-storage calls; the application controls persistence.",
+    "where": "privacy route, README",
+    "test": "npm run test:claims -- --grep @claim:package-side-effects",
+    "sandbox": "instrument fetch and browser-storage globals while importing and exercising the built package"
+  },
+  {
+    "id": "headless-core",
+    "claim": "The core returns serializable scheduling data without requiring or rendering a DOM.",
+    "where": "landing first screen and how it works, README introduction and styling",
+    "test": "npm run test:claims -- --grep @claim:headless-core",
+    "sandbox": "import the built package without document, build a timeline, and serialize its returned model"
+  },
+  {
+    "id": "offline-demo",
+    "claim": "The service worker caches local pages and assets so the sample demo opens offline after its first visit.",
+    "where": "demo offline state, README privacy and verification sections",
+    "test": "npm run test:claims -- --grep @claim:offline-demo",
+    "sandbox": "fresh ?demo=1 context; inspect same-origin cache entries, go offline, reload, and assert seeded UI"
+  },
+  {
+    "id": "route-contract",
+    "claim": "Demo, privacy, terms, and not-found states have real responses, route metadata, focus, and announcements.",
+    "where": "site navigation",
+    "test": "npm run test:claims -- --grep @claim:route-contract",
+    "sandbox": "inspect raw route HTML and status, then navigate with History API and assert title, focus, and live text"
+  },
+  {
+    "id": "static-site-artifact",
+    "claim": "The built static site contains the legal routes, demo, service worker, and installable tarball.",
+    "where": "README develop, test, and deploy",
+    "test": "npm run test:claims -- --grep @claim:static-site-artifact",
+    "sandbox": "serve only dist/site, request each public artifact, and assert generated files"
+  }
 ]
