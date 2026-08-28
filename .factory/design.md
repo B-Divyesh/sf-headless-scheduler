@@ -41,6 +41,8 @@ Touch targets are at least 44 px. The narrow layout drops decorative artwork fir
 ## Asset plan and provenance
 
 - `site/public/riso-scheduler.webp`: original generated hero collage showing torn calendar strips, resource rows and movable red/blue paper events. Generated with the Param Factory `factory-image` deployment on 2026-08-27, then converted locally to WebP. Prompt is stored beside the source metadata in `site/public/riso-scheduler.png.json`. No source brands, copied UI, logos, or third-party assets.
+- `site/public/og-headless-scheduler.webp`: 1200 × 630 center crop derived locally from the original riso collage on 2026-08-28 for social metadata.
+- `site/public/apple-touch-icon.png`: 180 × 180 crop derived locally from the same original collage on 2026-08-28.
 - Interface icons are hand-drawn inline SVG paths authored for this repository. They inherit current color and need no external icon font.
 - Paper grain and registration offsets are CSS-authored, so they add no image request or tracking surface.
 

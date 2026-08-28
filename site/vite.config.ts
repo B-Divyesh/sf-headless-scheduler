@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      'headless-scheduler': resolve(__dirname, '../dist/package/index.js'),
       'react-dom/client': 'preact/compat/client',
       'react-dom': 'preact/compat',
       'react/jsx-runtime': 'preact/jsx-runtime',

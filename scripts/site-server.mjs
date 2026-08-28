@@ -9,7 +9,7 @@ const contentTypes = {
 
 const matchesRoute = (pathname, route) => route.endsWith('/*') ? pathname.startsWith(route.slice(0, -1)) : pathname === route
 
-export async function startStaticSite(root) {
+export async function startStaticSite(root, port = 0) {
   let currentRoot = resolve(root)
   const headersFor = async pathname => {
     const config = JSON.parse(await readFile(resolve(currentRoot, 'staticwebapp.config.json'), 'utf8'))
@@ -26,15 +26,15 @@ export async function startStaticSite(root) {
       let fallback = false
       try { if ((await stat(file)).isDirectory()) file = resolve(file, 'index.html') } catch {
         if (extname(pathname)) { response.writeHead(404).end(); return }
-        file = resolve(currentRoot, 'index.html')
+        file = resolve(currentRoot, '404.html')
         fallback = true
       }
       const body = await readFile(file)
-      response.writeHead(200, { ...await headersFor(fallback ? '/' : pathname), 'Content-Type': contentTypes[extname(file)] ?? 'application/octet-stream' })
+      response.writeHead(fallback ? 404 : 200, { ...await headersFor(fallback ? '/' : pathname), 'Content-Type': contentTypes[extname(file)] ?? 'application/octet-stream' })
       response.end(body)
     } catch { response.writeHead(404).end() }
   })
-  await new Promise((resolvePromise, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolvePromise) })
+  await new Promise((resolvePromise, reject) => { server.once('error', reject); server.listen(port, '127.0.0.1', resolvePromise) })
   const address = server.address()
   if (!address || typeof address === 'string') throw new Error('Could not start static site server')
   return {

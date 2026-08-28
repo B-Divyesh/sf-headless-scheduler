@@ -20,10 +20,11 @@ const emitted = (await walk(resolve(siteRoot, 'assets')))
   .filter(file => !file.endsWith('.map'))
   .map(file => `/${relative(siteRoot, file).split(sep).join('/')}`)
   .sort()
-const shell = ['/', '/index.html', '/offline.html', '/privacy/', '/terms/', '/favicon.svg', '/icon-192.svg', '/icon-512.svg', '/manifest.webmanifest', '/riso-scheduler.webp', ...emitted]
+const shell = ['/', '/index.html', '/demo', '/demo/', '/privacy', '/privacy/', '/terms', '/terms/', '/404.html', '/offline.html', '/favicon.svg', '/apple-touch-icon.png', '/icon-192.svg', '/icon-512.svg', '/manifest.webmanifest', '/riso-scheduler.webp', '/og-headless-scheduler.webp', '/headless-scheduler-0.1.0.tgz', ...emitted]
 const revisionHash = createHash('sha256')
 for (const url of shell.filter(url => url !== '/')) {
-  const file = url.endsWith('/') ? `${url.slice(1)}index.html` : url.slice(1)
+  const routeFile = ['demo', 'privacy', 'terms'].includes(url.slice(1)) ? `${url.slice(1)}/index.html` : url.slice(1)
+  const file = url.endsWith('/') ? `${url.slice(1)}index.html` : routeFile
   revisionHash.update(await readFile(resolve(siteRoot, file)))
 }
 const revision = revisionHash.digest('hex').slice(0, 16)

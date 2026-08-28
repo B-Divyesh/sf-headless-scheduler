@@ -1,18 +1,24 @@
 # Headless Scheduler
 
-An MIT, headless TypeScript scheduler for product engineers building booking, staffing, and planning interfaces. It includes resource timelines and continuous month scrolling without a commercial view licence, and leaves the DOM and design system to you.
+Headless Scheduler is a TypeScript scheduling library for booking, staffing, and planning interfaces. It supplies behavior and typed view data, not UI components.
 
-**v0.1.0** · framework-agnostic core · optional React adapter · zero core dependencies · ESM + CJS + declarations
+Version 0.1.0 includes day, week, continuous month, and resource timeline models under the MIT license. The core package has no runtime dependencies. A React adapter is optional.
 
-## Install
+## Try the package
+
+Open the [isolated sample playground](https://headless-scheduler.sociobot.in/demo). You can edit sample JSON, move or resize events, switch views, and reset the demo. Demo edits stay in memory and clear on reload or reset.
+
+## Install the release file
+
+The npm registry name is not published yet. Install the versioned package file served by this release:
 
 ```bash
-npm install headless-scheduler
+npm install https://headless-scheduler.sociobot.in/headless-scheduler-0.1.0.tgz
 ```
 
-React is an optional peer dependency. The Temporal adapter works with native `Temporal` or `@js-temporal/polyfill`; the date-fns adapter accepts the date-fns functions you already ship.
+The tarball provides ESM, CommonJS, TypeScript declarations, optional React bindings, and the preset CSS file.
 
-## Usage
+## Create a scheduler
 
 ```ts
 import { createScheduler, nativeDateAdapter } from 'headless-scheduler'
@@ -30,7 +36,7 @@ const scheduler = createScheduler({
     start: '2026-08-27T09:00:00Z', end: '2026-08-27T10:30:00Z'
   }],
   onEventsChange(events, change) {
-    // Persist in your own store. change.type is create, update, move, resize or remove.
+    // Connect your own store here.
   }
 })
 
@@ -38,15 +44,15 @@ const unsubscribe = scheduler.subscribe(state => renderYourUI(state))
 scheduler.moveEvent('kickoff', { resourceId: 'room-b', start: '2026-08-27T11:00:00Z' })
 ```
 
-The documented example above is compiled and exercised by the test suite.
+The `@claim:readme-example` test runs this example.
 
-### React render prop
+### Use React
 
 ```tsx
 import { HeadlessScheduler } from 'headless-scheduler/react'
 
 <HeadlessScheduler options={options}>
-  {({ state, scheduler, timeline }) => (
+  {({ timeline }) => (
     <div role="grid" aria-label="Team schedule">
       {timeline.rows.map(row => (
         <div role="row" key={row.resource.id}>{row.resource.title}</div>
@@ -56,7 +62,7 @@ import { HeadlessScheduler } from 'headless-scheduler/react'
 </HeadlessScheduler>
 ```
 
-### Pointer interaction
+### Handle pointer input
 
 ```ts
 import { createPointerInteraction } from 'headless-scheduler'
@@ -70,68 +76,57 @@ const drag = createPointerInteraction({
 element.addEventListener('pointerdown', drag.onPointerDown)
 ```
 
-Use `mode: 'create'`, `'move'`, `'resize-start'`, or `'resize-end'`. `pixelsPerMinute` and `snapMinutes` must be positive finite numbers; invalid configuration throws when the interaction is created. Pointer capture keeps drags stable. Keyboard equivalents are available through `getGridNavigation`, and `scheduler.announce()` exposes changes for an `aria-live` region.
+Create, move, or resize interactions at fixed time intervals. Use `getGridNavigation` to map Arrow, Home, End, Page Up, and Page Down keys to grid positions.
 
-### Date adapters
+### Choose date calculations
 
-```ts
-import { createTemporalAdapter, createDateFnsAdapter } from 'headless-scheduler'
+Use the built-in adapter, native Temporal, its polyfill, or supplied date-fns functions. Pass event dates as ISO strings with an offset or `Z`.
 
-const temporal = createTemporalAdapter(Temporal, 'America/New_York')
-const dateFns = createDateFnsAdapter({ addMinutes, startOfDay, startOfWeek, format })
-```
+Version 0.1 does not expand recurring events. Expand them before passing events to the library.
 
-Events use ISO strings at the public boundary. Supply offsets or `Z` for instants; `timeZone` controls labels and calendar boundaries. The default `nativeDateAdapter` uses the platform `Intl` timezone data, so scheduler day/week/month boundaries and direct `addDays`/`addMonths` calls remain on the requested local calendar date across DST (pass the zone as the optional third argument for direct calls). The Temporal adapter provides the same behavior when you prefer Temporal. Recurrences must be expanded by the caller in v0.1.
+### Style the example
 
-### Tailwind theme
-
-Import `headless-scheduler/preset.css` or copy it into your Tailwind `@layer components`, then override variables such as `--hs-paper`, `--hs-ink`, and `--hs-accent`. Stable `hs-*` hooks are provided, but the core never requires this DOM.
+Import `headless-scheduler/preset.css` or copy it into your Tailwind component layer. Override its `--hs-*` variables, or render different markup from the returned view data.
 
 ## Public API
 
-- `createScheduler(options)` — observable event/view state and immutable CRUD/move/resize operations.
-- `buildMonth`, `getContinuousMonthWindow` — calendar math and virtual month windows.
-- `buildTimeGrid`, `buildResourceTimeline`, `layoutOverlaps` — view models with collision columns.
-- `createPointerInteraction` — pointer create/move/resize with snapping.
-- `getGridNavigation` — Arrow/Home/End/PageUp/PageDown keyboard intent.
-- `nativeDateAdapter`, `createTemporalAdapter`, `createDateFnsAdapter` — replaceable date math.
-- `HeadlessScheduler`, `useScheduler` from `/react` — optional React bindings.
-
-All exported types are emitted in `dist/`. See the live API and interactive example at https://headless-scheduler.sociobot.in.
+- `createScheduler` creates state and returns create, update, move, resize, and remove methods.
+- `buildMonth` and `getContinuousMonthWindow` calculate month data.
+- `buildTimeGrid`, `buildResourceTimeline`, and `layoutOverlaps` calculate event positions.
+- `createPointerInteraction` handles pointer create, move, and resize actions.
+- `getGridNavigation` maps keyboard input to grid positions.
+- Date adapters provide built-in, Temporal, or date-fns calculations.
+- `HeadlessScheduler` and `useScheduler` provide optional React bindings.
 
 ## Develop, test, and deploy
 
 ```bash
-npm install
+npm ci
 npm test
-npm run build         # library + static docs
-npm run build:site    # static docs -> dist/site (index.html at root)
-npm pack --dry-run
-npm run check:pack    # clean pack + fresh ESM/CJS consumer install
-npm run check:offline # production shell reload while offline
-npm run check:pwa-update # two-version service-worker update regression
-npm run check:smoke   # self-hosted production browser smoke check
-npm run check:a11y    # self-hosted production axe check
+npm run check
+npm run build
+npm run test:claims
+npm run check:pack
+npm run check:smoke
+npm run check:a11y
+npm run check:offline
+npm run check:pwa-update
+npm run check:headers
 ```
 
-`npm pack` and `npm publish` run the library build through `prepack`, so every declared ESM, CJS, declaration, React, and CSS export exists in a clean tarball. `npm run dev` serves the documentation site. The static `dist/site` directory can be deployed as-is; it includes `staticwebapp.config.json` for Static Web Apps cache and security headers plus a build-generated service worker that precaches the emitted shell. No analytics, accounts, cookies, local storage, third-party fonts, or runtime CDNs are used.
+`npm run build` writes the package to `dist/package` and the static site to `dist/site`. The site output includes the installable tarball and route files.
 
-For the production container used by the factory deployment:
+The documentation site uses no analytics, accounts, cookies, local storage, third-party scripts, remote fonts, or runtime CDNs. Cache Storage holds only the offline site shell.
 
-```bash
-docker build -t headless-scheduler .
-docker run --rm -p 8080:8080 headless-scheduler
-```
+The package includes no telemetry or network calls. Applications choose how to store scheduler data.
 
-It builds `dist/site` in a separate stage, then serves it on port 8080 as a non-root user. The runtime applies SPA fallback, no-store HTML responses, immutable caching for Vite's hashed assets, PWA-aware service-worker caching, and browser security headers.
+## Support and scope
 
-## Browser and framework support
+The package targets browsers with ES2022 and Pointer Events. The release contains ESM and CommonJS builds plus declarations. React 18 and 19 can use the optional adapter.
 
-Evergreen browsers with ES2022 and Pointer Events. The package ships ESM and CJS. React 18/19 is supported as an optional peer; Vue and Svelte adapters are intentionally outside v0.1, while the core works in either.
+Vue and Svelte adapters, recurrence expansion, iCal parsing, printing, and a hosted builder are outside version 0.1.
 
-## Contributing
-
-Run `npm test` and `npm run build:site` before opening a change. Please add a focused regression test for behavioral changes. Security issues should be reported privately to the repository owner.
+Report security issues privately through the repository owner’s GitHub profile.
 
 ## License
 

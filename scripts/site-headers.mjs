@@ -11,7 +11,9 @@ try {
   const html = await home.text()
   const asset = html.match(/src="(\/assets\/[^"?]+\.js)"/)?.[1]
   if (!asset) throw new Error('Could not find emitted JavaScript asset')
-  const [script, worker, manifest, deepLink] = await Promise.all([fetch(`${base}${asset}`), fetch(`${base}/sw.js`), fetch(`${base}/manifest.webmanifest`), fetch(`${base}/verification-deep-link`)])
+  const [script, worker, manifest, deepLink, missing] = await Promise.all([fetch(`${base}${asset}`), fetch(`${base}/sw.js`), fetch(`${base}/manifest.webmanifest`), fetch(`${base}/demo`), fetch(`${base}/verification-deep-link`)])
+  if (!deepLink.ok) throw new Error('/demo deep link did not resolve')
+  if (missing.status !== 404) throw new Error(`Unknown route returned ${missing.status} instead of 404`)
   const checks = [
     [home, 'Cache-Control', 'no-store'], [script, 'Cache-Control', 'immutable'], [worker, 'Cache-Control', 'no-cache'],
     [manifest, 'Content-Type', 'application/manifest+json'], [deepLink, 'Cache-Control', 'no-store'],

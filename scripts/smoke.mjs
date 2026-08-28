@@ -15,7 +15,7 @@ try {
     const errors = []
     page.on('pageerror', error => errors.push(String(error)))
     page.on('console', message => { if (message.type() === 'error') errors.push(message.text()) })
-    await page.goto(url, { waitUntil: 'networkidle' })
+    await page.goto(`${url.replace(/\/$/, '')}/demo`, { waitUntil: 'networkidle' })
 
     if (await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)) throw new Error(`Page overflows the ${viewport.width}px viewport`)
     await page.getByRole('button', { name: 'Add event' }).click()
@@ -33,14 +33,14 @@ try {
     await morning.press('ArrowRight')
     if (!(await morning.getAttribute('aria-label'))?.includes('8:45 AM')) throw new Error('Keyboard move did not update the event')
 
-    await page.getByRole('button', { name: 'Month' }).click()
+    await page.getByRole('button', { name: 'Show month view' }).click()
     await page.getByRole('heading', { name: 'August 2026' }).waitFor()
     const currentCell = page.locator('[role="gridcell"][tabindex="0"]').first()
     await currentCell.focus()
     await currentCell.press('ArrowRight')
     if (await page.evaluate(() => document.activeElement?.getAttribute('data-day')) !== '1') throw new Error('Month grid arrow navigation failed')
 
-    await page.getByRole('button', { name: 'Timeline' }).click()
+    await page.getByRole('button', { name: 'Show timeline view' }).click()
     await page.getByRole('region', { name: 'Resource schedule for 27 August 2026' }).waitFor()
     await morning.focus()
     await page.keyboard.press('Tab')
