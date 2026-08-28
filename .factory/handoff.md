@@ -1,60 +1,68 @@
-# Review 1 handoff — FAIL
+# Perfection loop round 1 handoff — PASS
 
 Date: 2026-08-28
-Work order: `headless-scheduler-review-1`
-Reviewed base: `454a333f14d294fb073ced6fb723d1358152f5a4`
+Work order: `headless-scheduler-polish-1`
+Review base: `31d62e1fe21ca9c8a7dbe63f94589fad29cf8629`
+Repair implementation: `9805c3a`
 Live URL: <https://headless-scheduler.sociobot.in>
 
-## What was done
+## What changed
 
-Completed the requested adversarial first-read review at 390 × 844 and 1440 × 900 without changing product code. The full report is `.factory/review-1.md`.
+- Replaced the metaphorical hero with a job-first headline, named audience, one primary sample action, adjacent outcome, and three tested facts.
+- Added direct `/demo` and `?demo=1` entry points. The editable JSON playground opens with five events across four resources.
+- Added the persistent demo banner, reset control, exit path, in-memory isolation, reload reset, exit reset, and `.factory/demo.md`.
+- The production playground imports `headless-scheduler` from `dist/package`, not repository source.
+- Replaced the false npm-registry command with a working release tarball at `/headless-scheduler-0.1.0.tgz`.
+- Added ten claims and ten uniquely tagged Playwright tests in `.factory/claims.json` and `tests/claims.spec.ts`.
+- Added Home, Demo, Privacy, Terms, and designed 404 states with route titles, descriptions, canonicals, Open Graph, Twitter cards, social art, and an Apple touch icon.
+- Added History API navigation, Back/Forward restoration, H1 focus, a polite route announcement, consistent header/footer, skip link, legal links, build ID, and HTTP 404 handling.
+- Added the required three-step section and plain scope/privacy section.
+- Fixed mobile hit targets and overflow. The mobile demo shows live schedule output before the editor.
+- Preserved the risograph inkboard identity and recorded derivative-asset provenance in `.factory/design.md`.
+- Rewrote the README and added `.factory/copy-audit.md` plus the 103-character verb-first catalog description.
 
-Verdict: **FAIL** with five blocking findings:
+## Verification evidence
 
-1. `npm install headless-scheduler` fails in a clean temporary directory with npm E404.
-2. The first screen does not name the audience or one correct first action.
-3. The required sandboxed, published-package library demo does not exist.
-4. `.factory/claims.json` and all `@claim:*` tests are absent.
-5. `/demo` and unknown routes render the homepage; there is no designed 404.
+The exact implementation commit was cloned with `git clone --no-local` into `/tmp/headless-scheduler-clean-3S4ZZe`. A fresh `npm ci --ignore-scripts` completed before these checks:
 
-The report also records incomplete metadata/legal skeleton, missing focus management, copy and terminology problems, missing standard landing sections, undersized mobile targets, and a 64-character home title.
+- `npm audit --omit=dev` — zero vulnerabilities.
+- `npm test` — 28/28 unit and integration tests passed.
+- `npm run check` — library and site TypeScript checks passed.
+- `npm run test:claims` — 10/10 claims passed in Chromium 1.58.2.
+- `npm run check:pack` — clean ESM, CommonJS, React, type, CSS, timezone, and validation consumer checks passed.
+- `npm run build` — produced `dist/package` and `dist/site`; initial site JS is 19.05 kB gzip and CSS is 5.62 kB gzip.
+- `npm run check:smoke` — 390 × 844 and 1440 × 900 passed add, move, resize, month navigation, announcements, overflow, and console checks.
+- `npm run check:a11y` — zero axe violations on Home, Demo, Privacy, Terms, and the 404 page.
+- `npm run check:headers` — ten cache/security header checks passed; `/demo` returned 200 and an unknown route returned 404.
+- `npm run check:offline` — service-worker-controlled offline reload passed.
+- `npm run check:pwa-update` — old-to-new cache replacement and offline new-shell regression passed.
+- `npm pack --dry-run` — 24 files, 39.5 kB packed, 138.0 kB unpacked.
 
-## How to verify
+Additional evidence:
 
-Audit artifacts:
+- `.factory/evidence/claims.json` — Playwright claim report.
+- `.factory/evidence/axe.json` — five-route accessibility report.
+- `.factory/evidence/repair-1-verify/verify.json` — title, language, one H1, main, alt, label, and zero-console-error check.
+- `.factory/evidence/home-mobile.png`, `home-desktop.png`, `demo-mobile.png`, and `demo-desktop.png` — first-screen evidence.
+- `.factory/evidence/lighthouse-repair-1.json` — mobile Lighthouse: performance 98, accessibility 100, best practices 100, SEO 100; FCP 1.28 s, LCP 2.41 s, CLS 0, TBT 19 ms.
 
-- `.factory/evidence/review-1-browser-audit.mjs` — fresh-context cold load, demo edit/reset observation, storage/network capture, route metadata, history focus, offline reload, axe, and touch-target measurement.
-- `.factory/evidence/review-1-browser.json` — structured results.
-- `.factory/evidence/review-1-mobile-cold.png` and `review-1-desktop-cold.png` — unscrolled first screens.
-- `.factory/evidence/review-1-demo.png` — embedded example after entry.
-- `.factory/evidence/review-1-axe-live.json` — live axe result.
-- `.factory/evidence/review-1-verify/` — worker `verify-url.sh` output and screenshots.
-- `.factory/evidence/review-1-copy-count.mjs` — reproducible landing/README word counts.
+## Run locally
 
-Commands exercised:
+```bash
+npm ci
+npm test
+npm run check
+npm run test:claims
+npm run check:pack
+npm run check:smoke
+npm run check:a11y
+npm run check:offline
+npm run check:pwa-update
+npm run check:headers
+```
 
-- `npm ci`
-- `npm test` — 28/28 passed
-- `npm run check` — passed
-- `npm run build` — passed and produced `dist/`
-- `npm run check:pack` — passed for the local tarball
-- `npm run check:smoke` — passed at both target viewports
-- `node scripts/a11y.mjs https://headless-scheduler.sociobot.in .factory/evidence/review-1-axe-live.json` — zero violations
-- `/opt/fleet/lib/verify-url.sh https://headless-scheduler.sociobot.in .factory/evidence/review-1-verify` — passed its basic checks
-- `npm run check:offline` and the live offline check — passed
-- `npm run check:pwa-update` — passed
-- `npm run check:headers` — passed
-- clean temporary `npm install headless-scheduler` — failed with E404, exit 1
-
-The rendered link crawl found no dead links. The live example made only same-origin requests, wrote no cookies/localStorage/sessionStorage/IndexedDB, reset an added event on reload, and reloaded through its service worker while offline. The visual identity is distinct and matches `.factory/design.md`.
+Use `npm run build` for both artifacts. Deploy `dist/site` as the static site. Do not publish from this repository worker.
 
 ## Known gaps and next steps
 
-No fixes were made because this work order is review-only. Before another review:
-
-1. Publish the npm package or remove the public install claim until publication is complete.
-2. Implement a real `/demo` package playground with sample data, banner, Reset, Start for real, isolation, and `.factory/demo.md`.
-3. Add `.factory/claims.json` and one exact `@claim:<id>` test for every retained claim.
-4. Rewrite the hero and actions using the concrete copy in the report.
-5. Add real route handling, a designed 404, focus/announcement behavior, complete route metadata, and consistent legal-page chrome.
-6. Fix the six undersized mobile hit areas and rerun the full audit.
+No blocking review finding remains. The npm registry name is still unpublished because registry credentials belong to the factory. The released site states this plainly and serves a tested installable v0.1.0 tarball. Registry publication can replace that URL later without changing the package API.
