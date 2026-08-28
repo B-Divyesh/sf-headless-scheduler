@@ -1,97 +1,31 @@
-# Repair handoff 6
+# Verification handoff 6 — FAIL
 
-Base verifier report: `eb01ae479343642b9dd8a7766399bef5923877aa`
-Repaired candidate: `14258c427bdfcc2278a34b13416e572191ce4aa5`
-Artifact: npm library (ESM, CJS, declarations) with static documentation PWA
+Verified candidate: `492bdab128f8fe4879b3227d520365d02a58d82b`
 
-## Result
+Verified URL: <https://headless-scheduler.sociobot.in>
 
-The verifier's only remaining release blocker is fixed. A successful timeline
-resize now announces the changed **end** time, rather than the unchanged start
-time. For example, resizing Morning briefing from 08:30–10:00 to 08:30–10:45
-now announces `Morning briefing resized to 10:45 AM.` in the visible and
-polite live status region.
+Date: 2026-08-28
 
-The correction is in `site/src/main.tsx`, with formatting isolated in
-`site/src/interaction-notice.ts`. It preserves the existing move announcement,
-which correctly reports the changed start time.
+## Release result
 
-## Regression coverage
+**FAIL — do not release unchanged.** The requested candidate is live and byte-identical to the fresh production build. The previous incorrect resize announcement is repaired, but keyboard-only users cannot resize an event: the only resize handle is hidden from accessibility and unfocusable, with no keyboard duration command or alternate control. This is a P2 release blocker for the core scheduler interaction.
 
-- `tests/interaction-notice.test.ts` has exact expectations for resize-end
-  (`10:45 AM`) and move (`8:45 AM`) completion text.
-- `scripts/smoke.mjs` now performs a real pointer resize at **390×844** and
-  **1440×900** and fails unless the live status reports the resulting end time.
-  It also continues to cover add event, keyboard ArrowRight move, month-grid
-  keyboard navigation, Timeline return, viewport overflow, and console errors.
+## What was verified
 
-## Clean verification evidence
+- Clean `npm ci --ignore-scripts --no-audit --no-fund` installed 147 packages.
+- `npm test` passed 28/28 tests; `npm run check` passed; `npm run build` passed.
+- `npm run check:pack` passed with a clean ESM/CJS/React package consumer. `npm pack --dry-run` produced a valid 24-file, 40.0 kB tarball.
+- Local production smoke, axe, headers, offline reload, and service-worker update tests passed.
+- The same smoke, axe, headers, and offline reload tests passed against the live hostname at both 390 px mobile and desktop. Axe found zero WCAG 2 A/AA + 2.1 AA violations and browser errors were zero.
+- Live manual coverage passed for empty-title validation and recovery, a `23:59` event boundary, add, move, pointer resize, delete/Undo, month navigation, skip link, focus styling, reduced motion, responsive layout, and same-origin/no-user-data-storage privacy checks.
+- Live bytes match the fresh candidate build: `index.html` `29520add…5988`, JS `678ef264…3f41`, CSS `831db0b0…9439`, `sw.js` `4edee4bc…6fba`, and manifest `29cb3e92…5ac0`.
 
-All commands were run in this checkout after `npm ci` (147 packages; no
-vulnerabilities):
+## Required fix
 
-| Command | Result |
-| --- | --- |
-| `npm ci --ignore-scripts --no-audit --no-fund` | PASS — clean lockfile install |
-| `npm test` | PASS — 2 files, **28/28** tests |
-| `npm run check` | PASS — strict library and site TypeScript checks |
-| `npm run build` | PASS — ESM/CJS/declarations and `dist/site` |
-| `npm run check:pack` | PASS — fresh tarball consumer exercised ESM, CJS, React, timezone and pointer validation |
-| `npm pack --dry-run` | PASS — 24 files, 40.0 kB package / 139.4 kB unpacked |
-| `npm run check:smoke` | PASS — desktop and 390 px, keyboard and resize announcement |
-| `npm run check:a11y` | PASS — zero WCAG 2 A/AA + 2.1 AA violations |
-| `npm run check:headers` | PASS — 10 production response/security checks |
-| `npm run check:offline` | PASS — service-worker-controlled offline reload |
-| `npm run check:pwa-update` | PASS — deterministic old-to-new cache and offline-shell handoff |
-| `npm ci && npm test && npm run build:site` | PASS — exact static deployment build command |
+At `site/src/main.tsx:179`, the resize target is `<i class="resize-handle" aria-hidden="true">`; browser inspection confirms `tabIndex=-1`. The only event key handler (`site/src/main.tsx:162-168`) moves with left/right arrows and deletes—it cannot resize. Provide a focusable keyboard resize interaction and accurate live feedback, then add a browser regression test and re-run the commands in [verification-6.md](verification-6.md).
 
-The production site bundle built from the repaired candidate is 46,460 B raw /
-16,954 B gzip JS, 17,120 B raw / 4,599 B gzip CSS, and has a 198,634 B hero
-WebP. It remains within the stated budgets. Source and request review found no
-analytics, telemetry, browser storage, cookies, runtime CDN, or third-party
-requests; the library remains local-first and network-free.
+## Operational notes
 
-Local build identities:
+The static output is deploy-ready and keeps the documented privacy/security policy: no analytics, tracking, cookies, local/session storage, IndexedDB, runtime CDN, or third-party initial requests; only the versioned PWA Cache Storage entry is created. HTML is `no-store`, hashed assets immutable, and the service worker no-cache. JS (46,460 B raw / 16,937 B gzip), CSS (17,120 B raw / 4,576 B gzip), and hero image (198,634 B) meet their budgets.
 
-| File | SHA-256 |
-| --- | --- |
-| `index.html` | `29520add7850e1b149e109be00760d3aadf1b696965a775b654eeef42ace5988` |
-| `assets/index-BJfMCuE9.js` | `678ef264ceeb35af23d09b952d1ee1904cbb68785e87f48109541f65bf403f41` |
-| `assets/index-D1Xy_nRN.css` | `831db0b0822793d06751eeddfc37a2d8514940c879244d8ef0f17da0ed094039` |
-| `sw.js` | `4edee4bca8773036aff97755d30173d479a179ce57867613fd671cccbc2a6fba` |
-| `manifest.webmanifest` | `29cb3e92c00d82a7d836f560587e00635f4e113f6c65844c692a1a96c7235ac0` |
-
-## Push and deployment handoff
-
-`14258c4` was pushed to `origin/main`; GitHub Actions run
-`33128347522` completed successfully. The work order's static deployment build
-configuration (`npm ci && npm test && npm run build:site`, output
-`dist/site`) was run successfully above.
-
-At 2026-08-28 00:03 UTC, the public hostname still returned the previous
-candidate's `index.html` SHA-256
-`82b0403865d415d8e05a890bb30b04ce0bad3447de792b6a65feb665e55275fc`, and its
-browser smoke consequently reproduced the old incorrect `8:45 AM` message.
-No deployment target or credentials are present in the work order beyond the
-static build/output configuration, and repository instructions reserve
-infrastructure deployment for the factory. Deploy `dist/site` from `14258c4`
-to `https://headless-scheduler.sociobot.in`, then run:
-
-```bash
-npm run check:smoke -- https://headless-scheduler.sociobot.in
-npm run check:a11y -- https://headless-scheduler.sociobot.in .factory/evidence/axe-live.json
-npm run check:headers -- https://headless-scheduler.sociobot.in
-npm run check:offline -- https://headless-scheduler.sociobot.in
-```
-
-The repaired live build should match the five local hashes above and the smoke
-output must include `"resizeAnnouncement":true`.
-
-## Ready to publish
-
-Do not publish from this worker. The package is ready for the registry owner:
-
-```bash
-npm pack
-npm publish
-```
+Docker is not installed in this verifier container, so the container image itself was not built. The exact repository production build and deployed static artifact were both tested. Do not publish the npm package until the P2 is repaired and verification passes.
