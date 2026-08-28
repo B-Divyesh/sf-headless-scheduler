@@ -1,0 +1,13 @@
+{
+  "commit": "9dd9b8147b21e0d6330d7c768fc9e3447d84d431",
+  "clone": "/tmp/headless-scheduler-9dd9b81-nlzQ9z",
+  "install": "npm ci --ignore-scripts --no-audit --no-fund",
+  "checks": {
+    "unit": "29/29 passed",
+    "typecheck": "passed",
+    "build": "passed",
+    "claims": "33/33 passed; 32 registered claim tags",
+    "packConsumer": "passed"
+  },
+  "separateClaimMatrix": ".factory/evidence/polish-1/claim-matrix-clean.json"
+}

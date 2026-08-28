@@ -1,84 +1,75 @@
 # Perfection loop round 1 handoff — PASS
 
 Date: 2026-08-28
-Work order: `headless-scheduler-polish-1`
-Review base: `31d62e1fe21ca9c8a7dbe63f94589fad29cf8629`
-Repair implementation: `9805c3a`
-Verification/docs: `8bfcb4a`
-Static host correction: `f08ccdd`
+Work order: `headless-scheduler-polish-1-all-findings`
+Review source: `31d62e1fe21ca9c8a7dbe63f94589fad29cf8629`
+Candidate base: `a2e3ef844130c414b7b43d6e36f09b02227f38df`
+Release commit: `9dd9b8147b21e0d6330d7c768fc9e3447d84d431`
 Live URL: <https://headless-scheduler.sociobot.in>
 
-## What changed
+## Delivered
 
-- Replaced the metaphorical hero with a job-first headline, named audience, one primary sample action, adjacent outcome, and three tested facts.
-- Added direct `/demo` and `?demo=1` entry points. The editable JSON playground opens with five events across four resources.
-- Added the persistent demo banner, reset control, exit path, in-memory isolation, reload reset, exit reset, and `.factory/demo.md`.
-- The production playground imports `headless-scheduler` from `dist/package`, not repository source.
-- Replaced the false npm-registry command with a working release tarball at `/headless-scheduler-0.1.0.tgz`.
-- Added ten claims and ten uniquely tagged Playwright tests in `.factory/claims.json` and `tests/claims.spec.ts`.
-- Added Home, Demo, Privacy, Terms, and designed 404 states with route titles, descriptions, canonicals, Open Graph, Twitter cards, social art, and an Apple touch icon.
-- Added History API navigation, Back/Forward restoration, H1 focus, a polite route announcement, consistent header/footer, skip link, legal links, build ID, and HTTP 404 handling.
-- Added the required three-step section and plain scope/privacy section.
-- Fixed mobile hit targets and overflow. The mobile demo shows live schedule output before the editor.
-- Preserved the risograph inkboard identity and recorded derivative-asset provenance in `.factory/design.md`.
-- Rewrote the README and added `.factory/copy-audit.md` plus the 103-character verb-first catalog description.
+- Replaced the first screen with a short job-first headline, named audience, one `/?demo=1` sample action, its outcome, and three tested facts.
+- Added the isolated in-memory package playground, five realistic events, editable JSON, live output, persistent demo banner, reset, exit, reload reset, and installable versioned release file.
+- Added 32 claims with exactly one `@claim:<id>` test each. Coverage includes package formats/types/license/dependencies, public APIs, all input modes, accessibility, time zones, adapters, React 18/19, privacy, offline, routing, headers, and the static artifact.
+- Corrected NodeNext declarations, strict ISO event boundaries, model-derived timeline positions, dialog focus return, mobile touch targets, heading order, first-screen fit, and sticky mobile demo controls.
+- Added real route documents and metadata for Home, Demo, Privacy, Terms, and 404, plus focus/announcement behavior, legal links, social art, icons, sitemap, security headers, and true unknown-route 404 responses.
+- Rewrote the landing page and README in plain language, added the required three-step and limits/privacy sections, recorded the copy audit, and changed the catalog description to an 88-character verb-first sentence.
+- Preserved the product-specific warm-paper, cobalt/tomato risograph inkboard identity.
 
-## Verification evidence
+Every review item is mapped to its fix and evidence in `.factory/polish-1.md`.
 
-The exact implementation commit was cloned with `git clone --no-local` into `/tmp/headless-scheduler-clean-3S4ZZe`. A fresh `npm ci --ignore-scripts` completed before these checks:
+## Clean-clone verification
 
-- `npm audit --omit=dev` — zero vulnerabilities.
-- `npm test` — 28/28 unit and integration tests passed.
+A new checkout of exact commit `9dd9b8147b21e0d6330d7c768fc9e3447d84d431` at `/tmp/headless-scheduler-9dd9b81-nlzQ9z` ran after `npm ci --ignore-scripts --no-audit --no-fund`:
+
+- `npm test` — 29/29 passed.
 - `npm run check` — library and site TypeScript checks passed.
-- `npm run test:claims` — 10/10 claims passed in Chromium 1.58.2.
-- `npm run check:pack` — clean ESM, CommonJS, React, type, CSS, timezone, and validation consumer checks passed.
-- `npm run build` — produced `dist/package` and `dist/site`; initial site JS is 19.05 kB gzip and CSS is 5.62 kB gzip.
-- `npm run check:smoke` — 390 × 844 and 1440 × 900 passed add, move, resize, month navigation, announcements, overflow, and console checks.
-- `npm run check:a11y` — zero axe violations on Home, Demo, Privacy, Terms, and the 404 page.
-- `npm run check:headers` — ten cache/security header checks passed; `/demo` returned 200 and an unknown route returned 404.
-- `npm run check:offline` — service-worker-controlled offline reload passed.
-- `npm run check:pwa-update` — old-to-new cache replacement and offline new-shell regression passed.
-- `npm pack --dry-run` — 24 files, 39.5 kB packed, 138.0 kB unpacked.
+- `npm run test:claims` — 33/33 passed; 32/32 registered claim tags passed and the one-to-one registry check passed.
+- `npm run check:pack` — clean ESM, CommonJS, React, declaration, CSS, timezone, and validation consumers passed.
+- The preceding clean checkout also passed `npm run check:smoke`, `check:a11y`, `check:headers`, `check:offline`, `check:pwa-update`, `check:visual`, `npm audit --omit=dev`, and `npm pack --dry-run`. All source/product changes were identical; the final commit changes only the live-origin portability of the privacy assertion.
+- `npm pack --dry-run` — 24 files, 40,567 bytes packed, 141,641 bytes unpacked.
+- Built site — JavaScript 55.12 kB raw / 19.50 kB gzip; CSS 22.69 kB raw / 5.70 kB gzip.
+- All 32 claims were also invoked separately; `.factory/evidence/polish-1/claim-matrix-clean.json` records 32 passes.
 
-Additional evidence:
+## Production verification
 
-- `.factory/evidence/claims.json` — Playwright claim report.
-- `.factory/evidence/axe.json` — five-route accessibility report.
-- `.factory/evidence/repair-1-verify/verify.json` — title, language, one H1, main, alt, label, and zero-console-error check.
-- `.factory/evidence/home-mobile.png`, `home-desktop.png`, `demo-mobile.png`, and `demo-desktop.png` — first-screen evidence.
-- `.factory/evidence/lighthouse-repair-1.json` — mobile Lighthouse: performance 98, accessibility 100, best practices 100, SEO 100; FCP 1.28 s, LCP 2.41 s, CLS 0, TBT 19 ms.
+Azure Static Web Apps deployment `e875abba-12bd-49e0-be42-d0caf76cb7a2` completed successfully. The custom domain reported Ready, and a no-cache cold request returned build marker `9dd9b81`.
 
-## Deployment
+- Factory URL verifier: HTTP 200, correct title and language, one H1, main landmark, complete alt/labels, zero console errors.
+- Live Playwright claims: 33/33 passed against `https://headless-scheduler.sociobot.in`.
+- Live smoke: 390 × 844 and 1440 × 900 passed add, move, resize, month navigation, live announcements, layout, and console checks.
+- Live axe: zero violations on `/`, `/demo`, `/privacy`, `/terms`, and the 404 state.
+- Live routes: Home, Demo, Privacy, and Terms return 200 with distinct raw HTML titles/canonicals; unknown GET returns 404 with the designed page.
+- Live privacy: only the product origin was requested; cookies, localStorage, sessionStorage, and IndexedDB remained empty.
+- Live mobile: first action and facts fit in 390 × 844, no horizontal overflow, and no interactive target is below 44 × 44 px.
+- Live offline: service-worker-controlled reload passed; the clean-clone old-to-new cache replacement test also passed.
+- Live headers: all ten cache and security checks passed.
+- Live Lighthouse mobile: performance 99, accessibility 100, best practices 100, SEO 100; LCP 2.09 s, CLS 0, TBT 52 ms, 228,779 transferred bytes.
 
-`/opt/fleet/lib/deploy-static.sh headless-scheduler dist/site` deployed successfully to Azure Static Web Apps and the custom domain reported `Ready`.
+Evidence is under `.factory/evidence/polish-1-live/`, `.factory/evidence/polish-1/`, and `.factory/evidence/claims.json`.
 
-Live verification after deployment:
-
-- `/`, `/demo`, `/?demo=1`, `/privacy`, `/terms`, and the release tarball returned 200; `/missing-page` returned 404 with the designed page.
-- The factory URL verifier found one H1, `lang="en"`, a main landmark, complete image alt text, labelled buttons, and zero console errors.
-- Live axe found zero violations on all five route states.
-- Live browser smoke passed both viewports and all scheduler interactions with zero console errors.
-- Live offline reload and all ten live security/cache header checks passed.
-- A fresh temporary project installed the hosted tarball and imported both ESM and CommonJS successfully.
-- Live artifacts are stored in `.factory/evidence/deployed-repair-1/`.
-
-## Run locally
+## Run and release
 
 ```bash
 npm ci
 npm test
 npm run check
 npm run test:claims
+npm run test:claims:each
 npm run check:pack
 npm run check:smoke
 npm run check:a11y
+npm run check:headers
 npm run check:offline
 npm run check:pwa-update
-npm run check:headers
+npm run check:visual
+npm run build
+npm pack --dry-run
 ```
 
-Use `npm run build` for both artifacts. Deploy `dist/site` as the static site. Do not publish from this repository worker.
+`npm run build` emits the package to `dist/package` and the static site to `dist/site`. The site ships the ready-to-install `headless-scheduler-0.1.0.tgz`. Registry publishing was intentionally not performed because factory credentials own that step; the site makes no registry claim and its displayed hosted-tarball command works in a fresh project.
 
-## Known gaps and next steps
+## Remaining work
 
-No blocking review finding remains. The npm registry name is still unpublished because registry credentials belong to the factory. The released site states this plainly and serves a tested installable v0.1.0 tarball. Registry publication can replace that URL later without changing the package API.
+None for the reviewed release. All 11 review findings and UC-01 through UC-53 are closed and verified on the live deployment.
