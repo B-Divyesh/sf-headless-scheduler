@@ -4,7 +4,7 @@ import { chromium } from '@playwright/test'
 import { startStaticSite } from './site-server.mjs'
 
 const externalUrl = process.argv[2]
-const output = resolve(process.argv[3] ?? '.factory/evidence/polish-1')
+const output = resolve(process.env.EVIDENCE_OUT ?? process.argv[3] ?? '.factory/evidence/polish-1')
 const server = externalUrl ? null : await startStaticSite(resolve('dist/site'))
 const base = (externalUrl ?? server.url).replace(/\/$/, '')
 await mkdir(output, { recursive: true })
@@ -50,13 +50,13 @@ try {
   }
   await context.close()
 
-  for (const route of ['/', '/demo', '/privacy', '/terms', '/missing-polish-1']) {
+  for (const route of ['/', '/demo', '/privacy', '/terms', '/missing-polish-2']) {
     const response = await fetch(`${base}${route}`)
     const html = await response.text()
     report.routes.push({ route, viewport: 'raw-http', status: response.status, title: html.match(/<title>([^<]+)/)?.[1] ?? null, canonical: html.match(/rel="canonical" href="([^"]+)/)?.[1] ?? null })
   }
   await writeFile(resolve(output, 'browser.json'), JSON.stringify(report, null, 2))
-  if (report.routes.some(item => item.errors?.length || item.overflow || (item.route === '/missing-polish-1' ? item.status !== 404 : item.status !== 200))) throw new Error('Browser evidence contains a failed route')
+  if (report.routes.some(item => item.errors?.length || item.overflow || (item.route === '/missing-polish-2' ? item.status !== 404 : item.status !== 200))) throw new Error('Browser evidence contains a failed route')
   if (Object.values(report.firstScreen).some(item => !item.actionVisible || !item.factsVisible)) throw new Error('First-screen content is below the viewport')
   if (targets.length) throw new Error(`Undersized targets: ${JSON.stringify(targets)}`)
   console.log(JSON.stringify(report))

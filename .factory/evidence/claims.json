@@ -56,7 +56,11 @@
     "updateSourceMethod": "patch",
     "version": "1.58.2",
     "workers": 1,
-    "webServer": null
+    "webServer": {
+      "command": "node scripts/serve-site.mjs",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": false
+    }
   },
   "suites": [
     {
@@ -83,7 +87,7 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 958,
+                  "duration": 542,
                   "errors": [],
                   "stdout": [],
                   "stderr": [
@@ -92,7 +96,7 @@
                     }
                   ],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:05.645Z",
+                  "startTime": "2026-08-28T12:09:05.449Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -123,7 +127,7 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 537,
+                  "duration": 561,
                   "errors": [],
                   "stdout": [],
                   "stderr": [
@@ -135,7 +139,7 @@
                     }
                   ],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:06.620Z",
+                  "startTime": "2026-08-28T12:09:06.010Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -166,12 +170,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2362,
+                  "duration": 2426,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:07.170Z",
+                  "startTime": "2026-08-28T12:09:06.583Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -202,12 +206,16 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4,
+                  "duration": 523,
                   "errors": [],
                   "stdout": [],
-                  "stderr": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    }
+                  ],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:09.541Z",
+                  "startTime": "2026-08-28T12:09:09.020Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -238,12 +246,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3,
+                  "duration": 2,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:09.568Z",
+                  "startTime": "2026-08-28T12:09:09.556Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -253,7 +261,7 @@
           ],
           "id": "4d980a722f8828033cf5-17f0bf7dd395f40cea80",
           "file": "claims.spec.ts",
-          "line": 65,
+          "line": 69,
           "column": 1
         },
         {
@@ -274,12 +282,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 967,
+                  "duration": 528,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:09.596Z",
+                  "startTime": "2026-08-28T12:09:09.567Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -289,7 +297,7 @@
           ],
           "id": "4d980a722f8828033cf5-7071b7c0a5cc691af839",
           "file": "claims.spec.ts",
-          "line": 71,
+          "line": 75,
           "column": 1
         },
         {
@@ -310,12 +318,16 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2,
+                  "duration": 2584,
                   "errors": [],
                   "stdout": [],
-                  "stderr": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    }
+                  ],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:10.667Z",
+                  "startTime": "2026-08-28T12:09:10.173Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -325,7 +337,7 @@
           ],
           "id": "4d980a722f8828033cf5-08c4e263a59411fe4a26",
           "file": "claims.spec.ts",
-          "line": 78,
+          "line": 82,
           "column": 1
         },
         {
@@ -346,12 +358,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5,
+                  "duration": 10,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:10.696Z",
+                  "startTime": "2026-08-28T12:09:12.769Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -361,7 +373,7 @@
           ],
           "id": "4d980a722f8828033cf5-67baf8adf23bd836cb2d",
           "file": "claims.spec.ts",
-          "line": 84,
+          "line": 107,
           "column": 1
         },
         {
@@ -382,12 +394,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 7,
+                  "duration": 6,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:10.712Z",
+                  "startTime": "2026-08-28T12:09:12.834Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -397,7 +409,7 @@
           ],
           "id": "4d980a722f8828033cf5-4d9a66f60782d2c55b58",
           "file": "claims.spec.ts",
-          "line": 98,
+          "line": 121,
           "column": 1
         },
         {
@@ -418,12 +430,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4,
+                  "duration": 3,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:10.767Z",
+                  "startTime": "2026-08-28T12:09:12.865Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -433,7 +445,7 @@
           ],
           "id": "4d980a722f8828033cf5-d472c8b9bd8d4f8145f3",
           "file": "claims.spec.ts",
-          "line": 105,
+          "line": 128,
           "column": 1
         },
         {
@@ -454,12 +466,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5,
+                  "duration": 29,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:10.816Z",
+                  "startTime": "2026-08-28T12:09:12.876Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -469,7 +481,7 @@
           ],
           "id": "4d980a722f8828033cf5-60c9aabfaa570cd71048",
           "file": "claims.spec.ts",
-          "line": 112,
+          "line": 135,
           "column": 1
         },
         {
@@ -490,12 +502,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1068,
+                  "duration": 745,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:10.828Z",
+                  "startTime": "2026-08-28T12:09:12.913Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -505,7 +517,7 @@
           ],
           "id": "4d980a722f8828033cf5-4c915c3be2124e554ec1",
           "file": "claims.spec.ts",
-          "line": 119,
+          "line": 142,
           "column": 1
         },
         {
@@ -526,12 +538,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 994,
+                  "duration": 623,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:11.905Z",
+                  "startTime": "2026-08-28T12:09:13.668Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -541,7 +553,43 @@
           ],
           "id": "4d980a722f8828033cf5-c64f7cc8d3593b195fca",
           "file": "claims.spec.ts",
-          "line": 132,
+          "line": 155,
+          "column": 1
+        },
+        {
+          "title": "@claim:sample-seed",
+          "ok": true,
+          "tags": [
+            "claim:sample-seed"
+          ],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 405,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-28T12:09:14.301Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4d980a722f8828033cf5-cf45d4712759dd7e061b",
+          "file": "claims.spec.ts",
+          "line": 166,
           "column": 1
         },
         {
@@ -562,12 +610,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2600,
+                  "duration": 2237,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:12.912Z",
+                  "startTime": "2026-08-28T12:09:14.716Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -577,7 +625,7 @@
           ],
           "id": "4d980a722f8828033cf5-70cdfb6a3c5618058cb6",
           "file": "claims.spec.ts",
-          "line": 143,
+          "line": 174,
           "column": 1
         },
         {
@@ -603,7 +651,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:15.524Z",
+                  "startTime": "2026-08-28T12:09:16.964Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -613,7 +661,7 @@
           ],
           "id": "4d980a722f8828033cf5-35f261fa32fab6e2b3ec",
           "file": "claims.spec.ts",
-          "line": 164,
+          "line": 195,
           "column": 1
         },
         {
@@ -634,12 +682,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 13,
+                  "duration": 9,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:15.536Z",
+                  "startTime": "2026-08-28T12:09:16.979Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -649,7 +697,7 @@
           ],
           "id": "4d980a722f8828033cf5-473cadb80ec5e45c65eb",
           "file": "claims.spec.ts",
-          "line": 180,
+          "line": 211,
           "column": 1
         },
         {
@@ -670,12 +718,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4,
+                  "duration": 39,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:15.557Z",
+                  "startTime": "2026-08-28T12:09:16.998Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -685,7 +733,7 @@
           ],
           "id": "4d980a722f8828033cf5-f3c101fff78569ebf184",
           "file": "claims.spec.ts",
-          "line": 194,
+          "line": 225,
           "column": 1
         },
         {
@@ -706,12 +754,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 650,
+                  "duration": 597,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:15.574Z",
+                  "startTime": "2026-08-28T12:09:17.048Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -721,7 +769,7 @@
           ],
           "id": "4d980a722f8828033cf5-7677c5b301101eb4ff99",
           "file": "claims.spec.ts",
-          "line": 200,
+          "line": 238,
           "column": 1
         },
         {
@@ -742,12 +790,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 7,
+                  "duration": 6,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:16.255Z",
+                  "startTime": "2026-08-28T12:09:17.663Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -757,7 +805,7 @@
           ],
           "id": "4d980a722f8828033cf5-cb2f16aa413cc9d4c56f",
           "file": "claims.spec.ts",
-          "line": 211,
+          "line": 249,
           "column": 1
         },
         {
@@ -783,7 +831,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:16.278Z",
+                  "startTime": "2026-08-28T12:09:17.677Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -793,7 +841,7 @@
           ],
           "id": "4d980a722f8828033cf5-ffeb55be447b686721d7",
           "file": "claims.spec.ts",
-          "line": 217,
+          "line": 255,
           "column": 1
         },
         {
@@ -819,7 +867,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:16.296Z",
+                  "startTime": "2026-08-28T12:09:17.689Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -829,7 +877,7 @@
           ],
           "id": "4d980a722f8828033cf5-67baaa2ec04c7ee4fdd6",
           "file": "claims.spec.ts",
-          "line": 226,
+          "line": 264,
           "column": 1
         },
         {
@@ -855,7 +903,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:16.317Z",
+                  "startTime": "2026-08-28T12:09:17.708Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -865,7 +913,7 @@
           ],
           "id": "4d980a722f8828033cf5-d8ddeb1cd406bff17ac8",
           "file": "claims.spec.ts",
-          "line": 243,
+          "line": 281,
           "column": 1
         },
         {
@@ -886,12 +934,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 10,
+                  "duration": 17,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:16.326Z",
+                  "startTime": "2026-08-28T12:09:17.719Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -901,7 +949,7 @@
           ],
           "id": "4d980a722f8828033cf5-b124e3edff51a8fdb728",
           "file": "claims.spec.ts",
-          "line": 250,
+          "line": 288,
           "column": 1
         },
         {
@@ -922,12 +970,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 477,
+                  "duration": 362,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:16.344Z",
+                  "startTime": "2026-08-28T12:09:17.745Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -937,7 +985,7 @@
           ],
           "id": "4d980a722f8828033cf5-442c6076a9d65ea09cec",
           "file": "claims.spec.ts",
-          "line": 259,
+          "line": 297,
           "column": 1
         },
         {
@@ -958,12 +1006,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 593,
+                  "duration": 583,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:16.829Z",
+                  "startTime": "2026-08-28T12:09:18.130Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -973,7 +1021,7 @@
           ],
           "id": "4d980a722f8828033cf5-5c27088a46ce9c7a22e9",
           "file": "claims.spec.ts",
-          "line": 265,
+          "line": 303,
           "column": 1
         },
         {
@@ -994,7 +1042,7 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1722,
+                  "duration": 1779,
                   "errors": [],
                   "stdout": [],
                   "stderr": [
@@ -1006,7 +1054,7 @@
                     }
                   ],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:17.432Z",
+                  "startTime": "2026-08-28T12:09:18.722Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1016,7 +1064,7 @@
           ],
           "id": "4d980a722f8828033cf5-56356dcc6dd541403d7b",
           "file": "claims.spec.ts",
-          "line": 276,
+          "line": 314,
           "column": 1
         },
         {
@@ -1037,12 +1085,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 633,
+                  "duration": 550,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:19.162Z",
+                  "startTime": "2026-08-28T12:09:20.514Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1052,7 +1100,7 @@
           ],
           "id": "4d980a722f8828033cf5-3d6bbbb69d29168acf78",
           "file": "claims.spec.ts",
-          "line": 285,
+          "line": 323,
           "column": 1
         },
         {
@@ -1073,12 +1121,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 6,
+                  "duration": 1042,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:19.803Z",
+                  "startTime": "2026-08-28T12:09:21.075Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1088,7 +1136,7 @@
           ],
           "id": "4d980a722f8828033cf5-75d7a3da690e8d46fb24",
           "file": "claims.spec.ts",
-          "line": 297,
+          "line": 335,
           "column": 1
         },
         {
@@ -1109,12 +1157,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4,
+                  "duration": 6,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:19.818Z",
+                  "startTime": "2026-08-28T12:09:22.129Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1124,7 +1172,7 @@
           ],
           "id": "4d980a722f8828033cf5-fd26695382f1b69af9f8",
           "file": "claims.spec.ts",
-          "line": 316,
+          "line": 374,
           "column": 1
         },
         {
@@ -1145,12 +1193,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1010,
+                  "duration": 798,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:19.829Z",
+                  "startTime": "2026-08-28T12:09:22.143Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1160,7 +1208,7 @@
           ],
           "id": "4d980a722f8828033cf5-60393682a5d38a1c7b62",
           "file": "claims.spec.ts",
-          "line": 325,
+          "line": 383,
           "column": 1
         },
         {
@@ -1181,12 +1229,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1395,
+                  "duration": 1282,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:20.848Z",
+                  "startTime": "2026-08-28T12:09:22.950Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1196,7 +1244,7 @@
           ],
           "id": "4d980a722f8828033cf5-e2cea94807c7a36dacb3",
           "file": "claims.spec.ts",
-          "line": 341,
+          "line": 408,
           "column": 1
         },
         {
@@ -1217,12 +1265,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 49,
+                  "duration": 25,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:22.253Z",
+                  "startTime": "2026-08-28T12:09:24.244Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1232,7 +1280,7 @@
           ],
           "id": "4d980a722f8828033cf5-0304ad733fc34bb442bc",
           "file": "claims.spec.ts",
-          "line": 376,
+          "line": 444,
           "column": 1
         },
         {
@@ -1251,12 +1299,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2132,
+                  "duration": 2280,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-28T11:30:22.310Z",
+                  "startTime": "2026-08-28T12:09:24.278Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1266,7 +1314,7 @@
           ],
           "id": "4d980a722f8828033cf5-83dc58b3506b481e3b32",
           "file": "claims.spec.ts",
-          "line": 381,
+          "line": 449,
           "column": 1
         }
       ]
@@ -1274,9 +1322,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-28T11:30:04.485Z",
-    "duration": 20047.999,
-    "expected": 33,
+    "startTime": "2026-08-28T12:09:04.098Z",
+    "duration": 22558.143,
+    "expected": 34,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

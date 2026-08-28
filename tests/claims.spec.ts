@@ -55,11 +55,15 @@ test('@claim:typescript-declarations', async ({ request }) => {
   } finally { rmSync(consumer, { recursive: true, force: true }) }
 })
 
-test('@claim:mit-license', async () => {
-  const manifest = JSON.parse(readFileSync('package.json', 'utf8'))
-  expect(manifest.license).toBe('MIT')
-  expect(readFileSync('LICENSE', 'utf8')).toContain('MIT License')
-  expect(readFileSync('dist/site/headless-scheduler-0.1.0.tgz').length).toBeGreaterThan(1_000)
+test('@claim:mit-license', async ({ request }) => {
+  const consumer = await installHostedPackage(request)
+  try {
+    const installed = join(consumer, 'node_modules/headless-scheduler')
+    const manifest = JSON.parse(readFileSync(join(installed, 'package.json'), 'utf8'))
+    expect(manifest.license).toBe('MIT')
+    expect(readFileSync(join(installed, 'LICENSE'), 'utf8')).toContain('Permission is hereby granted, free of charge')
+    execFileSync(process.execPath, ['--input-type=module', '--eval', "import { createScheduler } from 'headless-scheduler'; for (const view of ['day','week','month','resource-timeline']) { if (createScheduler({ initialView:view }).getState().view !== view) process.exit(1) }"], { cwd: consumer })
+  } finally { rmSync(consumer, { recursive: true, force: true }) }
 })
 
 test('@claim:zero-runtime-dependencies', async () => {
@@ -70,15 +74,34 @@ test('@claim:zero-runtime-dependencies', async () => {
 
 test('@claim:package-playground', async ({ page }) => {
   await page.goto('/?demo=1')
-  await expect(page.getByText(`v${PACKAGE_VERSION} package playground`)).toBeVisible()
+  await expect(page.getByText(`v${PACKAGE_VERSION} package demo`)).toBeVisible()
   expect(readFileSync('site/vite.config.ts', 'utf8')).toContain("'headless-scheduler': resolve(__dirname, '../dist/package/index.js')")
   await expect(page.getByRole('heading', { name: 'Run this schedule locally' })).toBeVisible()
 })
 
-test('@claim:readme-example', async () => {
-  const scheduler = createScheduler({ dateAdapter: nativeDateAdapter, initialView: 'resource-timeline', visibleRange: sampleRange, resources: [{ id: 'room-a', title: 'Room A' }, { id: 'room-b', title: 'Room B' }], events: [sampleEvent] })
-  scheduler.moveEvent('kickoff', { resourceId: 'room-b', start: '2026-08-27T11:00:00Z' })
-  expect(scheduler.getState().events[0]).toMatchObject({ resourceId: 'room-b', start: '2026-08-27T11:00:00.000Z', end: '2026-08-27T12:30:00.000Z' })
+test('@claim:readme-example', async ({ request }) => {
+  const readme = readFileSync('README.md', 'utf8')
+  const match = readme.match(/## Create a scheduler\s*\n\n```ts\n([\s\S]*?)\n```/)
+  const example = match?.[1]
+  if (!example) throw new Error('Could not extract the README scheduler example')
+  const consumer = await installHostedPackage(request)
+  try {
+    writeFileSync(join(consumer, 'example.ts'), example)
+    writeFileSync(join(consumer, 'globals.d.ts'), 'declare function renderYourUI(state: unknown): void\n')
+    writeFileSync(join(consumer, 'tsconfig.json'), JSON.stringify({ compilerOptions: { module: 'NodeNext', moduleResolution: 'NodeNext', target: 'ES2022', strict: true, outDir: 'build' }, files: ['example.ts', 'globals.d.ts'] }))
+    writeFileSync(join(consumer, 'run-example.mjs'), "let renders = 0; globalThis.renderYourUI = () => { renders += 1 }; await import('./build/example.js'); if (renders < 1) throw new Error('README subscription did not render'); const event = globalThis.__readmeScheduler?.getState().events[0]; if (event) throw new Error('README example unexpectedly leaked a global');")
+    const source = readFileSync(join(consumer, 'example.ts'), 'utf8')
+    expect(source).toBe(example)
+    execFileSync(resolve('node_modules/.bin/tsc'), ['-p', join(consumer, 'tsconfig.json')], { cwd: resolve('.'), stdio: 'ignore' })
+    const built = readFileSync(join(consumer, 'build/example.js'), 'utf8')
+    expect(built).toContain("scheduler.moveEvent('kickoff'")
+    writeFileSync(join(consumer, 'run-example.mjs'), "let renders = 0; globalThis.renderYourUI = () => { renders += 1 }; const original = globalThis.console; await import('./build/example.js'); if (renders < 1) throw new Error('README subscription did not render'); void original;")
+    execFileSync(process.execPath, ['run-example.mjs'], { cwd: consumer, stdio: 'ignore' })
+    const compiled = `${built}\nexport { scheduler }\n`
+    writeFileSync(join(consumer, 'build/example-for-assertion.mjs'), compiled)
+    const output = execFileSync(process.execPath, ['--input-type=module', '--eval', "globalThis.renderYourUI=()=>{}; const {scheduler}=await import('./build/example-for-assertion.mjs'); const event=scheduler.getState().events[0]; if(event.resourceId!=='room-b'||event.start!=='2026-08-27T11:00:00.000Z'||event.end!=='2026-08-27T12:30:00.000Z') process.exit(1)"], { cwd: consumer })
+    expect(output).toBeDefined()
+  } finally { rmSync(consumer, { recursive: true, force: true }) }
 })
 
 test('@claim:scheduler-operations', async () => {
@@ -140,6 +163,14 @@ test('@claim:shared-demo-state', async ({ page }) => {
   await expect(page.getByRole('button', { name: /^Shared state review/ })).toBeVisible()
 })
 
+test('@claim:sample-seed', async ({ page }) => {
+  await page.goto('/?demo=1')
+  await expect(page.getByText('Studio A', { exact: true })).toBeVisible()
+  await expect(page.getByText('Maya Chen', { exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: /^Morning briefing/ })).toBeVisible()
+  await expect(page.getByRole('button', { name: /^Prototype review/ })).toBeVisible()
+})
+
 test('@claim:demo-isolation-reset', async ({ page, context }) => {
   await page.goto('/?demo=1')
   await expect(page).toHaveURL(/\?demo=1$/)
@@ -154,7 +185,7 @@ test('@claim:demo-isolation-reset', async ({ page, context }) => {
   await expect(page.getByRole('button', { name: /^Morning briefing/ })).toBeVisible()
   await editor.fill((await editor.inputValue()).replace('Morning briefing', 'Discard this edit'))
   await page.getByRole('button', { name: 'Apply sample event' }).click()
-  await page.getByRole('link', { name: 'Start for real' }).click()
+  await page.getByRole('link', { name: 'Start for real — install the package' }).click()
   await page.getByRole('link', { name: 'Demo' }).first().click()
   await expect(page.getByRole('button', { name: /^Morning briefing/ })).toBeVisible()
   expect(await context.cookies()).toEqual([])
@@ -194,6 +225,13 @@ test('@claim:pointer-capture-validation', async () => {
 test('@claim:grid-keyboard-navigation', async () => {
   const cases: Array<[string, number]> = [['ArrowLeft', 9], ['ArrowRight', 11], ['ArrowUp', 3], ['ArrowDown', 17], ['Home', 7], ['End', 13], ['PageUp', 0], ['PageDown', 38]]
   for (const [key, result] of cases) expect(getGridNavigation({ key, index: 10, columns: 7, count: 42, pageSize: 28 })).toBe(result)
+  const edges: Record<string, number[]> = {
+    ArrowLeft: [0, 5, 34, 40], ArrowRight: [1, 7, 36, 41], ArrowUp: [0, 0, 28, 34], ArrowDown: [7, 13, 41, 41],
+    Home: [0, 0, 35, 35], End: [6, 6, 41, 41], PageUp: [0, 0, 7, 13], PageDown: [28, 34, 41, 41]
+  }
+  for (const [key, expected] of Object.entries(edges)) {
+    for (const [position, result] of [0, 6, 35, 41].entries()) expect(getGridNavigation({ key, index: result, columns: 7, count: 42, pageSize: 28 })).toBe(expected[position])
+  }
   expect(getGridNavigation({ key: 'Escape', index: 10, columns: 7, count: 42 })).toBeNull()
 })
 
@@ -294,23 +332,44 @@ test('@claim:privacy-boundary', async ({ page, context }) => {
   expect(await page.evaluate(async () => ({ local: localStorage.length, session: sessionStorage.length, indexed: (await indexedDB.databases()).length }))).toEqual({ local: 0, session: 0, indexed: 0 })
 })
 
-test('@claim:package-side-effects', async () => {
-  const calls: string[] = []
-  const originalFetch = globalThis.fetch
-  Object.defineProperty(globalThis, 'fetch', { configurable: true, writable: true, value: (..._args: unknown[]) => { calls.push('fetch'); throw new Error('Unexpected fetch') } })
-  Object.defineProperty(globalThis, 'localStorage', { configurable: true, value: new Proxy({}, { get() { calls.push('localStorage'); return undefined } }) })
-  Object.defineProperty(globalThis, 'sessionStorage', { configurable: true, value: new Proxy({}, { get() { calls.push('sessionStorage'); return undefined } }) })
+test('@claim:package-side-effects', async ({ request, page }) => {
+  const consumer = await installHostedPackage(request)
   try {
-    const built = await import(`${pathToFileURL(resolve('dist/package/index.js')).href}?claim=side-effects`)
-    const scheduler = built.createScheduler({ events: [sampleEvent] })
-    scheduler.moveEvent('kickoff', { start: '2026-08-27T10:00:00Z' })
-    built.buildResourceTimeline({ range: sampleRange, events: scheduler.getState().events, resources: [{ id: 'room-a', title: 'Room A' }], adapter: built.nativeDateAdapter })
-    expect(calls).toEqual([])
-  } finally {
-    Object.defineProperty(globalThis, 'fetch', { configurable: true, writable: true, value: originalFetch })
-    delete (globalThis as Record<string, unknown>).localStorage
-    delete (globalThis as Record<string, unknown>).sessionStorage
-  }
+    const packageDir = join(consumer, 'node_modules/headless-scheduler/dist/package')
+    await page.route('**/claim-package/**', route => {
+      const file = route.request().url().split('/claim-package/')[1]
+      if (!file || file.includes('..')) return route.abort()
+      return route.fulfill({ body: readFileSync(join(packageDir, file)), contentType: 'text/javascript' })
+    })
+    await page.goto('/')
+    const result = await page.evaluate(async () => {
+      const calls: string[] = []
+      const unexpected = (name: string) => (..._args: unknown[]) => { calls.push(name); throw new Error(`Unexpected ${name}`) }
+      const replace = (target: object, key: string, value: unknown) => Object.defineProperty(target, key, { configurable: true, writable: true, value })
+      replace(globalThis, 'fetch', unexpected('fetch'))
+      replace(globalThis, 'XMLHttpRequest', new Proxy(function () {}, { construct() { calls.push('XMLHttpRequest'); throw new Error('Unexpected XMLHttpRequest') } }))
+      replace(globalThis, 'WebSocket', new Proxy(function () {}, { construct() { calls.push('WebSocket'); throw new Error('Unexpected WebSocket') } }))
+      replace(globalThis, 'EventSource', new Proxy(function () {}, { construct() { calls.push('EventSource'); throw new Error('Unexpected EventSource') } }))
+      replace(navigator, 'sendBeacon', unexpected('sendBeacon'))
+      replace(globalThis, 'localStorage', new Proxy({}, { get() { calls.push('localStorage'); throw new Error('Unexpected localStorage') } }))
+      replace(globalThis, 'sessionStorage', new Proxy({}, { get() { calls.push('sessionStorage'); throw new Error('Unexpected sessionStorage') } }))
+      replace(globalThis, 'indexedDB', new Proxy({}, { get() { calls.push('indexedDB'); throw new Error('Unexpected indexedDB') } }))
+      replace(globalThis, 'caches', new Proxy({}, { get() { calls.push('Cache Storage'); throw new Error('Unexpected Cache Storage') } }))
+      Object.defineProperty(Document.prototype, 'cookie', { configurable: true, get() { calls.push('cookie-read'); return '' }, set() { calls.push('cookie-write') } })
+      const moduleUrl: string = '/claim-package/index.js'
+      const built = await import(moduleUrl)
+      const event = { id: 'kickoff', title: 'Kickoff', resourceId: 'room-a', start: '2026-08-27T09:00:00Z', end: '2026-08-27T10:30:00Z' }
+      const scheduler = built.createScheduler({ events: [event], resources: [{ id: 'room-a', title: 'Room A' }], visibleRange: { start: '2026-08-27T08:00:00Z', end: '2026-08-27T18:00:00Z' } })
+      const unsubscribe = scheduler.subscribe(() => undefined)
+      scheduler.setView('day'); scheduler.setAnchorDate('2026-08-27T09:00:00Z'); scheduler.setVisibleRange({ start: '2026-08-27T08:00:00Z', end: '2026-08-27T18:00:00Z' }); scheduler.setResources([{ id: 'room-a', title: 'Room A' }]); scheduler.setEvents([event])
+      scheduler.createEvent({ ...event, id: 'second' }); scheduler.updateEvent('second', { title: 'Updated' }); scheduler.moveEvent('second', { start: '2026-08-27T10:00:00Z' }); scheduler.resizeEvent('second', { end: '2026-08-27T12:00:00Z' }); scheduler.removeEvent('second'); scheduler.navigate(1); scheduler.announce('updated'); unsubscribe()
+      built.buildMonth({ month: '2026-08-01T00:00:00Z', events: scheduler.getState().events, adapter: built.nativeDateAdapter }); built.getContinuousMonthWindow({ anchor: '2026-08-01T00:00:00Z', scrollTop: 0, monthHeight: 600, count: 12, adapter: built.nativeDateAdapter }); built.buildTimeGrid({ range: scheduler.getState().visibleRange, events: scheduler.getState().events, adapter: built.nativeDateAdapter }); built.buildResourceTimeline({ range: scheduler.getState().visibleRange, events: scheduler.getState().events, resources: scheduler.getState().resources, adapter: built.nativeDateAdapter }); built.layoutOverlaps(scheduler.getState().events, scheduler.getState().visibleRange, built.nativeDateAdapter)
+      const interaction = built.createPointerInteraction({ mode: 'move', event, pixelsPerMinute: 2, onPreview() {}, onCommit() {} }); interaction.onPointerDown({ button: 0, clientX: 0, pointerId: 1, currentTarget: null, preventDefault() {} }); interaction.onPointerUp({ clientX: 30, pointerId: 1 })
+      built.getGridNavigation({ key: 'ArrowRight', index: 0, columns: 7, count: 42 })
+      return calls
+    })
+    expect(result).toEqual([])
+  } finally { await page.unroute('**/claim-package/**'); rmSync(consumer, { recursive: true, force: true }) }
 })
 
 test('@claim:headless-core', async () => {
@@ -336,6 +395,15 @@ test('@claim:offline-demo', async ({ page, context }) => {
   await page.reload({ waitUntil: 'domcontentloaded' })
   await expect(page.getByRole('heading', { level: 1, name: 'Edit a resource timeline' })).toBeVisible()
   await expect(page.getByText('Demo — sample data, nothing is saved')).toBeVisible()
+  await expect(page.getByText('Studio A', { exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: /^Morning briefing/ })).toBeVisible()
+  await page.getByRole('button', { name: 'Show day view' }).click()
+  await expect(page.getByRole('grid', { name: 'day calendar' })).toBeVisible()
+  await page.getByRole('button', { name: 'Show timeline view' }).click()
+  const editor = page.getByLabel('Sample event JSON')
+  await editor.fill((await editor.inputValue()).replace('Morning briefing', 'Offline planning'))
+  await page.getByRole('button', { name: 'Apply sample event' }).click()
+  await expect(page.getByRole('button', { name: /^Offline planning/ })).toBeVisible()
 })
 
 test('@claim:route-contract', async ({ page, request }) => {
@@ -354,6 +422,7 @@ test('@claim:route-contract', async ({ page, request }) => {
     await expect(page.locator('h1')).toHaveCount(1)
     await expect(page.locator('header')).toHaveCount(1)
     await expect(page.locator('footer')).toHaveCount(1)
+    await expect(page.getByRole('navigation', { name: 'Primary' }).getByRole('link', { name: 'Privacy' })).toHaveAttribute('href', '/privacy')
     await expect(page).toHaveTitle(title)
     expect((await page.title()).length).toBeLessThanOrEqual(60)
   }

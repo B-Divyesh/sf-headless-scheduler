@@ -14,7 +14,7 @@ await writeFile(index, homeHtml)
 const routeMetadata = {
   demo: {
     title: 'Demo — Headless Scheduler',
-    description: 'Edit sample event data and try the Headless Scheduler package in an isolated in-memory playground.',
+    description: 'Edit sample event data and try the Headless Scheduler package with isolated in-memory data.',
     canonical: '/demo'
   },
   privacy: {

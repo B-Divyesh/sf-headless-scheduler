@@ -1,28 +1,36 @@
-# Adversarial first-read review 2 handoff — FAIL
+# Perfection loop round 2 handoff — complete locally
 
 Date: 2026-08-28
 
-Work order: `headless-scheduler-review-2`
+Work order: `headless-scheduler-polish-2`
 
-Reviewed commit: `5e9933d4b3548a7b7fbaf2b069970af4bbec4087`
+Base reviewed commit: `5e9933d4b3548a7b7fbaf2b069970af4bbec4087`
+
+Repair commit: `33a55f3` (amended after clean-clone type checking)
 
 Live URL: <https://headless-scheduler.sociobot.in>
 
 ## Delivered
 
-- Wrote `.factory/review-2.md` with the cold mobile/desktop read, landing and README copy inventory, demo/isolation checks, claim matrix, live structure/accessibility checks, history verification, missed-leverage review, and FAIL verdict.
-- Added cold mobile, cold desktop, mobile demo, URL-verifier, and live axe evidence under `.factory/evidence/`.
-- Did not modify product code.
+- Closed every F-2-1 through F-2-28 finding and all seven reopened earlier UC findings. The complete mapping is in `.factory/polish-2.md`.
+- Strengthened five inadequate claim tests: exact README consumer, browser-side-effect channels, grid boundaries, functional offline demo, and installed-package MIT evidence.
+- Added the `sample-seed` claim, private `SECURITY.md` contact, plain-language copy audit, consistent demo/release-file terms, header Privacy link, explicit dialog close action, and first-screen free/offline/isolation facts.
+- Preserved the Inkboard time studio risograph identity and static TypeScript-library deployment class.
 
-## Verification
+## Exact verification evidence
 
-- Fresh clone: `npm ci`, `npm run build`, `npm run check:claims`, `npm run test:claims:each`, `npm test`, and `npm run check` passed.
-- All 32 claim processes exited 0. Five do not fully exercise their registered promises; see F-2-1 through F-2-5.
-- The live v0.1.0 release file installed and executed in a new temporary project.
-- The live demo passed one-click sample, edit, Reset, reload clearing, empty persistent storage, same-origin requests, offline reload, and offline editing checks.
-- Intended routes and crawled destinations passed; an unknown route returned the designed 404; no console errors, mobile overflow, or undersized targets were found.
-- The factory URL verifier passed. Axe reported zero violations on Home, Demo, Privacy, Terms, and 404.
+- Fresh clone: `/tmp/headless-scheduler-polish-2-koks0L` ran `npm ci --ignore-scripts --no-audit --no-fund`, `npm run check`, `npm run build`, `npm test` (29/29), `npm run test:claims:each` (33/33 separate processes), `npm run check:pack`, `npm run check:smoke`, `npm run check:a11y`, `npm run check:offline`, `npm run check:pwa-update`, and `npm run check:headers`; all exited 0.
+- Claim matrix: `.factory/evidence/polish-2/claim-matrix-clean.json` records 33 passed / 0 failed commands from that clone.
+- Browser evidence: `.factory/evidence/polish-2/browser.json`, `home-mobile.png`, `demo-mobile.png`, `home-desktop.png`, and `demo-desktop.png` show first-screen actions and facts, demo, routes, no overflow, no console errors, no undersized controls, and no persistent storage.
+- Accessibility: `npm run check:a11y` found zero axe violations on Home, Demo, Privacy, Terms, and 404. The claim suite also checks skip link, headings, focus restore, route announcement, dialog focus, keyboard controls, and mobile controls.
+- Performance: the production build is 19.46 kB gzip JavaScript and 5.68 kB gzip CSS, within the 200 kB / 50 kB budgets. Existing live Lighthouse evidence for this unchanged asset class is 99 performance and 100 accessibility.
 
-## Remaining work
+## Publish and deploy
 
-The product is not review-complete. Blocking items are incomplete claim tests for the exact README example, package side effects, keyboard boundaries, offline sample behavior, and shipped licensing, plus the regressed plain-language finding. Additional findings cover terminology, two weak actions, missing Privacy in the header, first-screen facts, two unlisted claims, and security-reporting instructions. See `.factory/review-2.md` for exact rewrites and tests.
+- Do not publish from this worker. The ready-to-publish command is `npm pack` (or `npm run check:pack` for a fresh consumer check).
+- Push commit `33a55f3` to `main`; the configured static deployment is then the deployment mechanism for this work order.
+- After deployment, rerun the cold live URL checks, URL verifier, and axe against Home, Demo, Privacy, Terms, and 404. Record the deployed build marker here if it differs from the commit.
+
+## Known gaps
+
+None in the reviewed scope. npm registry publication remains a factory-owned release action; the site only advertises the tested hosted v0.1.0 release file.

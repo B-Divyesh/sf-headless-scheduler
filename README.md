@@ -1,22 +1,22 @@
 # Headless Scheduler
 
-Headless Scheduler is a TypeScript scheduling library for booking, staffing, and planning interfaces. It supplies behavior and typed view data, not UI components.
+Headless Scheduler is a TypeScript scheduling library for booking, staffing, and planning interfaces. It supplies behavior and calendar data, not UI components.
 
-Version 0.1.0 includes day, week, continuous month, and resource timeline models under the MIT license. The core package has no runtime dependencies. A React adapter is optional.
+Version 0.1.0 includes day, week, continuous month, and resource timeline models under the MIT license. The core works without installing other packages. A React adapter is optional.
 
 ## Try the package
 
-Open the [isolated sample playground](https://headless-scheduler.sociobot.in/?demo=1). You can edit sample JSON, move or resize events, switch views, and reset the demo. Demo edits stay in memory and clear on reload or reset.
+Open the [demo](https://headless-scheduler.sociobot.in/?demo=1). The demo opens with rooms, people, and scheduled work. You can edit sample JSON, move or resize events, switch views, and reset the demo. Demo edits stay in memory and clear on reload or reset.
 
 ## Install the release file
 
-The npm registry name is not published yet. Install the versioned package file served by this release:
+Install the v0.1.0 release file from this site:
 
 ```bash
 npm install https://headless-scheduler.sociobot.in/headless-scheduler-0.1.0.tgz
 ```
 
-The tarball provides ESM, CommonJS, TypeScript declarations, optional React bindings, and the preset CSS file.
+The download supports JavaScript `import` and `require`, includes TypeScript types and CSS, and adds React support only when requested.
 
 ## Create a scheduler
 
@@ -80,13 +80,13 @@ Create, move, or resize interactions at fixed time intervals. Use `getGridNaviga
 
 ### Choose date calculations
 
-Use the built-in adapter, native Temporal, its polyfill, or supplied date-fns functions. Pass event dates as ISO strings with an offset or `Z`.
+Choose the built-in date handling, Temporal, or date-fns. Pass complete ISO dates such as `2026-08-27T09:00:00Z`.
 
 Version 0.1 does not expand recurring events. Expand them before passing events to the library.
 
 ### Style the example
 
-Import `headless-scheduler/preset.css` or copy it into your Tailwind component layer. Override its `--hs-*` variables, or render different markup from the returned view data.
+Import the preset CSS or copy it into Tailwind. Change its `--hs-*` colors, or render your own HTML from the calendar data.
 
 ## Public API
 
@@ -115,9 +115,9 @@ npm run check:pwa-update
 npm run check:headers
 ```
 
-`npm run build` writes the package to `dist/package` and the static site to `dist/site`. The site output includes the installable tarball and route files.
+`npm run build` writes the package to `dist/package` and the static site to `dist/site`. The site output includes the v0.1.0 release file and route files.
 
-The documentation site uses no analytics, accounts, cookies, local storage, third-party scripts, remote fonts, or runtime CDNs. The service worker uses Cache Storage for offline pages and assets.
+The documentation site does not load scripts, fonts, or other files from third-party sites. The service worker uses Cache Storage for offline pages and assets.
 
 The package includes no telemetry or network calls. Applications choose how to store scheduler data.
 
@@ -127,7 +127,7 @@ The package build targets ES2022 and pointer interactions use the Pointer Events
 
 Vue and Svelte adapters, recurrence expansion, iCal parsing, printing, and a hosted builder are outside version 0.1.
 
-Report security issues privately through the repository owner’s GitHub profile.
+Report security issues privately by following [SECURITY.md](SECURITY.md). Do not open a public issue for a security report.
 
 ## License
 

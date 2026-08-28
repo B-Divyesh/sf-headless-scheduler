@@ -91,6 +91,13 @@
     "sandbox": "edit an event, switch from timeline to day and back, and assert the edit in both views"
   },
   {
+    "id": "sample-seed",
+    "claim": "The demo opens with room resources, people resources, and scheduled work.",
+    "where": "landing demo preview, README demo section",
+    "test": "npm run test:claims -- --grep @claim:sample-seed",
+    "sandbox": "open a fresh ?demo=1 context and assert named room and person resources plus two seeded events"
+  },
+  {
     "id": "demo-isolation-reset",
     "claim": "Demo edits stay in memory and clear on reset, reload, or exit.",
     "where": "landing first screen, demo banner, privacy, README",
@@ -193,7 +200,7 @@
     "claim": "The core package makes no network or browser-storage calls; the application controls persistence.",
     "where": "privacy route, README",
     "test": "npm run test:claims -- --grep @claim:package-side-effects",
-    "sandbox": "instrument fetch and browser-storage globals while importing and exercising the built package"
+    "sandbox": "install the hosted release, run it in a browser sandbox that traps fetch, XHR, WebSocket, EventSource, beacon, cookies, IndexedDB, Cache Storage, and web storage, then exercise all public operations"
   },
   {
     "id": "headless-core",

@@ -1,1 +1,1 @@
-Build Tailwind calendar and resource timeline UIs with typed, headless scheduling logic.
+Build calendar and resource timeline UIs with headless TypeScript scheduling logic.
