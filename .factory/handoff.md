@@ -35,6 +35,7 @@ All commands were run from a clean install on Node `v22.23.2`:
 - `npm run check:offline` — passed; the service-worker-controlled production shell reloads offline.
 - `npm run check:pwa-update` — passed deterministic old-to-new worker/cache handoff.
 - Production browser screenshots were inspected at both target viewports. The 390 px layout retains the intentionally horizontally scrollable timeline and the resize target stays visible and touch-sized.
+- Live Lighthouse mobile (Lighthouse 12.8.2) — performance 90, accessibility 100, LCP 2.2 s, CLS 0, and 220 KiB total transfer. Result: `.factory/evidence/lighthouse.json`.
 
 Privacy and artifact class are unchanged: this remains a static documentation/demo site plus an npm library, with no analytics, cookies, storage, runtime CDN, or third-party initial requests. The only client persistence remains the versioned PWA Cache Storage shell.
 
@@ -42,4 +43,11 @@ Privacy and artifact class are unchanged: this remains a static documentation/de
 
 This repair is ready to publish but was not published to npm (the factory owns registry credentials). The package can be created with `npm pack` after the normal `npm run build:lib` prepack hook.
 
-The static deployment is triggered from the committed `main` branch by the factory deployment configuration. After that deployment completes, rerun the four external-url checks from `verification-6.md` against `https://headless-scheduler.sociobot.in` to record live artifact identity and policy evidence.
+Deployed the production static artifact using the configured Azure Static Web App `sf-headless-scheduler` in resource group `sociobot`. The production host passed all required external-url checks:
+
+- `npm run check:smoke -- https://headless-scheduler.sociobot.in` — passed at 390 × 844 and 1440 × 900, including the keyboard resize regression and zero console errors.
+- `npm run check:a11y -- https://headless-scheduler.sociobot.in .factory/evidence/axe-live.json` — passed with zero axe violations.
+- `npm run check:headers -- https://headless-scheduler.sociobot.in` — passed all 10 policy/header checks.
+- `npm run check:offline -- https://headless-scheduler.sociobot.in` — passed service-worker-controlled offline reload.
+
+Fresh local and live SHA-256 values match exactly: `index.html` `3ddc191b…e7cac9`; JS `dcbac014…a2b4db`; CSS `69e9f402…de667f`; `sw.js` `afb15e48…1f06c6`; manifest `29cb3e92…235ac0`. A clean live-browser privacy check observed no third-party origins, cookies, local/session storage, or IndexedDB; only the versioned `headless-scheduler-docs-8869f359d874a5e8` Cache Storage shell exists.
