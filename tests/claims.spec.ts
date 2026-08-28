@@ -289,7 +289,7 @@ test('@claim:privacy-boundary', async ({ page, context }) => {
   await page.getByRole('button', { name: 'Show month view' }).click()
   await page.getByRole('button', { name: 'Show timeline view' }).click()
   await page.getByRole('button', { name: 'Reset demo' }).click()
-  expect([...origins]).toEqual(['http://127.0.0.1:4173'])
+  expect([...origins]).toEqual([new URL(page.url()).origin])
   expect(await context.cookies()).toEqual([])
   expect(await page.evaluate(async () => ({ local: localStorage.length, session: sessionStorage.length, indexed: (await indexedDB.databases()).length }))).toEqual({ local: 0, session: 0, indexed: 0 })
 })
