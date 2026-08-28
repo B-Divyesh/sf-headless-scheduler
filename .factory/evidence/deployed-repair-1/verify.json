@@ -1,0 +1,14 @@
+{
+  "url": "https://headless-scheduler.sociobot.in",
+  "loadMs": 816,
+  "errors": [],
+  "a11y": {
+    "title": "Headless Scheduler — calendar and timeline logic",
+    "lang": "en",
+    "h1": 1,
+    "main": true,
+    "imgsMissingAlt": 0,
+    "buttonsUnlabeled": 0,
+    "textLength": 2109
+  }
+}

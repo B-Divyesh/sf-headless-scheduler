@@ -4,6 +4,8 @@ Date: 2026-08-28
 Work order: `headless-scheduler-polish-1`
 Review base: `31d62e1fe21ca9c8a7dbe63f94589fad29cf8629`
 Repair implementation: `9805c3a`
+Verification/docs: `8bfcb4a`
+Static host correction: `f08ccdd`
 Live URL: <https://headless-scheduler.sociobot.in>
 
 ## What changed
@@ -45,6 +47,20 @@ Additional evidence:
 - `.factory/evidence/repair-1-verify/verify.json` — title, language, one H1, main, alt, label, and zero-console-error check.
 - `.factory/evidence/home-mobile.png`, `home-desktop.png`, `demo-mobile.png`, and `demo-desktop.png` — first-screen evidence.
 - `.factory/evidence/lighthouse-repair-1.json` — mobile Lighthouse: performance 98, accessibility 100, best practices 100, SEO 100; FCP 1.28 s, LCP 2.41 s, CLS 0, TBT 19 ms.
+
+## Deployment
+
+`/opt/fleet/lib/deploy-static.sh headless-scheduler dist/site` deployed successfully to Azure Static Web Apps and the custom domain reported `Ready`.
+
+Live verification after deployment:
+
+- `/`, `/demo`, `/?demo=1`, `/privacy`, `/terms`, and the release tarball returned 200; `/missing-page` returned 404 with the designed page.
+- The factory URL verifier found one H1, `lang="en"`, a main landmark, complete image alt text, labelled buttons, and zero console errors.
+- Live axe found zero violations on all five route states.
+- Live browser smoke passed both viewports and all scheduler interactions with zero console errors.
+- Live offline reload and all ten live security/cache header checks passed.
+- A fresh temporary project installed the hosted tarball and imported both ESM and CommonJS successfully.
+- Live artifacts are stored in `.factory/evidence/deployed-repair-1/`.
 
 ## Run locally
 
