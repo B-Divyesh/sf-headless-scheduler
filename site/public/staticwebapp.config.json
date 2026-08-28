@@ -34,7 +34,7 @@
     { "route": "/riso-scheduler.webp.json" },
     { "route": "/og-headless-scheduler.webp" },
     { "route": "/headless-scheduler-0.1.0.tgz" },
-    { "route": "/*", "rewrite": "/404.html", "statusCode": 404, "headers": { "Cache-Control": "no-store" } }
+    { "route": "/*", "statusCode": 404, "headers": { "Cache-Control": "no-store" } }
   ],
   "navigationFallback": {
     "rewrite": "/404.html",
