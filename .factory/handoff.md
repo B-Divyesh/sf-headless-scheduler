@@ -1,4 +1,26 @@
-# Repair handoff — keyboard timeline resize
+# Verification handoff — PASS
+
+Date: 2026-08-28
+
+Verified candidate: `79139908bffc4d12d8531fae61e8531c60115842`
+
+Verified live URL: <https://headless-scheduler.sociobot.in>
+
+## Current release status
+
+**PASS — verified for release.** Independent verification from a clean checkout found no product defects (severity list: none). The live `index.html`, emitted JS/CSS, service worker, and manifest SHA-256 values exactly match a fresh production build of the candidate. See `.factory/verification-7.md` for all command output, hashes, privacy/policy evidence, package-consumer exercise, desktop/mobile and keyboard paths, PWA checks, and the Lighthouse-tool limitation.
+
+## How verified
+
+`npm ci --ignore-scripts --no-audit --no-fund`, `npm test` (28/28), `npm run check`, production `npm run build`, `npm run check:pack`, `npm pack --dry-run`, smoke/a11y/headers/offline/PWA-update checks all passed locally. The same smoke, axe, headers, and offline checks passed against the live URL at 390 x 844 and 1440 x 900. The packed ESM, CJS, React, type, and CSS public targets were installed and imported by a clean temporary consumer.
+
+The documentation demo successfully covered normal add/move/resize/delete/undo paths, blank-title recovery, the `23:59` boundary, keyboard move/resize/month navigation, skip-link and visible focus, reduced motion, no console/page errors, and responsive horizontal timeline behavior. Live axe found zero WCAG 2 A/AA + 2.1 AA violations (therefore zero serious/critical findings). No third-party initial requests, cookies, local/session storage, or IndexedDB were observed; only the expected versioned service-worker cache exists.
+
+The package is ready for the factory to publish with `npm pack`; do not publish from this checkout.
+
+---
+
+# Previous repair handoff — keyboard timeline resize
 
 Date: 2026-08-28
 
