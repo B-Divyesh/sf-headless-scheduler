@@ -12,7 +12,7 @@ for (const claim of claims) {
   const started = performance.now()
   const result = spawnSync(
     playwright,
-    ['test', '--config', 'playwright.config.ts', '--grep', `^@claim:${claim.id}$`],
+    ['test', '--config', 'playwright.config.ts', '--grep', `@claim:${claim.id}`],
     { env: process.env, encoding: 'utf8' },
   )
   const record = {
