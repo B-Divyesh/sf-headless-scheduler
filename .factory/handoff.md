@@ -1,75 +1,60 @@
-# Verification handoff — PASS
+# Review 1 handoff — FAIL
 
 Date: 2026-08-28
+Work order: `headless-scheduler-review-1`
+Reviewed base: `454a333f14d294fb073ced6fb723d1358152f5a4`
+Live URL: <https://headless-scheduler.sociobot.in>
 
-Verified candidate: `79139908bffc4d12d8531fae61e8531c60115842`
+## What was done
 
-Verified live URL: <https://headless-scheduler.sociobot.in>
+Completed the requested adversarial first-read review at 390 × 844 and 1440 × 900 without changing product code. The full report is `.factory/review-1.md`.
 
-## Current release status
+Verdict: **FAIL** with five blocking findings:
 
-**PASS — verified for release.** Independent verification from a clean checkout found no product defects (severity list: none). The live `index.html`, emitted JS/CSS, service worker, and manifest SHA-256 values exactly match a fresh production build of the candidate. See `.factory/verification-7.md` for all command output, hashes, privacy/policy evidence, package-consumer exercise, desktop/mobile and keyboard paths, PWA checks, and the Lighthouse-tool limitation.
+1. `npm install headless-scheduler` fails in a clean temporary directory with npm E404.
+2. The first screen does not name the audience or one correct first action.
+3. The required sandboxed, published-package library demo does not exist.
+4. `.factory/claims.json` and all `@claim:*` tests are absent.
+5. `/demo` and unknown routes render the homepage; there is no designed 404.
 
-## How verified
+The report also records incomplete metadata/legal skeleton, missing focus management, copy and terminology problems, missing standard landing sections, undersized mobile targets, and a 64-character home title.
 
-`npm ci --ignore-scripts --no-audit --no-fund`, `npm test` (28/28), `npm run check`, production `npm run build`, `npm run check:pack`, `npm pack --dry-run`, smoke/a11y/headers/offline/PWA-update checks all passed locally. The same smoke, axe, headers, and offline checks passed against the live URL at 390 x 844 and 1440 x 900. The packed ESM, CJS, React, type, and CSS public targets were installed and imported by a clean temporary consumer.
+## How to verify
 
-The documentation demo successfully covered normal add/move/resize/delete/undo paths, blank-title recovery, the `23:59` boundary, keyboard move/resize/month navigation, skip-link and visible focus, reduced motion, no console/page errors, and responsive horizontal timeline behavior. Live axe found zero WCAG 2 A/AA + 2.1 AA violations (therefore zero serious/critical findings). No third-party initial requests, cookies, local/session storage, or IndexedDB were observed; only the expected versioned service-worker cache exists.
+Audit artifacts:
 
-The package is ready for the factory to publish with `npm pack`; do not publish from this checkout.
+- `.factory/evidence/review-1-browser-audit.mjs` — fresh-context cold load, demo edit/reset observation, storage/network capture, route metadata, history focus, offline reload, axe, and touch-target measurement.
+- `.factory/evidence/review-1-browser.json` — structured results.
+- `.factory/evidence/review-1-mobile-cold.png` and `review-1-desktop-cold.png` — unscrolled first screens.
+- `.factory/evidence/review-1-demo.png` — embedded example after entry.
+- `.factory/evidence/review-1-axe-live.json` — live axe result.
+- `.factory/evidence/review-1-verify/` — worker `verify-url.sh` output and screenshots.
+- `.factory/evidence/review-1-copy-count.mjs` — reproducible landing/README word counts.
 
----
+Commands exercised:
 
-# Previous repair handoff — keyboard timeline resize
+- `npm ci`
+- `npm test` — 28/28 passed
+- `npm run check` — passed
+- `npm run build` — passed and produced `dist/`
+- `npm run check:pack` — passed for the local tarball
+- `npm run check:smoke` — passed at both target viewports
+- `node scripts/a11y.mjs https://headless-scheduler.sociobot.in .factory/evidence/review-1-axe-live.json` — zero violations
+- `/opt/fleet/lib/verify-url.sh https://headless-scheduler.sociobot.in .factory/evidence/review-1-verify` — passed its basic checks
+- `npm run check:offline` and the live offline check — passed
+- `npm run check:pwa-update` — passed
+- `npm run check:headers` — passed
+- clean temporary `npm install headless-scheduler` — failed with E404, exit 1
 
-Date: 2026-08-28
+The rendered link crawl found no dead links. The live example made only same-origin requests, wrote no cookies/localStorage/sessionStorage/IndexedDB, reset an added event on reload, and reloaded through its service worker while offline. The visual identity is distinct and matches `.factory/design.md`.
 
-Base verified candidate: `492bdab128f8fe4879b3227d520365d02a58d82b`
+## Known gaps and next steps
 
-## Repair
+No fixes were made because this work order is review-only. Before another review:
 
-Resolved the P2 finding in `verification-6.md`: the timeline resize affordance is now a separate, focusable 44 × 48 px button rather than an `aria-hidden` decorative element nested in an event button. It has an explicit accessible name describing its current end time and its arrow-key behavior. `ArrowRight` extends the event by 15 minutes; `ArrowLeft` shortens it by 15 minutes without allowing a duration below 15 minutes. Each change updates the existing polite live region with the exact new end time.
-
-The visible demo instructions now document the keyboard path. The original pointer resize interaction remains available on the same control. The semantic structure no longer nests one interactive control within another.
-
-## Regression coverage
-
-`scripts/smoke.mjs` now performs the exact browser regression at both 390 × 844 and 1440 × 900:
-
-1. Focuses `Morning briefing`, presses Tab, and asserts the resize control is the focused, tabbable element.
-2. Presses ArrowRight and asserts the exact polite announcement: `Morning briefing resized to 10:30 AM.`
-3. Asserts that the resize control's accessible name reflects the new end time.
-4. Continues to exercise the pointer resize path and its completion announcement.
-
-## Verification evidence
-
-All commands were run from a clean install on Node `v22.23.2`:
-
-- `npm ci --ignore-scripts --no-audit --no-fund` — passed; installed 147 packages.
-- `npm test` — passed, 28/28 tests.
-- `npm run check` — passed (library and site TypeScript).
-- `npm run build` — passed; produced `dist/package` and `dist/site`.
-- `npm run check:pack` — passed; clean ESM, CJS, and optional React consumer exercised all 7 targets.
-- `npm pack --dry-run` — passed; 24 files, 40.0 kB package / 139.4 kB unpacked.
-- `npm run check:smoke` — passed at 390 × 844 and 1440 × 900, including add, keyboard move, keyboard resize, pointer resize, month navigation, no horizontal page overflow, and zero console errors.
-- `npm run check:a11y` — passed; axe WCAG 2 A/AA + 2.1 AA returned zero violations. Fresh result: `.factory/evidence/axe.json`.
-- `npm run check:headers` — passed all 10 local cache/security response checks.
-- `npm run check:offline` — passed; the service-worker-controlled production shell reloads offline.
-- `npm run check:pwa-update` — passed deterministic old-to-new worker/cache handoff.
-- Production browser screenshots were inspected at both target viewports. The 390 px layout retains the intentionally horizontally scrollable timeline and the resize target stays visible and touch-sized.
-- Live Lighthouse mobile (Lighthouse 12.8.2) — performance 90, accessibility 100, LCP 2.2 s, CLS 0, and 220 KiB total transfer. Result: `.factory/evidence/lighthouse.json`.
-
-Privacy and artifact class are unchanged: this remains a static documentation/demo site plus an npm library, with no analytics, cookies, storage, runtime CDN, or third-party initial requests. The only client persistence remains the versioned PWA Cache Storage shell.
-
-## Release and deployment
-
-This repair is ready to publish but was not published to npm (the factory owns registry credentials). The package can be created with `npm pack` after the normal `npm run build:lib` prepack hook.
-
-Deployed the production static artifact using the configured Azure Static Web App `sf-headless-scheduler` in resource group `sociobot`. The production host passed all required external-url checks:
-
-- `npm run check:smoke -- https://headless-scheduler.sociobot.in` — passed at 390 × 844 and 1440 × 900, including the keyboard resize regression and zero console errors.
-- `npm run check:a11y -- https://headless-scheduler.sociobot.in .factory/evidence/axe-live.json` — passed with zero axe violations.
-- `npm run check:headers -- https://headless-scheduler.sociobot.in` — passed all 10 policy/header checks.
-- `npm run check:offline -- https://headless-scheduler.sociobot.in` — passed service-worker-controlled offline reload.
-
-Fresh local and live SHA-256 values match exactly: `index.html` `3ddc191b…e7cac9`; JS `dcbac014…a2b4db`; CSS `69e9f402…de667f`; `sw.js` `afb15e48…1f06c6`; manifest `29cb3e92…235ac0`. A clean live-browser privacy check observed no third-party origins, cookies, local/session storage, or IndexedDB; only the versioned `headless-scheduler-docs-8869f359d874a5e8` Cache Storage shell exists.
+1. Publish the npm package or remove the public install claim until publication is complete.
+2. Implement a real `/demo` package playground with sample data, banner, Reset, Start for real, isolation, and `.factory/demo.md`.
+3. Add `.factory/claims.json` and one exact `@claim:<id>` test for every retained claim.
+4. Rewrite the hero and actions using the concrete copy in the report.
+5. Add real route handling, a designed 404, focus/announcement behavior, complete route metadata, and consistent legal-page chrome.
+6. Fix the six undersized mobile hit areas and rerun the full audit.

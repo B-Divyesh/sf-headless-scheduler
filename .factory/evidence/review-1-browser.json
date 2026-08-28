@@ -1,0 +1,472 @@
+{
+  "mobile": {
+    "url": "https://headless-scheduler.sociobot.in/",
+    "title": "Headless Scheduler — resource timelines without the licence wall",
+    "h1": [
+      "Your schedule.Your surface."
+    ],
+    "beforeFold": [
+      {
+        "tag": "span",
+        "text": "HS",
+        "top": 12
+      },
+      {
+        "tag": "span",
+        "text": "headless—scheduler",
+        "top": 22
+      },
+      {
+        "tag": "span",
+        "text": "MIT",
+        "top": 139
+      },
+      {
+        "tag": "em",
+        "text": "Your surface.",
+        "top": 233
+      },
+      {
+        "tag": "p",
+        "text": "A headless calendar core with resource timelines, continuous months, and pointer interactions—ready for your Tailwind system.",
+        "top": 322
+      },
+      {
+        "tag": "a",
+        "text": "Try the timeline ↓",
+        "top": 539
+      },
+      {
+        "tag": "dt",
+        "text": "0",
+        "top": 635
+      },
+      {
+        "tag": "dd",
+        "text": "core dependencies",
+        "top": 663
+      },
+      {
+        "tag": "dt",
+        "text": "4",
+        "top": 635
+      },
+      {
+        "tag": "dd",
+        "text": "useful views",
+        "top": 663
+      },
+      {
+        "tag": "dt",
+        "text": "MIT",
+        "top": 635
+      },
+      {
+        "tag": "dd",
+        "text": "forever",
+        "top": 663
+      },
+      {
+        "tag": "p",
+        "text": "The actual library, in motion",
+        "top": 839
+      }
+    ],
+    "consoleErrors": []
+  },
+  "desktop": {
+    "url": "https://headless-scheduler.sociobot.in/",
+    "title": "Headless Scheduler — resource timelines without the licence wall",
+    "h1": [
+      "Your schedule.Your surface."
+    ],
+    "beforeFold": [
+      {
+        "tag": "span",
+        "text": "HS",
+        "top": 16
+      },
+      {
+        "tag": "span",
+        "text": "headless—scheduler",
+        "top": 25
+      },
+      {
+        "tag": "a",
+        "text": "Demo",
+        "top": 25
+      },
+      {
+        "tag": "a",
+        "text": "API",
+        "top": 25
+      },
+      {
+        "tag": "a",
+        "text": "Install",
+        "top": 25
+      },
+      {
+        "tag": "span",
+        "text": "MIT",
+        "top": 205
+      },
+      {
+        "tag": "em",
+        "text": "Your surface.",
+        "top": 342
+      },
+      {
+        "tag": "p",
+        "text": "A headless calendar core with resource timelines, continuous months, and pointer interactions—ready for your Tailwind system.",
+        "top": 479
+      },
+      {
+        "tag": "a",
+        "text": "Try the timeline ↓",
+        "top": 617
+      },
+      {
+        "tag": "dt",
+        "text": "0",
+        "top": 714
+      },
+      {
+        "tag": "dd",
+        "text": "core dependencies",
+        "top": 742
+      },
+      {
+        "tag": "dt",
+        "text": "4",
+        "top": 714
+      },
+      {
+        "tag": "dd",
+        "text": "useful views",
+        "top": 742
+      },
+      {
+        "tag": "dt",
+        "text": "MIT",
+        "top": 714
+      },
+      {
+        "tag": "dd",
+        "text": "forever",
+        "top": 742
+      },
+      {
+        "tag": "figcaption",
+        "text": "Structure without somebody else’s skin.",
+        "top": 686
+      }
+    ],
+    "consoleErrors": []
+  },
+  "demo": {
+    "actions": [
+      "Skip to main content",
+      "HSheadless—scheduler",
+      "GitHub",
+      "Start building ",
+      "Try the timeline ↓",
+      "Read the API ",
+      "npm install →",
+      "Privacy",
+      "Terms",
+      "Source"
+    ],
+    "buttons": [
+      "←",
+      "Today",
+      "→",
+      "Day",
+      "Week",
+      "Month",
+      "Timeline",
+      "Add event",
+      "Morning briefing8:30 AM–10:00 AM",
+      "↔",
+      "Prototype review10:15 AM–12:00 PM",
+      "↔",
+      "Field notes9:30 AM–11:15 AM",
+      "↔",
+      "Design handoff1:00 PM–3:30 PM",
+      "↔",
+      "Copy"
+    ],
+    "requiredTryCount": 0,
+    "actualTryCount": 1,
+    "afterClick": {
+      "url": "https://headless-scheduler.sociobot.in/#demo",
+      "title": "Headless Scheduler — resource timelines without the licence wall",
+      "h1": [
+        "Your schedule.Your surface."
+      ],
+      "text": "Skip to main content\nHS\nheadless—scheduler\nGitHub\n\nMIT NO PREMIUM VIEWS\n\nYour schedule.\nYour surface.\n\nA headless calendar core with resource timelines, continuous months, and pointer interactions—ready for your Tailwind system.\n\nStart building\nTry the timeline ↓\n0\ncore dependencies\n4\nuseful views\nMIT\nforever\n\nTHE ACTUAL LIBRARY, IN MOTION\n\nPlan across people and places\n\nDrag events to reschedule. Arrow keys move a focused event by 15 minutes; tab to its resize control, then use left or right arrows to change its duration. Every view below comes from the same headless state.\n\n←\nToday\n→\n27 August 2026\nDay\nWeek\nMonth\nTimeline\nAdd event\nRESOURCE\nUTC\n7 AM\n8 AM\n9 AM\n10 AM\n11 AM\n12 PM\n1 PM\n2 PM\n3 PM\n4 PM\nS\nStudio A\nRooms\nMorning briefing\n8:30 AM–10:00 AM\n↔\nP\nPrototype lab\nRooms\nPrototype review\n10:15 AM–12:00 PM\n↔\nM\nMaya Chen\nPeople\nField notes\n9:30 AM–11:15 AM\n↔\nN\nNoah Williams\nPeople\nDesign handoff\n1:00 PM–3:30 PM\n↔\nReady locally\nTip: drag an event or focus it and use arrow keys.\n04\n\nWHY ANOTHER CALENDAR?\n\nBecause layout is infrastructure, not a licence tier.\n\nResource scheduling should not force your product into a vendor’s visual language—or its premium plan. Headless Scheduler gives you date math, collision geometry, input behavior, and accessible navigation as typed primitives.\n\n01 / LAYOUT\nResource timelines\n\nHours or days across any number of people, rooms, tools, or tracks. Clipping and percentages are already calculated.\n\n02 / MONTHS\nKeep scrolling\n\nWindowed month models make an endless vertical calendar practical without rendering an endless DOM.\n\n03 / INPUT\nMove like you mean it\n\nPointer capture, snapping, resize handles, keyboard intent, and live announcements—without prescribing components.\n\n15 min\n\nONE PACKAGE. BRING YOUR STACK.\n\nShip the scheduler, not the fight.\n\nESM, CJS, declarations, zero runtime dependencies in the core. React is optional.\n\nTerminal\nCopy\n$ npm install headless-scheduler\n› import { createScheduler } from 'headless-scheduler'\n\nSMALL ON PURPOSE\n\nPrimitives you can hold in your head\ncreateScheduler(options)\nbuildResourceTimeline(input)\ngetContinuousMonthWindow(input)\ncreatePointerInteraction(options)\ngetGridNavigation(input)\nRead the API\n\nCalendar infrastructure,\nprinted your way.\n\nnpm install →\nHS\nheadless—scheduler\n\nMIT licensed. No telemetry. No licence wall.\n\nPrivacy\nTerms\nSource",
+      "resetCount": 0,
+      "startRealCount": 0,
+      "bannerCount": 0,
+      "storageBefore": {
+        "local": {},
+        "session": {},
+        "cookies": "",
+        "indexedDB": []
+      }
+    },
+    "persistence": {
+      "initialEvents": 4,
+      "changedEvents": 5,
+      "reloadedEvents": 4,
+      "storageAfterChange": {
+        "local": {},
+        "session": {},
+        "cookies": "",
+        "indexedDB": []
+      }
+    },
+    "requests": [
+      {
+        "url": "https://headless-scheduler.sociobot.in/",
+        "method": "GET",
+        "type": "document"
+      },
+      {
+        "url": "https://headless-scheduler.sociobot.in/assets/index-CMCPOt7n.js",
+        "method": "GET",
+        "type": "script"
+      },
+      {
+        "url": "https://headless-scheduler.sociobot.in/assets/index-ZH1TuV6H.css",
+        "method": "GET",
+        "type": "stylesheet"
+      },
+      {
+        "url": "https://headless-scheduler.sociobot.in/riso-scheduler.webp",
+        "method": "GET",
+        "type": "image"
+      },
+      {
+        "url": "https://headless-scheduler.sociobot.in/",
+        "method": "GET",
+        "type": "document"
+      },
+      {
+        "url": "https://headless-scheduler.sociobot.in/assets/index-CMCPOt7n.js",
+        "method": "GET",
+        "type": "script"
+      },
+      {
+        "url": "https://headless-scheduler.sociobot.in/assets/index-ZH1TuV6H.css",
+        "method": "GET",
+        "type": "stylesheet"
+      },
+      {
+        "url": "https://headless-scheduler.sociobot.in/riso-scheduler.webp",
+        "method": "GET",
+        "type": "image"
+      }
+    ]
+  },
+  "demoRoute": {
+    "url": "https://headless-scheduler.sociobot.in/demo",
+    "title": "Headless Scheduler — resource timelines without the licence wall",
+    "h1": [
+      "Your schedule.Your surface."
+    ],
+    "bannerCount": 0
+  },
+  "axe": {
+    "violations": []
+  },
+  "routes": [
+    {
+      "route": "/",
+      "status": 200,
+      "title": "Headless Scheduler — resource timelines without the licence wall",
+      "h1": [
+        "Your schedule.Your surface."
+      ],
+      "main": 1,
+      "header": 1,
+      "footer": 1,
+      "description": "An MIT headless calendar core with resource timelines, continuous months, pointer interactions, and a React adapter.",
+      "canonical": "https://headless-scheduler.sociobot.in/",
+      "ogTitle": null,
+      "twitterCard": null,
+      "favicon": "/favicon.svg",
+      "appleTouch": null,
+      "links": [
+        "#main",
+        "#top",
+        "#demo",
+        "#api",
+        "#install",
+        "https://github.com/B-Divyesh/sf-headless-scheduler",
+        "#install",
+        "#demo",
+        "https://github.com/B-Divyesh/sf-headless-scheduler#usage",
+        "#install",
+        "/privacy/",
+        "/terms/",
+        "https://github.com/B-Divyesh/sf-headless-scheduler"
+      ]
+    },
+    {
+      "route": "/demo",
+      "status": 200,
+      "title": "Headless Scheduler — resource timelines without the licence wall",
+      "h1": [
+        "Your schedule.Your surface."
+      ],
+      "main": 1,
+      "header": 1,
+      "footer": 1,
+      "description": "An MIT headless calendar core with resource timelines, continuous months, pointer interactions, and a React adapter.",
+      "canonical": "https://headless-scheduler.sociobot.in/",
+      "ogTitle": null,
+      "twitterCard": null,
+      "favicon": "/favicon.svg",
+      "appleTouch": null,
+      "links": [
+        "#main",
+        "#top",
+        "#demo",
+        "#api",
+        "#install",
+        "https://github.com/B-Divyesh/sf-headless-scheduler",
+        "#install",
+        "#demo",
+        "https://github.com/B-Divyesh/sf-headless-scheduler#usage",
+        "#install",
+        "/privacy/",
+        "/terms/",
+        "https://github.com/B-Divyesh/sf-headless-scheduler"
+      ]
+    },
+    {
+      "route": "/privacy/",
+      "status": 200,
+      "title": "Privacy — Headless Scheduler",
+      "h1": [
+        "Privacy"
+      ],
+      "main": 1,
+      "header": 0,
+      "footer": 0,
+      "description": null,
+      "canonical": null,
+      "ogTitle": null,
+      "twitterCard": null,
+      "favicon": null,
+      "appleTouch": null,
+      "links": [
+        "/"
+      ]
+    },
+    {
+      "route": "/terms/",
+      "status": 200,
+      "title": "Terms — Headless Scheduler",
+      "h1": [
+        "Terms"
+      ],
+      "main": 1,
+      "header": 0,
+      "footer": 0,
+      "description": null,
+      "canonical": null,
+      "ogTitle": null,
+      "twitterCard": null,
+      "favicon": null,
+      "appleTouch": null,
+      "links": [
+        "/"
+      ]
+    },
+    {
+      "route": "/does-not-exist",
+      "status": 200,
+      "title": "Headless Scheduler — resource timelines without the licence wall",
+      "h1": [
+        "Your schedule.Your surface."
+      ],
+      "main": 1,
+      "header": 1,
+      "footer": 1,
+      "description": "An MIT headless calendar core with resource timelines, continuous months, pointer interactions, and a React adapter.",
+      "canonical": "https://headless-scheduler.sociobot.in/",
+      "ogTitle": null,
+      "twitterCard": null,
+      "favicon": "/favicon.svg",
+      "appleTouch": null,
+      "links": [
+        "#main",
+        "#top",
+        "#demo",
+        "#api",
+        "#install",
+        "https://github.com/B-Divyesh/sf-headless-scheduler",
+        "#install",
+        "#demo",
+        "https://github.com/B-Divyesh/sf-headless-scheduler#usage",
+        "#install",
+        "/privacy/",
+        "/terms/",
+        "https://github.com/B-Divyesh/sf-headless-scheduler"
+      ]
+    }
+  ],
+  "historyFocus": {
+    "afterHash": {
+      "url": "https://headless-scheduler.sociobot.in/#demo",
+      "active": "Skip to main content\n    HSheadless—schedulerDemoAPIInstallGitHubMIT No premium viewsYour schedule.Your surface.A headless calendar core with resource timelines, continuous months, and pointer interactions—ready for your Tailwind system.Start building Try the timeline ↓0core dependencies4useful viewsMITforeverStructure without somebody else’s skin.The actual library, in motionPlan across people and placesDrag events to reschedule. Arrow keys move a focused event by 15 minutes; tab to its resize control, then use left or right arrows to change its duration. Every view below comes from the same headless state.←Today→27 August 2026DayWeekMonthTimelineAdd eventResource UTC7 AM8 AM9 AM10 AM11 AM12 PM1 PM2 PM3 PM4 PMSStudio ARoomsMorning briefing8:30 AM–10:00 AM↔PPrototype labRoomsPrototype review10:15 AM–12:00 PM↔MMaya ChenPeopleField notes9:30 AM–11:15 AM↔NNoah WilliamsPeopleDesign handoff1:00 PM–3:30 PM↔Ready locallyTip: drag an event or focus it and use arrow keys.04Why another calendar?Because layout is infrastructure, not a licence tier.Resource scheduling should not force your product into a vendor’s visual language—or its premium plan. Headless Scheduler gives you date math, collision geometry, input behavior, and accessible navigation as typed primitives.01 / LayoutResource timelinesHours or days across any number of people, rooms, tools, or tracks. Clipping and percentages are already calculated.02 / MonthsKeep scrollingWindowed month models make an endless vertical calendar practical without rendering an endless DOM.03 / InputMove like you mean itPointer capture, snapping, resize handles, keyboard intent, and live announcements—without prescribing components.15 minOne package. Bring your stack.Ship the scheduler, not the fight.ESM, CJS, declarations, zero runtime dependencies in the core. React is optional.TerminalCopy$ npm install headless-scheduler› import { createScheduler } from 'headless-scheduler'Small on purposePrimitives you can hold in your headcreateScheduler(options)buildResourceTimeline(input)getContinuousMonthWindow(input)createPointerInteraction(options)getGridNavigation(input)Read the API Calendar infrastructure,printed your way.npm install →HSheadless—schedulerMIT licensed. No telemetry. No licence wall.PrivacyTermsSource",
+      "h1Focused": false
+    },
+    "afterBack": {
+      "url": "https://headless-scheduler.sociobot.in/",
+      "active": "Skip to main content\n    HSheadless—schedulerDemoAPIInstallGitHubMIT No premium viewsYour schedule.Your surface.A headless calendar core with resource timelines, continuous months, and pointer interactions—ready for your Tailwind system.Start building Try the timeline ↓0core dependencies4useful viewsMITforeverStructure without somebody else’s skin.The actual library, in motionPlan across people and placesDrag events to reschedule. Arrow keys move a focused event by 15 minutes; tab to its resize control, then use left or right arrows to change its duration. Every view below comes from the same headless state.←Today→27 August 2026DayWeekMonthTimelineAdd eventResource UTC7 AM8 AM9 AM10 AM11 AM12 PM1 PM2 PM3 PM4 PMSStudio ARoomsMorning briefing8:30 AM–10:00 AM↔PPrototype labRoomsPrototype review10:15 AM–12:00 PM↔MMaya ChenPeopleField notes9:30 AM–11:15 AM↔NNoah WilliamsPeopleDesign handoff1:00 PM–3:30 PM↔Ready locallyTip: drag an event or focus it and use arrow keys.04Why another calendar?Because layout is infrastructure, not a licence tier.Resource scheduling should not force your product into a vendor’s visual language—or its premium plan. Headless Scheduler gives you date math, collision geometry, input behavior, and accessible navigation as typed primitives.01 / LayoutResource timelinesHours or days across any number of people, rooms, tools, or tracks. Clipping and percentages are already calculated.02 / MonthsKeep scrollingWindowed month models make an endless vertical calendar practical without rendering an endless DOM.03 / InputMove like you mean itPointer capture, snapping, resize handles, keyboard intent, and live announcements—without prescribing components.15 minOne package. Bring your stack.Ship the scheduler, not the fight.ESM, CJS, declarations, zero runtime dependencies in the core. React is optional.TerminalCopy$ npm install headless-scheduler› import { createScheduler } from 'headless-scheduler'Small on purposePrimitives you can hold in your headcreateScheduler(options)buildResourceTimeline(input)getContinuousMonthWindow(input)createPointerInteraction(options)getGridNavigation(input)Read the API Calendar infrastructure,printed your way.npm install →HSheadless—schedulerMIT licensed. No telemetry. No licence wall.PrivacyTermsSource",
+      "h1Focused": false
+    }
+  },
+  "offline": {
+    "responseStatus": 200,
+    "h1": [
+      "Your schedule.Your surface."
+    ],
+    "online": false
+  },
+  "touchTargets": [
+    {
+      "name": "HSheadless—scheduler",
+      "width": 205,
+      "height": 40
+    },
+    {
+      "name": "GitHub",
+      "width": 28,
+      "height": 20
+    },
+    {
+      "name": "Copy",
+      "width": 60,
+      "height": 36
+    },
+    {
+      "name": "Privacy",
+      "width": 66,
+      "height": 25
+    },
+    {
+      "name": "Terms",
+      "width": 54,
+      "height": 25
+    },
+    {
+      "name": "Source",
+      "width": 62,
+      "height": 25
+    }
+  ]
+}
