@@ -45,7 +45,8 @@
     "check:headers": "node scripts/site-headers.mjs",
     "check:offline": "node scripts/pwa-offline.mjs",
     "check:pwa-update": "node scripts/pwa-update.mjs",
-    "test:claims": "npm run check:claims && npm run build && playwright test --config playwright.config.ts"
+    "test:claims": "npm run check:claims && npm run build && playwright test --config playwright.config.ts",
+    "test:claims:each": "npm run check:claims && npm run build && node scripts/run-claim-matrix.mjs"
   },
   "peerDependencies": {
     "react": ">=18"
