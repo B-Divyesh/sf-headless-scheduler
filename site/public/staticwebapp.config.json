@@ -20,7 +20,6 @@
     { "route": "/offline.html", "headers": { "Cache-Control": "no-store" } },
     { "route": "/404.html", "headers": { "Cache-Control": "no-store" } },
     { "route": "/demo", "rewrite": "/demo/index.html", "headers": { "Cache-Control": "no-store" } },
-    { "route": "/demo/", "rewrite": "/demo/index.html", "headers": { "Cache-Control": "no-store" } },
     { "route": "/privacy", "rewrite": "/privacy/index.html", "headers": { "Cache-Control": "no-store" } },
     { "route": "/terms", "rewrite": "/terms/index.html", "headers": { "Cache-Control": "no-store" } },
     { "route": "/privacy/*", "headers": { "Cache-Control": "no-store" } },
