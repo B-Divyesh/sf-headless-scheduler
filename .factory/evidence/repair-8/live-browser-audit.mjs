@@ -33,13 +33,15 @@ try {
     await page.getByText('Studio A', { exact: true }).waitFor()
     await page.getByRole('button', { name: /^Morning briefing/ }).waitFor()
 
-    await page.getByRole('button', { name: 'Add event', exact: true }).first().click()
-    await page.getByRole('button', { name: 'Add event', exact: true }).last().click()
+    const openAddEvent = page.locator('.add-button')
+    const submitAddEvent = page.locator('dialog button[type="submit"]')
+    await openAddEvent.click()
+    await submitAddEvent.click()
     await page.getByRole('alert').waitFor()
     if (await page.getByRole('alert').innerText() !== 'Add a title so people know what is scheduled.') throw new Error(`${viewport.name}: blank-title error is not actionable`)
     await page.getByLabel('Event title').fill(`Boundary event ${viewport.name}`)
     await page.getByLabel('Start time').fill('23:59')
-    await page.getByRole('button', { name: 'Add event', exact: true }).last().click()
+    await submitAddEvent.click()
     await page.getByText(`Boundary event ${viewport.name} added.`).waitFor()
     await banner.waitFor()
 
