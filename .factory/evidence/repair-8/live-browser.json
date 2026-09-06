@@ -1,0 +1,62 @@
+{
+  "base": "https://headless-scheduler.sociobot.in",
+  "results": [
+    {
+      "viewport": {
+        "name": "phone",
+        "width": 390,
+        "height": 844
+      },
+      "status": 200,
+      "heading": "Build calendar and resource timeline UIs",
+      "audience": "For product engineers who need scheduling behavior without adopting another component library.",
+      "firstAction": "Try it with sample data",
+      "sample": [
+        "Studio A",
+        "Morning briefing"
+      ],
+      "banner": "Demo — sample data, nothing is saved",
+      "invalidRecovery": true,
+      "boundaryTime": "23:59",
+      "reset": true,
+      "storage": {
+        "cookies": "",
+        "localStorage": 0,
+        "sessionStorage": 0,
+        "indexedDB": 0
+      },
+      "errors": []
+    },
+    {
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "status": 200,
+      "heading": "Build calendar and resource timeline UIs",
+      "audience": "For product engineers who need scheduling behavior without adopting another component library.",
+      "firstAction": "Try it with sample data",
+      "sample": [
+        "Studio A",
+        "Morning briefing"
+      ],
+      "banner": "Demo — sample data, nothing is saved",
+      "invalidRecovery": true,
+      "boundaryTime": "23:59",
+      "reset": true,
+      "storage": {
+        "cookies": "",
+        "localStorage": 0,
+        "sessionStorage": 0,
+        "indexedDB": 0
+      },
+      "errors": []
+    }
+  ],
+  "notFound": {
+    "status": 404,
+    "heading": "This page does not exist",
+    "label": "PAGE NOT FOUND"
+  }
+}

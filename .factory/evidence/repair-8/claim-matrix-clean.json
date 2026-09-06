@@ -1,0 +1,269 @@
+{
+  "baseURL": "local",
+  "results": [
+    {
+      "id": "release-package-installs",
+      "test": "npm run test:claims -- --grep @claim:release-package-installs",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:00:22.140Z",
+      "durationMs": 3890,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:29:1 › @claim:release-package-installs\n\n\n\u001b[1A\u001b[2K  1 passed (2.6s)\n\u001b[1A\u001b[2K[WebServer] (node:13006) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13018) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13018) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K[chromium] › tests/claims.spec.ts:29:1 › @claim:release-package-installs"
+    },
+    {
+      "id": "package-formats",
+      "test": "npm run test:claims -- --grep @claim:package-formats",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:00:26.033Z",
+      "durationMs": 3292,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:38:1 › @claim:package-formats\n\n\n\n\n\u001b[1A\u001b[2K  1 passed (2.1s)\n\u001b[1A\u001b[2K[WebServer] (node:13081) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13093) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13093) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K[chromium] › tests/claims.spec.ts:38:1 › @claim:package-formats\n\u001b[1A\u001b[2K"
+    },
+    {
+      "id": "typescript-declarations",
+      "test": "npm run test:claims -- --grep @claim:typescript-declarations",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:00:29.325Z",
+      "durationMs": 5105,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:49:1 › @claim:typescript-declarations\n\u001b[1A\u001b[2K  1 passed (3.9s)\n\u001b[1A\u001b[2K[WebServer] (node:13146) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13158) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13158) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "mit-license",
+      "test": "npm run test:claims -- --grep @claim:mit-license",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:00:34.430Z",
+      "durationMs": 3311,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:58:1 › @claim:mit-license\n\n\n\u001b[1A\u001b[2K  1 passed (2.1s)\n\u001b[1A\u001b[2K[WebServer] (node:13204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13216) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13216) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K[chromium] › tests/claims.spec.ts:58:1 › @claim:mit-license"
+    },
+    {
+      "id": "zero-runtime-dependencies",
+      "test": "npm run test:claims -- --grep @claim:zero-runtime-dependencies",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:00:37.741Z",
+      "durationMs": 2682,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:69:1 › @claim:zero-runtime-dependencies\n\u001b[1A\u001b[2K  1 passed (1.5s)\n\u001b[1A\u001b[2K[WebServer] (node:13262) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13274) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13274) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "package-playground",
+      "test": "npm run test:claims -- --grep @claim:package-playground",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:00:40.423Z",
+      "durationMs": 3298,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:75:1 › @claim:package-playground\n\u001b[1A\u001b[2K  1 passed (2.1s)\n\u001b[1A\u001b[2K[WebServer] (node:13301) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13313) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13313) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "readme-example",
+      "test": "npm run test:claims -- --grep @claim:readme-example",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:00:43.721Z",
+      "durationMs": 4935,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:82:1 › @claim:readme-example\n\n\n\u001b[1A\u001b[2K  1 passed (3.7s)\n\u001b[1A\u001b[2K[WebServer] (node:13411) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13423) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13423) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K[chromium] › tests/claims.spec.ts:82:1 › @claim:readme-example"
+    },
+    {
+      "id": "scheduler-operations",
+      "test": "npm run test:claims -- --grep @claim:scheduler-operations",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:00:48.657Z",
+      "durationMs": 2957,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:107:1 › @claim:scheduler-operations\n\u001b[1A\u001b[2K  1 passed (1.8s)\n\u001b[1A\u001b[2K[WebServer] (node:13483) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13495) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13495) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "resource-layout",
+      "test": "npm run test:claims -- --grep @claim:resource-layout",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:00:51.614Z",
+      "durationMs": 2681,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:121:1 › @claim:resource-layout\n\u001b[1A\u001b[2K  1 passed (1.5s)\n\u001b[1A\u001b[2K[WebServer] (node:13522) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13534) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13534) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "collision-layout",
+      "test": "npm run test:claims -- --grep @claim:collision-layout",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:00:54.295Z",
+      "durationMs": 2677,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:128:1 › @claim:collision-layout\n\u001b[1A\u001b[2K  1 passed (1.5s)\n\u001b[1A\u001b[2K[WebServer] (node:13561) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13573) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13573) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "month-models",
+      "test": "npm run test:claims -- --grep @claim:month-models",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:00:56.972Z",
+      "durationMs": 3376,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:135:1 › @claim:month-models\n\u001b[1A\u001b[2K  1 passed (2.2s)\n\u001b[1A\u001b[2K[WebServer] (node:13618) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13630) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13630) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "four-demo-views",
+      "test": "npm run test:claims -- --grep @claim:four-demo-views",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:00.347Z",
+      "durationMs": 4042,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:162:1 › @claim:four-demo-views\n\u001b[1A\u001b[2K  1 passed (2.7s)\n\u001b[1A\u001b[2K[WebServer] (node:13678) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13690) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13690) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "shared-demo-state",
+      "test": "npm run test:claims -- --grep @claim:shared-demo-state",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:04.390Z",
+      "durationMs": 3546,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:175:1 › @claim:shared-demo-state\n\u001b[1A\u001b[2K  1 passed (2.3s)\n\u001b[1A\u001b[2K[WebServer] (node:13781) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13793) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13793) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "sample-seed",
+      "test": "npm run test:claims -- --grep @claim:sample-seed",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:07.936Z",
+      "durationMs": 3977,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:186:1 › @claim:sample-seed\n\u001b[1A\u001b[2K  1 passed (2.7s)\n\u001b[1A\u001b[2K[WebServer] (node:13885) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13897) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:13897) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "demo-isolation-reset",
+      "test": "npm run test:claims -- --grep @claim:demo-isolation-reset",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:11.913Z",
+      "durationMs": 5605,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:194:1 › @claim:demo-isolation-reset\n\u001b[1A\u001b[2K  1 passed (4.3s)\n\u001b[1A\u001b[2K[WebServer] (node:13991) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14003) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14003) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "pointer-modes",
+      "test": "npm run test:claims -- --grep @claim:pointer-modes",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:17.518Z",
+      "durationMs": 3066,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:215:1 › @claim:pointer-modes\n\u001b[1A\u001b[2K  1 passed (1.8s)\n\u001b[1A\u001b[2K[WebServer] (node:14093) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14105) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14105) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "pointer-capture-validation",
+      "test": "npm run test:claims -- --grep @claim:pointer-capture-validation",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:20.584Z",
+      "durationMs": 2725,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:231:1 › @claim:pointer-capture-validation\n\u001b[1A\u001b[2K  1 passed (1.5s)\n\u001b[1A\u001b[2K[WebServer] (node:14132) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14144) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14144) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "grid-keyboard-navigation",
+      "test": "npm run test:claims -- --grep @claim:grid-keyboard-navigation",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:23.309Z",
+      "durationMs": 2767,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:245:1 › @claim:grid-keyboard-navigation\n\u001b[1A\u001b[2K  1 passed (1.6s)\n\u001b[1A\u001b[2K[WebServer] (node:14171) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14183) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14183) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "keyboard-controls",
+      "test": "npm run test:claims -- --grep @claim:keyboard-controls",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:26.076Z",
+      "durationMs": 3719,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:258:1 › @claim:keyboard-controls\n\u001b[1A\u001b[2K  1 passed (2.5s)\n\u001b[1A\u001b[2K[WebServer] (node:14210) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14222) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14222) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "iso-event-boundary",
+      "test": "npm run test:claims -- --grep @claim:iso-event-boundary",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:29.795Z",
+      "durationMs": 2723,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:269:1 › @claim:iso-event-boundary\n\u001b[1A\u001b[2K  1 passed (1.5s)\n\u001b[1A\u001b[2K[WebServer] (node:14333) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14345) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14345) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "timezone-boundaries",
+      "test": "npm run test:claims -- --grep @claim:timezone-boundaries",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:32.517Z",
+      "durationMs": 2831,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:275:1 › @claim:timezone-boundaries\n\u001b[1A\u001b[2K  1 passed (1.5s)\n\u001b[1A\u001b[2K[WebServer] (node:14373) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14385) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14385) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "date-adapters",
+      "test": "npm run test:claims -- --grep @claim:date-adapters",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:35.348Z",
+      "durationMs": 2952,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:284:1 › @claim:date-adapters\n\u001b[1A\u001b[2K  1 passed (1.7s)\n\u001b[1A\u001b[2K[WebServer] (node:14412) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "recurrence-scope",
+      "test": "npm run test:claims -- --grep @claim:recurrence-scope",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:38.300Z",
+      "durationMs": 2643,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:301:1 › @claim:recurrence-scope\n\u001b[1A\u001b[2K  1 passed (1.5s)\n\u001b[1A\u001b[2K[WebServer] (node:14451) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14463) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14463) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "release-scope",
+      "test": "npm run test:claims -- --grep @claim:release-scope",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:40.943Z",
+      "durationMs": 2858,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:308:1 › @claim:release-scope\n\u001b[1A\u001b[2K  1 passed (1.7s)\n\u001b[1A\u001b[2K[WebServer] (node:14490) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14502) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14502) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "browser-primitives",
+      "test": "npm run test:claims -- --grep @claim:browser-primitives",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:43.801Z",
+      "durationMs": 3190,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:317:1 › @claim:browser-primitives\n\u001b[1A\u001b[2K  1 passed (2.0s)\n\u001b[1A\u001b[2K[WebServer] (node:14529) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14541) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14541) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "preset-css",
+      "test": "npm run test:claims -- --grep @claim:preset-css",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:46.991Z",
+      "durationMs": 3544,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:323:1 › @claim:preset-css\n\u001b[1A\u001b[2K  1 passed (2.4s)\n\u001b[1A\u001b[2K[WebServer] (node:14634) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14646) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14646) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "react-adapter",
+      "test": "npm run test:claims -- --grep @claim:react-adapter",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:50.535Z",
+      "durationMs": 4661,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:334:1 › @claim:react-adapter\n\n\n\n\n\u001b[1A\u001b[2K  1 passed (3.5s)\n\u001b[1A\u001b[2K[WebServer] (node:14741) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14753) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14753) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K[chromium] › tests/claims.spec.ts:334:1 › @claim:react-adapter\n\u001b[1A\u001b[2K"
+    },
+    {
+      "id": "privacy-boundary",
+      "test": "npm run test:claims -- --grep @claim:privacy-boundary",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:55.196Z",
+      "durationMs": 3710,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:343:1 › @claim:privacy-boundary\n\u001b[1A\u001b[2K  1 passed (2.5s)\n\u001b[1A\u001b[2K[WebServer] (node:14818) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14830) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14830) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "package-side-effects",
+      "test": "npm run test:claims -- --grep @claim:package-side-effects",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:01:58.906Z",
+      "durationMs": 3914,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:391:1 › @claim:package-side-effects\n\u001b[1A\u001b[2K  1 passed (2.7s)\n\u001b[1A\u001b[2K[WebServer] (node:14922) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14934) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:14934) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "headless-core",
+      "test": "npm run test:claims -- --grep @claim:headless-core",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:02:02.820Z",
+      "durationMs": 2948,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:431:1 › @claim:headless-core\n\u001b[1A\u001b[2K  1 passed (1.8s)\n\u001b[1A\u001b[2K[WebServer] (node:15058) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:15070) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:15070) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "offline-demo",
+      "test": "npm run test:claims -- --grep @claim:offline-demo",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:02:05.769Z",
+      "durationMs": 3645,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:440:1 › @claim:offline-demo\n\u001b[1A\u001b[2K  1 passed (2.4s)\n\u001b[1A\u001b[2K[WebServer] (node:15097) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:15109) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:15109) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "route-contract",
+      "test": "npm run test:claims -- --grep @claim:route-contract",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:02:09.414Z",
+      "durationMs": 4131,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:465:1 › @claim:route-contract\n\u001b[1A\u001b[2K  1 passed (3.0s)\n\u001b[1A\u001b[2K[WebServer] (node:15207) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:15219) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:15219) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    },
+    {
+      "id": "static-site-artifact",
+      "test": "npm run test:claims -- --grep @claim:static-site-artifact",
+      "status": "passed",
+      "startedAt": "2026-09-06T04:02:13.545Z",
+      "durationMs": 2698,
+      "output": "Running 1 test using 1 worker\n\n\n\n\n\n\u001b[1A\u001b[2K[1/1] [chromium] › tests/claims.spec.ts:504:1 › @claim:static-site-artifact\n\u001b[1A\u001b[2K  1 passed (1.5s)\n\u001b[1A\u001b[2K[WebServer] (node:15316) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:15328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\u001b[1A\u001b[2K(node:15328) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    }
+  ]
+}
