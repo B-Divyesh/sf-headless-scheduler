@@ -1,0 +1,2593 @@
+===== release-package-installs =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:release-package-installs
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 184ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 180ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 404ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:29:1 › @claim:release-package-installs
+
+
+[1A[2K  1 passed (2.0s)
+[1A[2K[WebServer] (node:7556) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:7568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:7568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K[chromium] › tests/claims.spec.ts:29:1 › @claim:release-package-installs
+===== package-formats =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:package-formats
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 185ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 191ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 401ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:38:1 › @claim:package-formats
+
+
+
+
+[1A[2K  1 passed (1.9s)
+[1A[2K[WebServer] (node:7805) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:7817) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:7817) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K[chromium] › tests/claims.spec.ts:38:1 › @claim:package-formats
+[1A[2K===== typescript-declarations =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:typescript-declarations
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 183ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 176ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 422ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:49:1 › @claim:typescript-declarations
+[1A[2K  1 passed (3.3s)
+[1A[2K[WebServer] (node:8061) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:8073) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:8073) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== mit-license =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:mit-license
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 191ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 194ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 412ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:58:1 › @claim:mit-license
+
+
+[1A[2K  1 passed (1.9s)
+[1A[2K[WebServer] (node:8310) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:8322) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:8322) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K[chromium] › tests/claims.spec.ts:58:1 › @claim:mit-license
+===== zero-runtime-dependencies =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:zero-runtime-dependencies
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 182ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 201ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 407ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:69:1 › @claim:zero-runtime-dependencies
+[1A[2K  1 passed (1.4s)
+[1A[2K[WebServer] (node:8580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:8592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:8592) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== package-playground =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:package-playground
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 185ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 182ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 420ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:75:1 › @claim:package-playground
+[1A[2K  1 passed (1.9s)
+[1A[2K[WebServer] (node:8815) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:8827) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:8827) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== readme-example =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:readme-example
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 209ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 188ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 424ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:82:1 › @claim:readme-example
+
+
+[1A[2K  1 passed (3.6s)
+[1A[2K[WebServer] (node:9113) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:9125) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:9125) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K[chromium] › tests/claims.spec.ts:82:1 › @claim:readme-example
+===== scheduler-operations =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:scheduler-operations
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 187ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 178ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 426ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:107:1 › @claim:scheduler-operations
+[1A[2K  1 passed (1.4s)
+[1A[2K[WebServer] (node:9376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:9388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:9388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== resource-layout =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:resource-layout
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 175ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 178ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 402ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:121:1 › @claim:resource-layout
+[1A[2K  1 passed (1.3s)
+[1A[2K[WebServer] (node:9626) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:9638) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:9638) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== collision-layout =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:collision-layout
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 182ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 187ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 417ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:128:1 › @claim:collision-layout
+[1A[2K  1 passed (1.3s)
+[1A[2K[WebServer] (node:9857) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:9869) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:9869) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== month-models =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:month-models
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 179ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 179ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 422ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:135:1 › @claim:month-models
+[1A[2K  1 passed (2.0s)
+[1A[2K[WebServer] (node:10089) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:10101) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:10101) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== four-demo-views =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:four-demo-views
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 197ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 197ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 409ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:162:1 › @claim:four-demo-views
+[1A[2K  1 passed (2.2s)
+[1A[2K[WebServer] (node:10340) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:10352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:10352) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== shared-demo-state =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:shared-demo-state
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 206ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 207ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 474ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:175:1 › @claim:shared-demo-state
+[1A[2K  1 passed (2.1s)
+[1A[2K[WebServer] (node:10657) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:10669) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:10669) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== sample-seed =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:sample-seed
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 189ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 182ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 421ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:186:1 › @claim:sample-seed
+[1A[2K  1 passed (1.9s)
+[1A[2K[WebServer] (node:10955) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:10967) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:10967) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== demo-isolation-reset =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:demo-isolation-reset
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 199ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 197ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 408ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:194:1 › @claim:demo-isolation-reset
+[1A[2K  1 passed (3.5s)
+[1A[2K[WebServer] (node:11255) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:11267) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:11267) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== pointer-modes =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:pointer-modes
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 185ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 188ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 409ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:215:1 › @claim:pointer-modes
+[1A[2K  1 passed (1.4s)
+[1A[2K[WebServer] (node:11551) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:11563) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:11563) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== pointer-capture-validation =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:pointer-capture-validation
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 192ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 186ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 402ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:231:1 › @claim:pointer-capture-validation
+[1A[2K  1 passed (1.4s)
+[1A[2K[WebServer] (node:11781) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:11813) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:11813) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== grid-keyboard-navigation =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:grid-keyboard-navigation
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 190ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 196ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 415ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:245:1 › @claim:grid-keyboard-navigation
+[1A[2K  1 passed (1.4s)
+[1A[2K[WebServer] (node:12033) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:12045) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:12045) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== keyboard-controls =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:keyboard-controls
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 193ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 195ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 404ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:258:1 › @claim:keyboard-controls
+[1A[2K  1 passed (1.9s)
+[1A[2K[WebServer] (node:12263) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:12275) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:12275) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== iso-event-boundary =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:iso-event-boundary
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 189ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 201ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 418ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:269:1 › @claim:iso-event-boundary
+[1A[2K  1 passed (1.4s)
+[1A[2K[WebServer] (node:12559) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:12571) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:12571) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== timezone-boundaries =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:timezone-boundaries
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 194ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 181ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 407ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:275:1 › @claim:timezone-boundaries
+[1A[2K  1 passed (1.4s)
+[1A[2K[WebServer] (node:12809) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:12821) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:12821) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== date-adapters =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:date-adapters
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 189ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 195ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 430ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:284:1 › @claim:date-adapters
+[1A[2K  1 passed (1.4s)
+[1A[2K[WebServer] (node:13039) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:13051) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:13051) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== recurrence-scope =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:recurrence-scope
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 183ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 201ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 418ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:301:1 › @claim:recurrence-scope
+[1A[2K  1 passed (1.4s)
+[1A[2K[WebServer] (node:13270) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:13282) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:13282) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== release-scope =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:release-scope
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 202ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 202ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 441ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:308:1 › @claim:release-scope
+[1A[2K  1 passed (1.4s)
+[1A[2K[WebServer] (node:13505) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:13517) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:13517) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== browser-primitives =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:browser-primitives
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 179ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 208ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 413ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:317:1 › @claim:browser-primitives
+[1A[2K  1 passed (1.9s)
+[1A[2K[WebServer] (node:13735) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:13747) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:13747) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== preset-css =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:preset-css
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 178ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 184ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 429ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:323:1 › @claim:preset-css
+[1A[2K  1 passed (2.1s)
+[1A[2K[WebServer] (node:14029) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:14041) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:14041) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== react-adapter =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:react-adapter
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 193ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 206ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 469ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:334:1 › @claim:react-adapter
+
+
+
+
+[1A[2K  1 passed (3.1s)
+[1A[2K[WebServer] (node:14347) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:14359) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:14359) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K[chromium] › tests/claims.spec.ts:334:1 › @claim:react-adapter
+[1A[2K===== privacy-boundary =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:privacy-boundary
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 187ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 188ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 428ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:343:1 › @claim:privacy-boundary
+[1A[2K  1 passed (2.3s)
+[1A[2K[WebServer] (node:14620) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:14632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:14632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== package-side-effects =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:package-side-effects
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 196ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 188ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 406ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:391:1 › @claim:package-side-effects
+[1A[2K  1 passed (2.5s)
+[1A[2K[WebServer] (node:14916) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:14928) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:14928) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== headless-core =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:headless-core
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 181ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 194ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 436ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:431:1 › @claim:headless-core
+[1A[2K  1 passed (1.4s)
+[1A[2K[WebServer] (node:15227) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:15239) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:15239) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== offline-demo =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:offline-demo
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 186ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 184ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 416ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:440:1 › @claim:offline-demo
+[1A[2K  1 passed (2.2s)
+[1A[2K[WebServer] (node:15457) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:15469) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:15469) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== route-contract =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:route-contract
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 196ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 182ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 410ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:465:1 › @claim:route-contract
+[1A[2K  1 passed (2.6s)
+[1A[2K[WebServer] (node:15775) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:15787) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:15787) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+===== static-site-artifact =====
+
+> headless-scheduler@0.1.0 test:claims
+> npm run check:claims && npm run build && playwright test --config playwright.config.ts --grep @claim:static-site-artifact
+
+
+> headless-scheduler@0.1.0 check:claims
+> node scripts/check-claims.mjs
+
+{"claims":33,"uniqueTags":33,"exactOneToOne":true}
+
+> headless-scheduler@0.1.0 build
+> npm run build:lib && npm run build:site
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 206ms
+
+> headless-scheduler@0.1.0 build:site
+> npm run build:lib && vite build --config site/vite.config.ts && node scripts/prepare-site.mjs && node scripts/build-service-worker.mjs
+
+
+> headless-scheduler@0.1.0 build:lib
+> vite build --config vite.config.ts && tsc -p tsconfig.build.json && cp src/preset.css dist/package/preset.css
+
+vite v6.4.3 building for production...
+transforming...
+✓ 7 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/package/react.js            0.83 kB │ gzip: 0.44 kB │ map:  2.60 kB
+dist/package/index.js            2.55 kB │ gzip: 1.14 kB │ map:  6.70 kB
+dist/package/store-C5D8QFkl.js  12.94 kB │ gzip: 4.18 kB │ map: 39.58 kB
+dist/package/react.cjs            0.83 kB │ gzip: 0.46 kB │ map:  2.63 kB
+dist/package/index.cjs            2.34 kB │ gzip: 1.09 kB │ map:  6.61 kB
+dist/package/store-DFXK4bRF.cjs  10.28 kB │ gzip: 3.83 kB │ map: 38.65 kB
+✓ built in 190ms
+vite v6.4.3 building for production...
+transforming...
+✓ 12 modules transformed.
+rendering chunks...
+computing gzip size...
+../dist/site/.vite/manifest.json         0.19 kB │ gzip:  0.14 kB
+../dist/site/index.html                  2.33 kB │ gzip:  0.70 kB
+../dist/site/assets/index-Dfw04gbk.css  22.58 kB │ gzip:  5.68 kB
+../dist/site/assets/index-BmOhjK_Y.js   55.64 kB │ gzip: 19.68 kB │ map: 144.33 kB
+✓ built in 415ms
+{"routes":["/","/demo","/privacy","/terms","/404.html"],"package":"headless-scheduler-0.1.0.tgz"}
+{"serviceWorker":"sw.js","release":"release","revision":"03c8e7bea63a17cb","precache":20}
+
+
+Running 1 test using 1 worker
+
+
+
+
+
+[1A[2K[1/1] [chromium] › tests/claims.spec.ts:504:1 › @claim:static-site-artifact
+[1A[2K  1 passed (1.4s)
+[1A[2K[WebServer] (node:16073) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:16085) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:16085) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

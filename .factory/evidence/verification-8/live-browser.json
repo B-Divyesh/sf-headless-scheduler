@@ -1,0 +1,388 @@
+{
+  "base": "https://headless-scheduler.sociobot.in",
+  "viewportResults": [
+    {
+      "viewport": {
+        "name": "phone",
+        "width": 390,
+        "height": 844
+      },
+      "heading": "Build calendar and resource timeline UIs",
+      "audience": "For product engineers who need scheduling behavior without adopting another component library.",
+      "action": "Try it with sample data",
+      "factsBeforeScroll": true,
+      "sample": [
+        "Studio A",
+        "Maya Chen",
+        "Morning briefing",
+        "Prototype review"
+      ],
+      "persistentBanner": "Demo — sample data, nothing is saved",
+      "invalidTitleRecovery": true,
+      "invalidJsonRecovery": true,
+      "boundaryTime": "23:59",
+      "keyboardMoveResize": true,
+      "deleteUndo": true,
+      "resetReload": true,
+      "storage": {
+        "cookies": "",
+        "localStorage": 0,
+        "sessionStorage": 0,
+        "indexedDB": 0,
+        "cacheNames": [
+          "headless-scheduler-docs-03c8e7bea63a17cb"
+        ],
+        "cacheEntries": [
+          {
+            "url": "https://headless-scheduler.sociobot.in/",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/index.html",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/demo",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/demo/",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/privacy/",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/privacy",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/terms",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/terms/",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/404.html",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/favicon.svg",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/icon-192.svg",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/icon-512.svg",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/offline.html",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/manifest.webmanifest",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/apple-touch-icon.png",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/headless-scheduler-0.1.0.tgz",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/og-headless-scheduler.webp",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/riso-scheduler.webp",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/assets/index-Dfw04gbk.css",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/assets/index-BmOhjK_Y.js",
+            "method": "GET",
+            "containsEdit": false
+          }
+        ]
+      },
+      "requestOrigins": [
+        "https://headless-scheduler.sociobot.in"
+      ],
+      "errors": []
+    },
+    {
+      "viewport": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      },
+      "heading": "Build calendar and resource timeline UIs",
+      "audience": "For product engineers who need scheduling behavior without adopting another component library.",
+      "action": "Try it with sample data",
+      "factsBeforeScroll": true,
+      "sample": [
+        "Studio A",
+        "Maya Chen",
+        "Morning briefing",
+        "Prototype review"
+      ],
+      "persistentBanner": "Demo — sample data, nothing is saved",
+      "invalidTitleRecovery": true,
+      "invalidJsonRecovery": true,
+      "boundaryTime": "23:59",
+      "keyboardMoveResize": true,
+      "deleteUndo": true,
+      "resetReload": true,
+      "storage": {
+        "cookies": "",
+        "localStorage": 0,
+        "sessionStorage": 0,
+        "indexedDB": 0,
+        "cacheNames": [
+          "headless-scheduler-docs-03c8e7bea63a17cb"
+        ],
+        "cacheEntries": [
+          {
+            "url": "https://headless-scheduler.sociobot.in/",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/demo",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/index.html",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/demo/",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/privacy/",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/privacy",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/terms",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/404.html",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/terms/",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/favicon.svg",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/offline.html",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/apple-touch-icon.png",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/icon-192.svg",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/manifest.webmanifest",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/icon-512.svg",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/riso-scheduler.webp",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/headless-scheduler-0.1.0.tgz",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/og-headless-scheduler.webp",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/assets/index-Dfw04gbk.css",
+            "method": "GET",
+            "containsEdit": false
+          },
+          {
+            "url": "https://headless-scheduler.sociobot.in/assets/index-BmOhjK_Y.js",
+            "method": "GET",
+            "containsEdit": false
+          }
+        ]
+      },
+      "requestOrigins": [
+        "https://headless-scheduler.sociobot.in"
+      ],
+      "errors": []
+    }
+  ],
+  "routes": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Headless Scheduler — calendar and timeline logic",
+      "lang": "en",
+      "h1Count": 1,
+      "h1": "Build calendar and resource timeline UIs",
+      "main": true,
+      "header": true,
+      "footer": true,
+      "description": "Build calendar and resource timeline interfaces with TypeScript scheduling logic and an optional React adapter.",
+      "canonical": "https://headless-scheduler.sociobot.in/"
+    },
+    {
+      "path": "/demo",
+      "status": 200,
+      "title": "Demo — Headless Scheduler",
+      "lang": "en",
+      "h1Count": 1,
+      "h1": "Edit a resource timeline",
+      "main": true,
+      "header": true,
+      "footer": true,
+      "description": "Edit sample event data and try the Headless Scheduler package with isolated in-memory data.",
+      "canonical": "https://headless-scheduler.sociobot.in/demo"
+    },
+    {
+      "path": "/privacy",
+      "status": 200,
+      "title": "Privacy — Headless Scheduler",
+      "lang": "en",
+      "h1Count": 1,
+      "h1": "Privacy",
+      "main": true,
+      "header": true,
+      "footer": true,
+      "description": "How the Headless Scheduler site and package handle data, storage, and network access.",
+      "canonical": "https://headless-scheduler.sociobot.in/privacy"
+    },
+    {
+      "path": "/terms",
+      "status": 200,
+      "title": "Terms — Headless Scheduler",
+      "lang": "en",
+      "h1Count": 1,
+      "h1": "Terms",
+      "main": true,
+      "header": true,
+      "footer": true,
+      "description": "License and usage terms for the Headless Scheduler package and documentation site.",
+      "canonical": "https://headless-scheduler.sociobot.in/terms"
+    },
+    {
+      "path": "/verification-8-not-found",
+      "status": 404,
+      "title": "Page not found — Headless Scheduler",
+      "lang": "en",
+      "h1Count": 1,
+      "h1": "This page does not exist",
+      "main": true,
+      "header": true,
+      "footer": true,
+      "description": "The requested Headless Scheduler page does not exist.",
+      "canonical": "https://headless-scheduler.sociobot.in/verification-8-not-found"
+    }
+  ],
+  "routeFocusAndBack": true,
+  "routeNotice": "Headless Scheduler — calendar and timeline logic",
+  "linkResults": [
+    {
+      "href": "https://headless-scheduler.sociobot.in/",
+      "status": 200
+    },
+    {
+      "href": "https://headless-scheduler.sociobot.in/demo",
+      "status": 200
+    },
+    {
+      "href": "https://headless-scheduler.sociobot.in/privacy",
+      "status": 200
+    },
+    {
+      "href": "https://headless-scheduler.sociobot.in/?demo=1",
+      "status": 200
+    },
+    {
+      "href": "https://headless-scheduler.sociobot.in/terms",
+      "status": 200
+    },
+    {
+      "href": "https://github.com/B-Divyesh/sf-headless-scheduler",
+      "status": 200
+    },
+    {
+      "href": "https://github.com/B-Divyesh/sf-headless-scheduler/blob/main/LICENSE",
+      "status": 200
+    }
+  ],
+  "reducedMotion": {
+    "matches": true,
+    "scrollBehavior": "auto",
+    "transitionDuration": "1e-05s",
+    "animationDuration": "1e-05s"
+  }
+}
