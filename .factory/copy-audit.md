@@ -1,6 +1,6 @@
 # Copy audit
 
-Date: 2026-08-28
+Date: 2026-09-06
 
 This audit covers visitor-facing sentences in the landing page, demo, legal pages, empty/error/offline states, README, and catalog description. Code samples, API names, dates, and URLs are excluded. No audited sentence exceeds 22 words. The banned-word scan for `leverage`, `seamless`, `effortless`, `robust`, `powerful`, `intuitive`, `reimagine`, `supercharge`, `unlock`, `delightful`, `journey`, `ecosystem`, and `AI-powered` has zero matches.
 
@@ -58,16 +58,20 @@ This audit covers visitor-facing sentences in the landing page, demo, legal page
 | Add a title so people know what is scheduled. | 9 |
 | Include id, title, resourceId, start, and end. | 8 |
 | Use a resourceId shown in the sample schedule. | 8 |
+| New event | 2 |
 | Run this schedule locally | 4 |
 | Install the same version used above, then pass the sample event to createScheduler. | 12 |
 | The documentation site does not load scripts, fonts, or other files from third-party sites. | 15 |
 | The demo keeps edits in memory and clears them on reload or reset. | 12 |
+| The service worker stores this site's pages, package file, images, and code in Cache Storage for offline use. | 18 |
+| It does not store demo edits or other user data. | 10 |
 | The package includes no telemetry or network calls. | 8 |
 | Your application chooses where scheduler data is stored. | 8 |
 | Headless Scheduler is provided under the MIT License, without warranty. | 10 |
 | This site offers no payment or hosted scheduling service. | 9 |
 | Read the repository LICENSE file on GitHub for the complete terms. | 11 |
-| This page is not on the board | 7 |
+| Page not found | 3 |
+| This page does not exist | 5 |
 | Check the address or return to the scheduler library. | 9 |
 
 ## Actions and terminology
@@ -99,6 +103,8 @@ Actions name their result: **Try it with sample data**, **Open the demo**, **App
 | Import the preset CSS or copy it into Tailwind. | 10 |
 | Change its --hs-* colors, or render your own HTML from the calendar data. | 13 |
 | The documentation site does not load scripts, fonts, or other files from third-party sites. | 15 |
+| The service worker stores site pages, the package file, images, and code in Cache Storage for offline use. | 18 |
+| It stores no demo edits or other user data. | 9 |
 | Build calendar and resource timeline UIs with headless TypeScript scheduling logic. | 10 |
 
 Catalog description: “Build calendar and resource timeline UIs with headless TypeScript scheduling logic.” It starts with a verb and is 79 characters before the newline.

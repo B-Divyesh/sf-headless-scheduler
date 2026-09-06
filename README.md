@@ -117,7 +117,7 @@ npm run check:headers
 
 `npm run build` writes the package to `dist/package` and the static site to `dist/site`. The site output includes the v0.1.0 release file and route files.
 
-The documentation site does not load scripts, fonts, or other files from third-party sites. The service worker uses Cache Storage for offline pages and assets.
+The documentation site does not load scripts, fonts, or other files from third-party sites. The service worker stores site pages, the package file, images, and code in Cache Storage for offline use. It stores no demo edits or other user data.
 
 The package includes no telemetry or network calls. Applications choose how to store scheduler data.
 

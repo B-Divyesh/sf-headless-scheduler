@@ -9,4 +9,4 @@
 - Reset: **Reset demo** restores the original events, resources, view, and input.
 - Exit: **Start for real — install the package** discards the current demo and opens the install section.
 - Isolation: demo state exists only in the page’s in-memory scheduler instance. It does not read or write localStorage, sessionStorage, IndexedDB, cookies, or application data.
-- Offline: the generated service worker caches the demo shell and bundled sample.
+- Offline: the generated service worker caches only site pages, the package file, images, and code. It does not cache demo edits.

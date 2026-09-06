@@ -71,10 +71,10 @@
   },
   {
     "id": "month-models",
-    "claim": "The package returns six-week months and finite continuous-month windows.",
+    "claim": "The package returns six-week months with correct local dates and finite continuous-month windows.",
     "where": "landing capabilities, README public API",
     "test": "npm run test:claims -- --grep @claim:month-models",
-    "sandbox": "build an August grid and an overscanned month window with explicit finite limits"
+    "sandbox": "install the release, assert March keys, days, outside flags, and today in Kolkata and Auckland, then test a finite month window"
   },
   {
     "id": "four-demo-views",
@@ -190,10 +190,10 @@
   },
   {
     "id": "privacy-boundary",
-    "claim": "The site loads no analytics, third-party scripts, or remote fonts and writes no cookies or persistent app storage.",
+    "claim": "The site loads no analytics, third-party scripts, or remote fonts and stores no user data in the browser.",
     "where": "landing privacy section, privacy route, README",
     "test": "npm run test:claims -- --grep @claim:privacy-boundary",
-    "sandbox": "intercept a complete ?demo=1 flow and inspect origins, cookies, localStorage, sessionStorage, and IndexedDB"
+    "sandbox": "edit and reset a fresh demo; inspect origins, cookies, web storage, IndexedDB, and the exact static-only Cache Storage allowlist"
   },
   {
     "id": "package-side-effects",

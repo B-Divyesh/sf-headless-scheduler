@@ -132,11 +132,31 @@ test('@claim:collision-layout', async () => {
   expect(buildTimeGrid({ range: sampleRange, events: [sampleEvent, overlap], adapter: nativeDateAdapter })).toEqual(positioned)
 })
 
-test('@claim:month-models', async () => {
+test('@claim:month-models', async ({ request }) => {
   expect(buildMonth({ month: '2026-08-01T00:00:00Z', events: [sampleEvent], adapter: nativeDateAdapter }).weeks).toHaveLength(6)
   const window = getContinuousMonthWindow({ anchor: '2026-08-01T00:00:00Z', scrollTop: 600, monthHeight: 600, count: 24, overscan: 1, adapter: nativeDateAdapter })
   expect(window.length).toBeGreaterThan(1)
   expect(window.length).toBeLessThanOrEqual(5)
+  const consumer = await installHostedPackage(request)
+  try {
+    const output = execFileSync(process.execPath, ['--input-type=module', '--eval', `
+      import { buildMonth, nativeDateAdapter } from 'headless-scheduler'
+      const result = {}
+      for (const [timeZone, expectedFirst] of [['Asia/Kolkata', '2026-02-28T18:30:00.000Z'], ['Pacific/Auckland', '2026-02-28T11:00:00.000Z']]) {
+        const month = buildMonth({ month: '2026-03-15T12:00:00Z', events: [], adapter: nativeDateAdapter, timeZone, today: '2026-03-01T00:30:00Z' })
+        const days = month.weeks.flat()
+        const inside = days.filter(day => !day.outside)
+        const today = days.find(day => day.today)
+        result[timeZone] = { key: month.key, first: inside[0], last: inside.at(-1), insideCount: inside.length, today }
+        if (month.key !== '2026-03' || inside.length !== 31 || inside[0]?.date !== expectedFirst || inside[0]?.dayNumber !== 1 || inside.at(-1)?.dayNumber !== 31 || today?.dayNumber !== 1) process.exit(1)
+      }
+      console.log(JSON.stringify(result))
+    `], { cwd: consumer, encoding: 'utf8' })
+    const result = JSON.parse(output)
+    for (const timeZone of ['Asia/Kolkata', 'Pacific/Auckland']) {
+      expect(result[timeZone]).toMatchObject({ key: '2026-03', insideCount: 31, first: { dayNumber: 1, outside: false, today: true }, last: { dayNumber: 31, outside: false } })
+    }
+  } finally { rmSync(consumer, { recursive: true, force: true }) }
 })
 
 test('@claim:four-demo-views', async ({ page }) => {
@@ -324,12 +344,45 @@ test('@claim:privacy-boundary', async ({ page, context }) => {
   const origins = new Set<string>()
   page.on('request', request => origins.add(new URL(request.url()).origin))
   await page.goto('/?demo=1')
+  await page.waitForFunction(() => navigator.serviceWorker?.controller !== null)
+  const privateEdit = `Not cached ${crypto.randomUUID()}`
+  const editor = page.getByLabel('Sample event JSON')
+  await editor.fill((await editor.inputValue()).replace('Morning briefing', privateEdit))
+  await page.getByRole('button', { name: 'Apply sample event' }).click()
+  await expect(page.getByRole('button', { name: new RegExp(`^${privateEdit}`) })).toBeVisible()
   await page.getByRole('button', { name: 'Show month view' }).click()
   await page.getByRole('button', { name: 'Show timeline view' }).click()
   await page.getByRole('button', { name: 'Reset demo' }).click()
   expect([...origins]).toEqual([new URL(page.url()).origin])
   expect(await context.cookies()).toEqual([])
   expect(await page.evaluate(async () => ({ local: localStorage.length, session: sessionStorage.length, indexed: (await indexedDB.databases()).length }))).toEqual({ local: 0, session: 0, indexed: 0 })
+  const cacheReport = await page.evaluate(async privateValue => {
+    const names = await caches.keys()
+    const entries = (await Promise.all(names.map(async name => {
+      const cache = await caches.open(name)
+      return Promise.all((await cache.keys()).map(async request => ({
+        url: request.url,
+        method: request.method,
+        containsPrivateEdit: (await (await cache.match(request))!.clone().text()).includes(privateValue)
+      })))
+    }))).flat()
+    return { names, entries }
+  }, privateEdit)
+  expect(cacheReport.names).toHaveLength(1)
+  expect(cacheReport.names[0]).toMatch(/^headless-scheduler-docs-[a-f0-9]{16}$/)
+  const expectedStaticPaths = [
+    '/', '/index.html', '/demo', '/demo/', '/privacy', '/privacy/', '/terms', '/terms/',
+    '/404.html', '/offline.html', '/favicon.svg', '/apple-touch-icon.png', '/icon-192.svg',
+    '/icon-512.svg', '/manifest.webmanifest', '/riso-scheduler.webp', '/og-headless-scheduler.webp',
+    '/headless-scheduler-0.1.0.tgz'
+  ]
+  const cachedPaths = cacheReport.entries.map(entry => new URL(entry.url).pathname)
+  const assetPaths = cachedPaths.filter(path => path.startsWith('/assets/'))
+  expect(assetPaths).toHaveLength(2)
+  expect(assetPaths.some(path => /^\/assets\/index-[A-Za-z0-9_-]+\.js$/.test(path))).toBeTruthy()
+  expect(assetPaths.some(path => /^\/assets\/index-[A-Za-z0-9_-]+\.css$/.test(path))).toBeTruthy()
+  expect(cachedPaths.filter(path => !path.startsWith('/assets/')).sort()).toEqual(expectedStaticPaths.sort())
+  expect(cacheReport.entries.every(entry => new URL(entry.url).origin === new URL(page.url()).origin && entry.method === 'GET' && !entry.containsPrivateEdit)).toBeTruthy()
 })
 
 test('@claim:package-side-effects', async ({ request, page }) => {
@@ -429,6 +482,9 @@ test('@claim:route-contract', async ({ page, request }) => {
   const missing = await request.get('/missing-page')
   expect(missing.status()).toBe(404)
   expect(await missing.text()).toContain('<title>Page not found — Headless Scheduler</title>')
+  await page.goto('/missing-page')
+  await expect(page.getByText('Page not found', { exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { level: 1, name: 'This page does not exist' })).toBeVisible()
   await page.goto('/')
   await page.keyboard.press('Tab')
   await expect(page.getByRole('link', { name: 'Skip to main content' })).toBeFocused()
@@ -463,6 +519,7 @@ test('mobile controls, dialog focus, and validation meet the interaction baselin
   const add = page.getByRole('button', { name: 'Add event' })
   await add.click()
   await expect(page.getByLabel('Event title')).toBeFocused()
+  await expect(page.getByText('New event', { exact: true })).toBeVisible()
   await page.getByRole('button', { name: 'Close dialog' }).click()
   await expect(add).toBeFocused()
   const editor = page.getByLabel('Sample event JSON')

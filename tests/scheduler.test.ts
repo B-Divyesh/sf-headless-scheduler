@@ -86,6 +86,22 @@ describe('view models', () => {
     expect(window.some(item => item.index === 1)).toBe(true)
   })
 
+  it.each([
+    ['Asia/Kolkata', '2026-02-28T18:30:00.000Z'],
+    ['Pacific/Auckland', '2026-02-28T11:00:00.000Z']
+  ])('uses local calendar fields throughout a positive-offset month in %s', (timeZone, firstDayInstant) => {
+    const month = buildMonth({
+      month: '2026-03-15T12:00:00Z', events: [], adapter: nativeDateAdapter,
+      timeZone, today: '2026-03-01T00:30:00Z'
+    })
+    const days = month.weeks.flat()
+    const inside = days.filter(day => !day.outside)
+    expect(month.key).toBe('2026-03')
+    expect(inside.map(day => day.dayNumber)).toEqual(Array.from({ length: 31 }, (_, index) => index + 1))
+    expect(inside[0]).toMatchObject({ date: firstDayInstant, dayNumber: 1, outside: false, today: true })
+    expect(days[days.indexOf(inside[0]!) - 1]).toMatchObject({ dayNumber: 28, outside: true, today: false })
+  })
+
   it('keeps Temporal calendar additions on New York midnights across both DST boundaries', () => {
     const adapter = createTemporalAdapter(Temporal, 'America/New_York')
     const springStart = adapter.startOfDay(adapter.parse('2026-03-08T16:00:00.000Z'), 'America/New_York')

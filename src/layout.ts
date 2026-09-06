@@ -77,6 +77,21 @@ export function buildTimeGrid(input: { range: DateRange; events: readonly Schedu
   return layoutOverlaps(input.events.filter(event => !event.allDay), input.range, input.adapter)
 }
 
+const calendarPartLocale = 'en-US-u-ca-iso8601-nu-latn'
+
+function calendarFields(adapter: DateAdapter, value: Date, timeZone: string) {
+  const read = (part: 'year' | 'month' | 'day') => {
+    const options: Intl.DateTimeFormatOptions = { [part]: part === 'year' ? 'numeric' : '2-digit' }
+    const formatted = adapter.format(value, options, calendarPartLocale, timeZone).trim()
+    if (!/^\d+$/.test(formatted)) throw new RangeError(`Date adapter returned an invalid ${part}: ${formatted}`)
+    return Number(formatted)
+  }
+  const year = read('year')
+  const month = read('month')
+  const day = read('day')
+  return { year, month, day, key: `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}` }
+}
+
 export function buildMonth(input: {
   month: string; events: readonly SchedulerEvent[]; adapter: DateAdapter; weekStartsOn?: number; locale?: string; timeZone?: string; today?: string
 }): MonthModel {
@@ -85,18 +100,21 @@ export function buildMonth(input: {
   const timeZone = input.timeZone ?? 'UTC'
   const monthStart = adapter.startOfMonth(adapter.parse(input.month), timeZone)
   const gridStart = adapter.startOfWeek(monthStart, input.weekStartsOn ?? 1, timeZone)
-  const todayKey = (input.today ? adapter.parse(input.today) : new Date()).toISOString().slice(0, 10)
+  const monthFields = calendarFields(adapter, monthStart, timeZone)
+  const todayKey = calendarFields(adapter, input.today ? adapter.parse(input.today) : new Date(), timeZone).key
   const days = Array.from({ length: 42 }, (_, index) => {
     const date = adapter.addDays(gridStart, index, timeZone)
     const next = adapter.addDays(date, 1, timeZone)
-    const key = date.toISOString().slice(0, 10)
+    const fields = calendarFields(adapter, date, timeZone)
     return {
-      date: adapter.toISO(date), dayNumber: date.getUTCDate(), outside: date.getUTCMonth() !== monthStart.getUTCMonth(), today: key === todayKey,
+      date: adapter.toISO(date), dayNumber: fields.day,
+      outside: fields.year !== monthFields.year || fields.month !== monthFields.month,
+      today: fields.key === todayKey,
       events: events.filter(event => adapter.parse(event.start) < next && adapter.parse(event.end) > date)
     }
   })
   return {
-    key: monthStart.toISOString().slice(0, 7),
+    key: `${monthFields.year}-${String(monthFields.month).padStart(2, '0')}`,
     label: adapter.format(monthStart, { month: 'long', year: 'numeric' }, locale, timeZone),
     weeks: Array.from({ length: 6 }, (_, index) => days.slice(index * 7, index * 7 + 7))
   }

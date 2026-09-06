@@ -135,7 +135,13 @@ export function createDateFnsAdapter(fn: DateFnsFunctions): DateAdapter {
     startOfWeek: (value, weekStartsOn) => fn.startOfWeek(value, { weekStartsOn: weekStartsOn as 0 | 1 | 2 | 3 | 4 | 5 | 6 }),
     startOfMonth: fn.startOfMonth ? value => fn.startOfMonth!(value) : nativeDateAdapter.startOfMonth,
     format(value, options, locale, timeZone) {
-      const token = options.month === 'long' ? 'MMMM yyyy' : options.weekday ? 'EEE d' : options.hour ? 'HH:mm' : 'yyyy-MM-dd'
+      const token = options.month === 'long' ? 'MMMM yyyy'
+        : options.year && !options.month && !options.day ? 'yyyy'
+        : options.month && !options.year && !options.day ? 'MM'
+        : options.day && !options.year && !options.month ? 'dd'
+        : options.weekday ? 'EEE d'
+        : options.hour ? 'HH:mm'
+        : 'yyyy-MM-dd'
       return fn.format(value, token) || nativeDateAdapter.format(value, options, locale, timeZone)
     }
   }

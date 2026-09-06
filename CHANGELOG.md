@@ -3,10 +3,12 @@
 ## Unreleased
 
 - Make the default native adapter honor configured IANA timezones for calendar boundaries and DST-safe calendar additions.
+- Keep month keys, day numbers, outside-month flags, and today markers correct in positive-offset time zones.
 - Reject invalid pointer `snapMinutes` and `pixelsPerMinute` at interaction construction.
 - Make `npm pack`/`npm publish` build the library automatically and add a clean tarball consumer regression.
 - Generate a revisioned documentation service worker with emitted-shell precaching and update coverage.
 - Ship Static Web Apps cache and security header configuration with the documentation build.
+- Disclose the static offline cache and verify that it never contains demo edits or other user data.
 
 ## 0.1.0 — 2026-08-27
 
