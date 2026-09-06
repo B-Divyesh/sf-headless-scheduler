@@ -136,11 +136,11 @@ export function createDateFnsAdapter(fn: DateFnsFunctions): DateAdapter {
     startOfMonth: fn.startOfMonth ? value => fn.startOfMonth!(value) : nativeDateAdapter.startOfMonth,
     format(value, options, locale, timeZone) {
       const token = options.month === 'long' ? 'MMMM yyyy'
+        : options.weekday ? 'EEE d'
+        : options.hour ? 'HH:mm'
         : options.year && !options.month && !options.day ? 'yyyy'
         : options.month && !options.year && !options.day ? 'MM'
         : options.day && !options.year && !options.month ? 'dd'
-        : options.weekday ? 'EEE d'
-        : options.hour ? 'HH:mm'
         : 'yyyy-MM-dd'
       return fn.format(value, token) || nativeDateAdapter.format(value, options, locale, timeZone)
     }

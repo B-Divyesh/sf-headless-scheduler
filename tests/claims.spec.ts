@@ -352,7 +352,6 @@ test('@claim:privacy-boundary', async ({ page, context }) => {
   await expect(page.getByRole('button', { name: new RegExp(`^${privateEdit}`) })).toBeVisible()
   await page.getByRole('button', { name: 'Show month view' }).click()
   await page.getByRole('button', { name: 'Show timeline view' }).click()
-  await page.getByRole('button', { name: 'Reset demo' }).click()
   expect([...origins]).toEqual([new URL(page.url()).origin])
   expect(await context.cookies()).toEqual([])
   expect(await page.evaluate(async () => ({ local: localStorage.length, session: sessionStorage.length, indexed: (await indexedDB.databases()).length }))).toEqual({ local: 0, session: 0, indexed: 0 })
@@ -383,6 +382,10 @@ test('@claim:privacy-boundary', async ({ page, context }) => {
   expect(assetPaths.some(path => /^\/assets\/index-[A-Za-z0-9_-]+\.css$/.test(path))).toBeTruthy()
   expect(cachedPaths.filter(path => !path.startsWith('/assets/')).sort()).toEqual(expectedStaticPaths.sort())
   expect(cacheReport.entries.every(entry => new URL(entry.url).origin === new URL(page.url()).origin && entry.method === 'GET' && !entry.containsPrivateEdit)).toBeTruthy()
+  await page.getByRole('button', { name: 'Reset demo' }).click()
+  await expect(page.getByRole('button', { name: /^Morning briefing/ })).toBeVisible()
+  await expect(page.getByText(privateEdit, { exact: false })).toHaveCount(0)
+  expect(await page.evaluate(async () => ({ local: localStorage.length, session: sessionStorage.length, indexed: (await indexedDB.databases()).length }))).toEqual({ local: 0, session: 0, indexed: 0 })
 })
 
 test('@claim:package-side-effects', async ({ request, page }) => {

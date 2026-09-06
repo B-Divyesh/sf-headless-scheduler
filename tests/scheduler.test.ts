@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import {
-  buildMonth, buildResourceTimeline, createPointerInteraction, createScheduler,
+  buildMonth, buildResourceTimeline, createDateFnsAdapter, createPointerInteraction, createScheduler,
   createTemporalAdapter, getContinuousMonthWindow, getGridNavigation, layoutOverlaps, nativeDateAdapter,
   type PointerPreview
 } from '../src'
@@ -100,6 +100,16 @@ describe('view models', () => {
     expect(inside.map(day => day.dayNumber)).toEqual(Array.from({ length: 31 }, (_, index) => index + 1))
     expect(inside[0]).toMatchObject({ date: firstDayInstant, dayNumber: 1, outside: false, today: true })
     expect(days[days.indexOf(inside[0]!) - 1]).toMatchObject({ dayNumber: 28, outside: true, today: false })
+  })
+
+  it('keeps combined weekday labels in caller-supplied date-fns formatting', () => {
+    const adapter = createDateFnsAdapter({
+      addMinutes: (date, amount) => new Date(date.getTime() + amount * 60_000),
+      startOfDay: date => new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())),
+      startOfWeek: date => date,
+      format: (date, token) => token === 'EEE d' ? `Thu ${date.getUTCDate()}` : ''
+    })
+    expect(adapter.format(new Date('2026-08-27T09:00:00Z'), { weekday: 'short', day: 'numeric' }, 'en-US', 'UTC')).toBe('Thu 27')
   })
 
   it('keeps Temporal calendar additions on New York midnights across both DST boundaries', () => {
